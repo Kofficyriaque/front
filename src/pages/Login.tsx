@@ -3,10 +3,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Loader2, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Login: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,14 +28,14 @@ const Login: React.FC = () => {
         className="max-w-md w-full"
       >
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome back</h1>
-          <p className="text-slate-500">Access the market's most accurate salary engine.</p>
+          <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('login.title')}</h1>
+          <p className="text-slate-500">{t('login.subtitle')}</p>
         </div>
 
         <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
           <form onSubmit={handleSignIn} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Email address</label>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">{t('login.email')}</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <Mail size={20} />
@@ -41,7 +43,7 @@ const Login: React.FC = () => {
                 <input 
                   type="email" 
                   required
-                  placeholder="name@company.com"
+                  placeholder={t('login.emailPlaceholder')}
                   className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-slate-900"
                 />
               </div>
@@ -49,8 +51,8 @@ const Login: React.FC = () => {
 
             <div>
               <div className="flex justify-between mb-2">
-                <label className="block text-sm font-semibold text-slate-700">Password</label>
-                <a href="#" className="text-sm font-medium text-blue-600 hover:underline">Forgot password?</a>
+                <label className="block text-sm font-semibold text-slate-700">{t('login.password')}</label>
+                <a href="#" className="text-sm font-medium text-blue-600 hover:underline">{t('login.forgot')}</a>
               </div>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
@@ -73,21 +75,21 @@ const Login: React.FC = () => {
               {isLoading ? (
                 <Loader2 className="animate-spin" size={24} />
               ) : (
-                <>Sign In <ArrowRight className="ml-2" size={20} /></>
+                <>{t('login.signIn')} <ArrowRight className="ml-2" size={20} /></>
               )}
             </button>
           </form>
 
           <div className="mt-10 pt-8 border-t border-slate-100 text-center">
             <p className="text-slate-500">
-              Don't have an account?{' '}
-              <a href="#" className="text-blue-600 font-bold hover:underline">Create an account</a>
+              {t('login.noAccount')}{' '}
+              <a href="#" className="text-blue-600 font-bold hover:underline">{t('login.create')}</a>
             </p>
           </div>
         </div>
 
         <p className="mt-8 text-center text-slate-400 text-xs px-4">
-          By continuing, you agree to PrediSalaire's Terms of Service and Privacy Policy.
+          {t('login.tos')}
         </p>
       </motion.div>
     </div>

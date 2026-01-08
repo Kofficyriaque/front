@@ -3,9 +3,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Briefcase, Database, Brain, ShieldCheck, Search,  TrendingUp, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Landing: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -30,15 +32,15 @@ const Landing: React.FC = () => {
             className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse mr-2"></span>
-            <span className="text-xs font-semibold text-blue-700 uppercase tracking-wider">V2.0 Model Live</span>
+            <span className="text-xs font-semibold text-blue-700 uppercase tracking-wider">{t('landing.badge')}</span>
           </motion.div>
           
           <motion.h1 
             {...fadeInUp}
             className="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6"
           >
-            The truth about IT salaries.<br />
-            <span className="text-blue-600">Revealed by Data.</span>
+            {t('landing.titleLine1')}<br />
+            <span className="text-blue-600">{t('landing.titleLine2')}</span>
           </motion.h1>
           
           <motion.p 
@@ -47,7 +49,7 @@ const Landing: React.FC = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="max-w-2xl mx-auto text-lg md:text-xl text-slate-500 mb-12"
           >
-            Stop guessing. Start knowing. The first AI engine that decodes market reality by analyzing millions of real-time data points.
+            {t('landing.subtitle')}
           </motion.p>
 
           {/* Hero CTAs */}
@@ -60,10 +62,10 @@ const Landing: React.FC = () => {
               className="relative group bg-blue-600 text-white p-8 rounded-[2rem] text-left overflow-hidden shadow-xl shadow-blue-200"
             >
               <div className="relative z-10">
-                <span className="text-xs font-bold uppercase tracking-widest text-blue-100 opacity-80 mb-2 block">For Talent</span>
-                <h3 className="text-2xl font-bold mb-4">I am a Candidate</h3>
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-100 opacity-80 mb-2 block">{t('landing.candidateBadge')}</span>
+                <h3 className="text-2xl font-bold mb-4">{t('landing.candidateTitle')}</h3>
                 <div className="flex items-center text-sm font-semibold text-blue-100 group-hover:translate-x-1 transition-transform">
-                  Get my worth <ArrowRight size={16} className="ml-2" />
+                  {t('landing.candidateCta')} <ArrowRight size={16} className="ml-2" />
                 </div>
               </div>
               <User className="absolute right-[-10px] bottom-[-10px] w-32 h-32 text-white/10 group-hover:scale-110 transition-transform duration-500" />
@@ -77,10 +79,10 @@ const Landing: React.FC = () => {
               className="relative group bg-slate-900 text-white p-8 rounded-[2rem] text-left overflow-hidden shadow-xl shadow-slate-200"
             >
               <div className="relative z-10">
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">For Hiring</span>
-                <h3 className="text-2xl font-bold mb-4">I am a Recruiter</h3>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">{t('landing.recruiterBadge')}</span>
+                <h3 className="text-2xl font-bold mb-4">{t('landing.recruiterTitle')}</h3>
                 <div className="flex items-center text-sm font-semibold text-slate-300 group-hover:translate-x-1 transition-transform">
-                  Find data <ArrowRight size={16} className="ml-2" />
+                  {t('landing.recruiterCta')} <ArrowRight size={16} className="ml-2" />
                 </div>
               </div>
               <Briefcase className="absolute right-[-10px] bottom-[-10px] w-32 h-32 text-white/5 group-hover:scale-110 transition-transform duration-500" />
@@ -94,33 +96,33 @@ const Landing: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
-              <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Why this Model?</h2>
-              <p className="text-slate-500 text-lg">Our technology removes human bias to give you the raw market truth.</p>
+              <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('landing.whyTitle')}</h2>
+              <p className="text-slate-500 text-lg">{t('landing.whySubtitle')}</p>
             </div>
             <a href="#" className="text-blue-600 font-semibold flex items-center hover:underline">
-              Read the whitepaper <ArrowRight size={18} className="ml-2" />
+              {t('landing.whitepaper')} <ArrowRight size={18} className="ml-2" />
             </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FeatureCard 
               icon={<Database className="text-blue-600" size={24} />}
-              title="Big Data Ingestion"
-              description="Analyzing millions of job offers in real-time across 50+ platforms to capture the entire market spectrum."
+              title={t('landing.feature1Title')}
+              description={t('landing.feature1Desc')}
               footer="Market Coverage"
               footerColor="blue"
             />
             <FeatureCard 
               icon={<Brain className="text-white" size={24} />}
-              title="Advanced NLP"
-              description="Understanding context, seniority, and stack requirements beyond just keywords using Transformers."
+              title={t('landing.feature2Title')}
+              description={t('landing.feature2Desc')}
               dark
               tags={['spaCy', 'BERT', 'LLM']}
             />
             <FeatureCard 
               icon={<ShieldCheck className="text-blue-600" size={24} />}
-              title="Zero Human Bias"
-              description="Pure data-driven insights without subjective filtering. No recruiter intuition, just statistical facts."
+              title={t('landing.feature3Title')}
+              description={t('landing.feature3Desc')}
               footer="99.8% Accuracy"
               footerColor="blue"
             />
@@ -131,8 +133,8 @@ const Landing: React.FC = () => {
       {/* Value for Everyone Section */}
       <section className="py-24 bg-slate-50 px-4">
         <div className="max-w-7xl mx-auto text-center mb-16">
-          <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Value for Everyone</h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto">Whether you are hiring or looking to be hired, data is your leverage.</p>
+          <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('landing.valueTitle')}</h2>
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto">{t('landing.valueSubtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -141,29 +143,27 @@ const Landing: React.FC = () => {
             <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
               <Search size={24} />
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-slate-900">For Candidates</h3>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Stop underselling yourself. Use data to negotiate with proof. Know your worth down to the percentile based on your specific stack and city.
-            </p>
+            <h3 className="text-2xl font-bold mb-4 text-slate-900">{t('landing.forCandidatesTitle')}</h3>
+            <p className="text-slate-500 mb-8 leading-relaxed">{t('landing.forCandidatesDesc')}</p>
             <ul className="space-y-4 mb-10 flex-grow">
               <li className="flex items-start">
                 <CheckCircle2 size={18} className="text-blue-600 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">Real-time salary benchmarking</span>
+                <span className="text-slate-600">{t('landing.forCandidatesItem1')}</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle2 size={18} className="text-blue-600 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">Negotiation cheat-sheets generated by AI</span>
+                <span className="text-slate-600">{t('landing.forCandidatesItem2')}</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle2 size={18} className="text-blue-600 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">Skill-gap analysis to boost income</span>
+                <span className="text-slate-600">{t('landing.forCandidatesItem3')}</span>
               </li>
             </ul>
             <button 
               onClick={() => navigate('/onboarding/candidate')}
               className="text-blue-600 font-bold flex items-center hover:translate-x-1 transition-transform"
             >
-              Start Free Analysis <ArrowRight size={18} className="ml-2" />
+              {t('landing.forCandidatesCTA')} <ArrowRight size={18} className="ml-2" />
             </button>
           </div>
 
@@ -172,29 +172,27 @@ const Landing: React.FC = () => {
             <div className="w-12 h-12 bg-slate-50 text-slate-900 rounded-2xl flex items-center justify-center mb-6">
               <TrendingUp size={24} />
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-slate-900">For Recruiters</h3>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Attract top talent without breaking the bank. Offer competitive packages grounded in reality and close candidates faster.
-            </p>
+            <h3 className="text-2xl font-bold mb-4 text-slate-900">{t('landing.forRecruitersTitle')}</h3>
+            <p className="text-slate-500 mb-8 leading-relaxed">{t('landing.forRecruitersDesc')}</p>
             <ul className="space-y-4 mb-10 flex-grow">
               <li className="flex items-start">
                 <CheckCircle2 size={18} className="text-slate-900 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">Market-aligned offer generation</span>
+                <span className="text-slate-600">{t('landing.forRecruitersItem1')}</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle2 size={18} className="text-slate-900 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">Budget forecasting for Q1/Q2</span>
+                <span className="text-slate-600">{t('landing.forRecruitersItem2')}</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle2 size={18} className="text-slate-900 mt-1 mr-3 shrink-0" />
-                <span className="text-slate-600">Competitor salary analysis</span>
+                <span className="text-slate-600">{t('landing.forRecruitersItem3')}</span>
               </li>
             </ul>
             <button 
               onClick={() => navigate('/login')}
               className="text-slate-900 font-bold flex items-center hover:translate-x-1 transition-transform"
             >
-              Get Business Access <ArrowRight size={18} className="ml-2" />
+              {t('landing.forRecruitersCTA')} <ArrowRight size={18} className="ml-2" />
             </button>
           </div>
         </div>
@@ -202,8 +200,8 @@ const Landing: React.FC = () => {
 
       {/* Engineered for Clarity Section */}
       <section className="py-24 px-4 bg-white text-center overflow-hidden">
-        <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Engineered for Clarity</h2>
-        <p className="text-slate-500 text-lg mb-16 max-w-xl mx-auto">Complex data turned into actionable insights. See the future of your earnings.</p>
+        <h2 className="text-4xl font-bold text-slate-900 mb-4 tracking-tight">{t('landing.engineeredTitle')}</h2>
+        <p className="text-slate-500 text-lg mb-16 max-w-xl mx-auto">{t('landing.engineeredDesc')}</p>
         
         <div className="max-w-4xl mx-auto relative group">
           <div className="absolute inset-0 bg-blue-600/5 blur-3xl rounded-full scale-110 -z-10 group-hover:scale-125 transition-transform duration-700"></div>
