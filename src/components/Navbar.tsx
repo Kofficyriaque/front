@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.ourMission')}</Link>
-            <Link to="/" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forCandidates')}</Link>
+            <Link to="/candidat" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forCandidates')}</Link>
             <Link to="/" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">{t('navbar.forRecruiters')}</Link>
             <div className="flex items-center space-x-4 pl-4 border-l border-slate-200">
               {/* Language Switcher Desktop */}
@@ -145,7 +145,7 @@ const Navbar: React.FC = () => {
         <div className="md:hidden bg-white border-b border-slate-100 animate-in slide-in-from-top duration-300">
           <div className="px-4 pt-2 pb-6 space-y-3">
             <Link to="/" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.ourMission')}</Link>
-            <Link to="/" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.forCandidates')}</Link>
+            <Link to="/candidat" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.forCandidates')}</Link>
             <Link to="/" className="block text-base font-medium text-slate-600 hover:text-blue-600 py-2">{t('navbar.forRecruiters')}</Link>
             
             <div className="pt-4 flex flex-col space-y-3">

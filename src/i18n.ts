@@ -6,14 +6,13 @@ const resources = {
     translation: {
       navbar: {
         ourMission: 'Our Mission',
-        forCandidates: 'For Candidates',
-        forRecruiters: 'For Recruiters',
+        forCandidates: 'Candidate',
+        forRecruiters: 'Recruiter',
         login: 'Log In',
         startAnalysis: 'Start Analysis',
         language: 'Language',
       },
       landing: {
-       
         titleLine1: 'The truth about IT salaries.',
         titleLine2: 'Revealed by Data.',
         subtitle: "Stop guessing. Start knowing. The first AI engine that decodes market reality by analyzing millions of real-time data points.",
@@ -21,7 +20,7 @@ const resources = {
         candidateTitle: 'I am a Candidate',
         candidateCta: 'Get my worth',
         recruiterBadge: 'For Hiring',
-        recruiterTitle: 'I am a Recruiter',
+        rights: 'All rights reserved.',
         recruiterCta: 'Find data',
         whyTitle: 'Why this Model?',
         whySubtitle: 'Our technology removes human bias to give you the raw market truth.',
@@ -48,6 +47,64 @@ const resources = {
         forRecruitersCTA: 'Get Business Access',
         engineeredTitle: 'Engineered for Clarity',
         engineeredDesc: 'Complex data turned into actionable insights. See the future of your earnings.',
+      },
+      candidate: {
+        discover_title: 'Boost your career',
+        discover_subtitle:
+          'Access cutting-edge technology used by recruitment leaders to level the playing field.',
+        cand_how_it_works: 'How it works?',
+        cand_how_it_works_subtitle: '3 simple steps to know your worth',
+        cand_step1_title: 'Create your profile',
+        cand_step1_desc:
+          'Enter your current or target role, experience, and location. It takes under 2 minutes.',
+        cand_step2_title: 'Add your skills',
+        cand_step2_desc:
+          "List your technologies, languages, and frameworks. The more precise, the more accurate the estimate.",
+        cand_step3_title: 'Get your analysis',
+        cand_step3_desc:
+          'Our AI analyzes your profile in 30 seconds and generates a full report with your market value.',
+
+        cand_feat1_title: 'Estimate your salary',
+        cand_feat1_desc:
+          'Get an accurate salary range based on your profile, skills, and location.',
+        cand_feat1_items: [
+          'Personalized estimate',
+          'Regional comparison',
+          'Experience-based evolution',
+          'Market range',
+        ],
+
+        cand_feat2_title: 'Compare offers',
+        cand_feat2_desc:
+          'Have multiple offers? Compare them instantly using real market data.',
+        cand_feat2_items: [
+          'Multi-offer comparison',
+          'Attractiveness score',
+          'Negotiation points',
+          'Market benchmark',
+        ],
+
+        cand_feat3_title: 'Identify profitable skills',
+        cand_feat3_desc:
+          'Discover which technical skills would most increase your salary today.',
+        cand_feat3_items: [
+          'Top profitable skills',
+          'Salary impact (+X%)',
+          'Trends by stack',
+          'Rare skills',
+        ],
+
+        cand_feat5_title: 'Explore by region',
+        cand_feat5_desc:
+          'Compare salaries across different cities to find where your profile is most valued.',
+        cand_feat5_items: [
+          'Salary map',
+          'Cost-of-living ratio',
+          'Best cities',
+          'Mobility trends',
+        ],
+        btn_calculate_salary: 'Calculate my salary',
+        btn_start: 'Start',
       },
       faq: {
         title: "FAQ",
@@ -82,7 +139,7 @@ const resources = {
         step1Title: 'Tell us about your role.',
         step1Desc: 'We use this to anchor your profile against global market data.',
         jobTitle: 'Target Job Title',
-        jobTitlePlaceholder: 'e.g. Senior Fullstack Engineer',
+        
         experience: 'Years of Experience',
         selectRange: 'Select range',
         exp0_2: '0 - 2 years (Junior)',
@@ -140,8 +197,8 @@ const resources = {
     translation: {
       navbar: {
         ourMission: 'Notre mission',
-        forCandidates: 'Pour les candidats',
-        forRecruiters: 'Pour les recruteurs',
+        forCandidates: 'Candidat',
+        forRecruiters: 'Recruteur',
         login: 'Se connecter',
         startAnalysis: "Lancer l'analyse",
         language: 'Langue',
@@ -248,6 +305,64 @@ const resources = {
         refine: 'Affiner le profil',
         disclaimer: '*Cette estimation est basée sur des données temps réel (mars 2024) et ne constitue pas une offre juridique.',
       },
+      candidate: {
+        discover_title: 'Propulsez votre carrière',
+        discover_subtitle:
+          'Accédez à la technologie de pointe utilisée par les géants du recrutement pour équilibrer le rapport de force.',
+        cand_how_it_works: 'Comment ça marche ?',
+        cand_how_it_works_subtitle: '3 étapes simples pour connaître votre valeur',
+        cand_step1_title: 'Créez votre profil',
+        cand_step1_desc:
+          'Renseignez votre poste actuel ou visé, votre expérience et votre localisation. Ça prend moins de 2 minutes.',
+        cand_step2_title: 'Ajoutez vos compétences',
+        cand_step2_desc:
+          "Listez vos technologies, langages et frameworks. Plus vous êtes précis, plus l'estimation sera juste.",
+        cand_step3_title: 'Obtenez votre analyse',
+        cand_step3_desc:
+          "Notre IA analyse votre profil en 30 secondes et vous génère un rapport complet avec votre valeur marché.",
+
+        cand_feat1_title: 'Estimer votre salaire',
+        cand_feat1_desc:
+          'Obtenez une fourchette salariale précise basée sur votre profil, vos compétences et votre localisation.',
+        cand_feat1_items: [
+          'Estimation personnalisée',
+          'Comparaison par région',
+          "Évolution selon l'expérience",
+          'Fourchette de marché',
+        ],
+
+        cand_feat2_title: 'Comparer les offres',
+        cand_feat2_desc:
+          'Vous avez plusieurs propositions ? Comparez-les instantanément avec les données réelles du marché.',
+        cand_feat2_items: [
+          'Comparaison multi-offres',
+          "Score d'attractivité",
+          'Points de négociation',
+          'Benchmark marché',
+        ],
+
+        cand_feat3_title: 'Identifier les compétences rentables',
+        cand_feat3_desc:
+          'Découvrez quelles compétences techniques augmenteraient le plus votre salaire aujourd’hui.',
+        cand_feat3_items: [
+          'Top skills rentables',
+          'Impact salarial (+X%)',
+          'Tendances par stack',
+          'Compétences rares',
+        ],
+
+        cand_feat5_title: 'Explorer par région',
+        cand_feat5_desc:
+          'Comparez les salaires entre différentes villes pour trouver où votre profil est le plus valorisé.',
+        cand_feat5_items: [
+          'Carte des salaires',
+          'Ratio coût de la vie',
+          'Meilleures villes',
+          'Tendances mobilité',
+        ],
+        btn_calculate_salary: 'Calculer mon salaire',
+        btn_start: 'Commencer',
+      },
       footer: {
         about:
           'Démocratiser les données salariales pour tous. Nous croyons en la transparence, l’équité et la puissance de l’intelligence artificielle.',
@@ -268,6 +383,7 @@ const resources = {
         by: 'par {{author}}',
         rights: 'Tous droits réservés.',
       },
+       
     },
   },
 };
