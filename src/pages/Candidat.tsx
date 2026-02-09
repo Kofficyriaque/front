@@ -56,34 +56,33 @@ const Candidat: React.FC = () => {
         </div>
       </header>
       {/*Fonctionnalités*/}
-      <section className="py-0 bg-white">
-        {candidateFeatures.map((f, idx) => (
-          <div key={idx} className={`${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
-            <div className="py-32 px-4 lg:px-8">
-              <div className="max-w-7xl mx-auto">
-                <div className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-20`}>
-                  <div className="flex-1">
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-8 ${f.colorClasses} shadow-xl`}>
-                      {f.icon}
-                    </div>
-                    <h3 className="text-4xl font-black text-slate-900 mb-6 tracking-tight">{f.title}</h3>
-                    <p className="text-lg text-slate-500 font-medium leading-relaxed mb-10">{f.desc}</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {f.items.map((item: string, i: number) => (
-                        <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-slate-200 font-semibold text-slate-700 text-xs shadow-sm hover:shadow-md hover:border-slate-300 hover:scale-105 transition-all duration-200 cursor-default">
-                          <CheckCircle2 size={16} className={`text-${f.color}-600`} /> {item}
-                        </div>
-                      ))}
-                    </div>
+      <section className="py-32 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {candidateFeatures.map((f, idx) => (
+              <div key={idx} className="group relative bg-slate-50 border border-slate-200 rounded-[3rem] p-12 overflow-hidden hover:shadow-2xl hover:border-blue-200 transition-all duration-500 flex flex-col md:flex-row gap-10 h-[500px]">
+                <div className="flex-1 relative z-10">
+                  <div className={`w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-8 border border-slate-100 text-blue-600`}>
+                    {f.icon}
                   </div>
-                  <div className="flex-1 w-full bg-slate-50 rounded-[4rem] aspect-square flex items-center justify-center border border-slate-100 relative group overflow-hidden">
-                    <FeatureVisual type={f.title} color={f.color} />
+                  <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">{f.title}</h3>
+                  <p className="text-slate-500 font-medium mb-8">{f.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {f.items.map((item: string, i: number) => (
+                      <div key={i} className="flex items-center gap-2 px-3 py-1 bg-white border border-slate-100 rounded-full text-[10px] font-bold text-slate-600 uppercase tracking-tight">
+                        <CheckCircle2 size={10} className="text-blue-500" />
+                        {item}
+                      </div>
+                    ))}
                   </div>
                 </div>
+                <div className="flex-1 min-h-[300px] relative flex items-center justify-center">
+                  <FeatureVisual type={f.title} color={f.color} />
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
       {/*Comment ça marche*/}
 <section className="py-48 bg-slate-950 text-white relative overflow-hidden">

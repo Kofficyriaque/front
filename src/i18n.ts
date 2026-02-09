@@ -68,10 +68,9 @@ const resources = {
         cand_feat1_desc:
           'Get an accurate salary range based on your profile, skills, and location.',
         cand_feat1_items: [
-          'Personalized estimate',
-          'Regional comparison',
-          'Experience-based evolution',
-          'Market range',
+          'AI-based',
+          'Real-time',
+          '98% Accuracy',
         ],
 
         cand_feat2_title: 'Compare offers',
@@ -80,17 +79,13 @@ const resources = {
         cand_feat2_items: [
           'Multi-offer comparison',
           'Attractiveness score',
-          'Negotiation points',
-          'Market benchmark',
         ],
 
         cand_feat3_title: 'Identify profitable skills',
         cand_feat3_desc:
           'Discover which technical skills would most increase your salary today.',
         cand_feat3_items: [
-          'Top profitable skills',
           'Salary impact (+X%)',
-          'Trends by stack',
           'Rare skills',
         ],
 
@@ -98,9 +93,7 @@ const resources = {
         cand_feat5_desc:
           'Compare salaries across different cities to find where your profile is most valued.',
         cand_feat5_items: [
-          'Salary map',
-          'Cost-of-living ratio',
-          'Best cities',
+          'Geo map',
           'Mobility trends',
         ],
         btn_calculate_salary: 'Calculate my salary',
@@ -407,12 +400,7 @@ const resources = {
         cand_feat1_title: 'Estimer votre salaire',
         cand_feat1_desc:
           'Obtenez une fourchette salariale précise basée sur votre profil, vos compétences et votre localisation.',
-        cand_feat1_items: [
-          'Estimation personnalisée',
-          'Comparaison par région',
-          "Évolution selon l'expérience",
-          'Fourchette de marché',
-        ],
+        cand_feat1_items: ["Basé sur l'IA", "Temps Réel", "Précision 98%"],
 
         cand_feat2_title: 'Comparer les offres',
         cand_feat2_desc:
@@ -420,17 +408,13 @@ const resources = {
         cand_feat2_items: [
           'Comparaison multi-offres',
           "Score d'attractivité",
-          'Points de négociation',
-          'Benchmark marché',
         ],
 
         cand_feat3_title: 'Identifier les compétences rentables',
         cand_feat3_desc:
           'Découvrez quelles compétences techniques augmenteraient le plus votre salaire aujourd’hui.',
         cand_feat3_items: [
-          'Top skills rentables',
           'Impact salarial (+X%)',
-          'Tendances par stack',
           'Compétences rares',
         ],
 
@@ -438,9 +422,7 @@ const resources = {
         cand_feat5_desc:
           'Comparez les salaires entre différentes villes pour trouver où votre profil est le plus valorisé.',
         cand_feat5_items: [
-          'Carte des salaires',
-          'Ratio coût de la vie',
-          'Meilleures villes',
+          'Carte Géo',
           'Tendances mobilité',
         ],
         btn_calculate_salary: 'Calculer mon salaire',
