@@ -1,12 +1,35 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { BrainCircuit, BarChart4, Map, Database, ShieldCheck, TrendingUp, Users, FileJson,ArrowRight,Target} from 'lucide-react';
-import { FeatureVisual} from '../components/FeatureVisual';
+import { Database, ShieldCheck, TrendingUp, FileJson, ArrowRight, Target, BarChart3, AlertCircle, Info, CheckCircle2, Cpu, Globe, Activity } from 'lucide-react';
 
 const Recruteur: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  // Benchmarking Items
+  const benchmarkItems = [
+    t('recruiter.rec_bench_item1'),
+    t('recruiter.rec_bench_item2'),
+    t('recruiter.rec_bench_item3'),
+  ];
+
+  // Skills Data
+  const skillsList = [
+    { name: t('recruiter.rec_skills_genai'), scarcity: "9.8/10", impact: t('recruiter.rec_skills_genai_impact') },
+    { name: t('recruiter.rec_skills_rust'), scarcity: "9.2/10", impact: t('recruiter.rec_skills_rust_impact') },
+    { name: t('recruiter.rec_skills_cyber'), scarcity: "8.9/10", impact: t('recruiter.rec_skills_cyber_impact') },
+    { name: t('recruiter.rec_skills_react'), scarcity: "7.5/10", impact: t('recruiter.rec_skills_react_impact') },
+  ];
+
+  // Attractiveness Criteria
+  const attractiveCriteria = [
+    { label: t('recruiter.rec_attract_salary_label'), score: "95%", status: t('recruiter.rec_attract_salary_status') },
+    { label: t('recruiter.rec_attract_clarity_label'), score: "82%", status: t('recruiter.rec_attract_clarity_status') },
+    { label: t('recruiter.rec_attract_benefits_label'), score: "70%", status: t('recruiter.rec_attract_benefits_status') },
+    { label: t('recruiter.rec_attract_seo_label'), score: "88%", status: t('recruiter.rec_attract_seo_status') },
+  ];
+
   return (
     <div className="bg-slate-50 min-h-screen animate-in fade-in duration-700">
       {/* Header - Vision Stratégique */}
@@ -28,91 +51,245 @@ const Recruteur: React.FC = () => {
               {t('recruiter.start_now')} <ArrowRight />
             </button>
           </div>
-          <div className="flex-1 w-full max-w-xl">
-            <div className="relative bg-white rounded-[3rem] p-8 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] border border-slate-100">
-               <FeatureVisual type="salarial" color="blue" />
+          <div className="flex-1 w-full max-w-2xl">
+            {/* RIGHT SIDE: ORBITAL DATA ENGINE */}
+            <div className="relative h-[600px] hidden lg:flex items-center justify-center animate-in fade-in zoom-in duration-1000 delay-300">
+              {/* Central Core: The IA Brain */}
+              <div className="relative z-30 w-32 h-32 bg-white rounded-full shadow-[0_0_100px_rgba(99,102,241,0.2)] border-4 border-indigo-50 flex items-center justify-center group cursor-pointer hover:scale-110 transition-transform duration-500">
+                <div className="absolute inset-2 border border-indigo-100 rounded-full animate-spin-slow"></div>
+                <Database className="text-indigo-600" size={40} />
+              </div>
+
+              {/* Orbital Rings */}
+              <div className="absolute w-[300px] h-[300px] border border-slate-100 rounded-full"></div>
+              <div className="absolute w-[450px] h-[450px] border border-slate-50 rounded-full"></div>
+              <div className="absolute w-[580px] h-[580px] border border-slate-50/50 rounded-full"></div>
+
+              {/* Data Nodes (Orbiting Cards) */}
+              {/* Node 1: Salary Bench */}
+              <div className="absolute top-[15%] right-0 z-40 bg-white p-5 rounded-3xl shadow-xl border border-slate-100 w-56 transform hover:-translate-y-2 transition-transform">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                    <TrendingUp size={16} />
+                  </div>
+                  <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Benchmark</span>
+                </div>
+                <div className="text-2xl font-black text-slate-900">+18.5% <span className="text-[10px] text-emerald-500 font-bold">vs Q1</span></div>
+                <div className="mt-2 text-[9px] font-bold text-slate-400 italic">Tendance Marché IT</div>
+              </div>
+
+              {/* Node 2: Scarcity Index */}
+              <div className="absolute bottom-[20%] right-[10%] z-40 bg-slate-950 text-white p-6 rounded-[2.5rem] shadow-2xl w-60 transform -rotate-3 hover:rotate-0 transition-all">
+                <div className="flex items-center justify-between mb-4">
+                  <Cpu size={18} className="text-indigo-400" />
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full animate-ping"></div>
+                </div>
+                <div className="text-[10px] font-black text-indigo-300 uppercase tracking-widest mb-1">Scarcity Score</div>
+                <div className="text-4xl font-black mb-3 text-white">9.8<span className="text-sm opacity-50">/10</span></div>
+                <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase">
+                  <Globe size={10} /> Focus: Europe Centrale
+                </div>
+              </div>
+
+              {/* Node 3: Real-time Feed */}
+              <div className="absolute left-0 top-[30%] z-40 bg-white/80 backdrop-blur-md p-5 rounded-3xl border border-white shadow-lg w-52">
+                <div className="flex items-center gap-3 mb-4">
+                  <Activity size={16} className="text-indigo-600" />
+                  <span className="text-[9px] font-black text-slate-900 uppercase tracking-widest">Feed Live</span>
+                </div>
+                <div className="space-y-3">
+                  {[1,2,3].map(i => (
+                    <div key={i} className="flex items-center justify-between">
+                      <div className="w-1.5 h-1.5 bg-indigo-200 rounded-full"></div>
+                      <div className="h-1 flex-1 bg-slate-50 mx-2 rounded-full overflow-hidden">
+                        <div className={`h-full bg-indigo-500 w-[${30 + i*20}%]`}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Architectural Lines (SVG) */}
+              <svg className="absolute inset-0 w-full h-full -z-10" viewBox="0 0 600 600">
+                <path d="M300 300 L500 150" stroke="#e2e8f0" strokeWidth="1" strokeDasharray="5 5" />
+                <path d="M300 300 L450 480" stroke="#e2e8f0" strokeWidth="1" strokeDasharray="5 5" />
+                <path d="M300 300 L120 250" stroke="#e2e8f0" strokeWidth="1" strokeDasharray="5 5" />
+              </svg>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Les 4 Piliers Fonctionnels (Cahier des Charges) */}
-      <section className="py-24 px-4">
+     
+
+      {/* --- MODULE 1: BENCHMARKING (REALISTIC DATA) --- */}
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            {/* Pilier 1: IA & Machine Learning */}
-            <div className="bg-white p-12 rounded-[3.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-              <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <BrainCircuit size={32} />
-              </div>
-              <h3 className="text-3xl font-black text-slate-900 mb-6 tracking-tight">{t('recruiter.rec_pillar1_title')}</h3>
-              <p className="text-slate-500 font-medium leading-relaxed mb-10">{t('recruiter.rec_pillar1_desc')}</p>
-              <ul className="space-y-4">
-                <li className="flex items-center gap-4 text-sm font-bold text-slate-700">
-                  <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-blue-600"><i className="fas fa-check"></i></div>
-                  {t('recruiter.rec_pillar1_feature')}
-                </li>
-                <li className="flex items-center gap-4 text-sm font-bold text-slate-700">
-                  <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-blue-600"><i className="fas fa-check"></i></div>
-                  Modèle prédictif entraîné sur 1M+ données
-                </li>
-              </ul>
-            </div>
-
-            {/* Pilier 2: Benchmarking & Attractivité */}
-            <div className="bg-slate-900 p-12 rounded-[3.5rem] text-white shadow-2xl hover:scale-[1.02] transition-all group">
-              <div className="w-16 h-16 bg-white/10 text-blue-400 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-blue-400 group-hover:text-white transition-colors">
-                <Target size={32} />
-              </div>
-              <h3 className="text-3xl font-black mb-6 tracking-tight">{t('recruiter.rec_pillar2_title')}</h3>
-              <p className="text-slate-300 font-medium leading-relaxed mb-10">{t('recruiter.rec_pillar2_desc')}</p>
-              <div className="p-6 bg-white/5 rounded-3xl border border-white/10">
-                 <div className="flex justify-between items-center mb-4">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{t('recruiter.rec_pillar2_feature')}</span>
-                    <span className="text-2xl font-black text-blue-400">84%</span>
-                 </div>
-                 <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full w-[84%] bg-blue-400"></div>
-                 </div>
-              </div>
-            </div>
-
-            {/* Pilier 3: Tableaux de Bord (Dashboards) */}
-            <div className="md:col-span-2 bg-white p-12 rounded-[3.5rem] border border-slate-100 shadow-sm">
-               <div className="flex flex-col md:flex-row gap-16 items-center">
-                  <div className="flex-1">
-                    <div className="w-16 h-16 bg-cyan-50 text-cyan-600 rounded-2xl flex items-center justify-center mb-10">
-                      <BarChart4 size={32} />
-                    </div>
-                    <h3 className="text-4xl font-black text-slate-900 mb-6 tracking-tight">{t('recruiter.rec_pillar3_title')}</h3>
-                    <p className="text-slate-500 font-medium leading-relaxed mb-12">{t('recruiter.rec_pillar3_desc')}</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                       <div className="space-y-3">
-                          <Map className="text-blue-500" size={20} />
-                          <div className="text-[11px] font-black uppercase tracking-tighter text-slate-400">{t('recruiter.rec_pillar3_map')}</div>
-                       </div>
-                       <div className="space-y-3">
-                          <TrendingUp className="text-emerald-500" size={20} />
-                          <div className="text-[11px] font-black uppercase tracking-tighter text-slate-400">{t('recruiter.rec_pillar3_skills')}</div>
-                       </div>
-                       <div className="space-y-3">
-                          <Users className="text-indigo-500" size={20} />
-                          <div className="text-[11px] font-black uppercase tracking-tighter text-slate-400">{t('recruiter.rec_pillar3_compare')}</div>
-                       </div>
-                    </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="order-2 lg:order-1">
+               <div className="bg-slate-50 border border-slate-200 rounded-[2.5rem] overflow-hidden shadow-sm">
+                  <div className="p-8 border-b border-slate-200 bg-white">
+                     <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-1">{t('recruiter.rec_bench_subtitle')}</h4>
+                     <p className="text-lg font-bold">{t('recruiter.rec_bench_role')}</p>
                   </div>
-                  <div className="flex-1 w-full bg-slate-50 rounded-[2.5rem] p-10 border border-slate-100">
-                     <div className="h-64 flex items-end gap-3">
-                        {[40, 70, 45, 90, 65, 85, 50, 75].map((h, i) => (
-                          <div key={i} style={{ height: `${h}%` }} className="flex-1 bg-blue-200/50 rounded-t-xl hover:bg-blue-600 transition-all"></div>
-                        ))}
+                  <div className="p-8 space-y-8">
+                     <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                           <span className="text-xs font-bold text-slate-600 uppercase">{t('recruiter.rec_bench_budget')}</span>
+                           <span className="text-lg font-black text-slate-900">{t('recruiter.rec_bench_budget_value')}</span>
+                        </div>
+                        <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
+                           <div className="h-full w-[65%] bg-slate-900"></div>
+                        </div>
+                     </div>
+                     <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                           <span className="text-xs font-bold text-indigo-600 uppercase">{t('recruiter.rec_bench_market')}</span>
+                           <span className="text-lg font-black text-indigo-600">{t('recruiter.rec_bench_market_value')}</span>
+                        </div>
+                        <div className="h-3 w-full bg-indigo-100 rounded-full overflow-hidden">
+                           <div className="h-full w-[85%] bg-indigo-600"></div>
+                        </div>
+                     </div>
+                     <div className="p-6 bg-red-50 rounded-2xl border border-red-100 flex items-center gap-4">
+                        <AlertCircle className="text-red-500 shrink-0" />
+                        <p className="text-sm font-bold text-red-700">{t('recruiter.rec_bench_alert')}</p>
                      </div>
                   </div>
                </div>
             </div>
+            <div className="order-1 lg:order-2">
+              <div className="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-8">
+                <BarChart3 size={32} />
+              </div>
+              <h2 className="text-4xl font-black tracking-tight mb-6">{t('recruiter.rec_bench_title')}</h2>
+              <p className="text-xl text-slate-500 font-medium leading-relaxed mb-10">
+                {t('recruiter.rec_bench_desc')}
+              </p>
+              <div className="space-y-4">
+                 {benchmarkItems.map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                       <CheckCircle2 size={18} className="text-emerald-500" />
+                       <span className="font-bold text-slate-700">{item}</span>
+                    </div>
+                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Pilier 4: SQL & Infrastructure */}
+      {/* --- MODULE 2: RARE SKILLS (TABLE STYLE) --- */}
+      <section className="py-24 px-6 bg-slate-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <div className="w-16 h-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mb-8">
+                <TrendingUp size={32} />
+              </div>
+              <h2 className="text-4xl font-black tracking-tight mb-6">{t('recruiter.rec_skills_title')}</h2>
+              <p className="text-xl text-slate-500 font-medium leading-relaxed mb-10">
+                {t('recruiter.rec_skills_desc')}
+              </p>
+              <div className="grid grid-cols-2 gap-6">
+                 <div className="p-6 bg-white rounded-2xl border border-slate-200">
+                    <div className="text-2xl font-black text-slate-900 mb-1">94%</div>
+                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('recruiter.rec_skills_scarcity')}</div>
+                 </div>
+                 <div className="p-6 bg-slate-900 rounded-2xl">
+                    <div className="text-2xl font-black text-white mb-1">+18%</div>
+                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('recruiter.rec_skills_bonus')}</div>
+                 </div>
+              </div>
+            </div>
+            
+            <div>
+               <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                  <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+                     <span className="font-black text-xs uppercase tracking-widest text-slate-400">{t('recruiter.rec_skills_table_title')}</span>
+                     <TrendingUp size={16} className="text-amber-500" />
+                  </div>
+                  <div className="divide-y divide-slate-100">
+                     {skillsList.map((skill, i) => (
+                        <div key={i} className="p-6 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                           <div>
+                              <div className="font-black text-slate-900">{skill.name}</div>
+                              <div className="text-[10px] font-bold text-slate-400 uppercase">{t('recruiter.rec_skills_scarcity_label')} : {skill.scarcity}</div>
+                           </div>
+                           <div className="text-right">
+                              <div className="text-sm font-black text-emerald-600">{skill.impact}</div>
+                              <div className="text-[10px] font-bold text-slate-400 uppercase">{t('recruiter.rec_skills_impact_label')}</div>
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+                  <div className="p-4 bg-slate-50 text-center">
+                     <button className="text-[10px] font-black uppercase text-indigo-600 hover:underline">{t('recruiter.rec_skills_view_all')}</button>
+                  </div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- MODULE 3: ATTRACTIVENESS (DETAILED SCORECARD) --- */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="order-2 lg:order-1">
+               <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 blur-[100px]"></div>
+                  <div className="flex items-center gap-4 mb-10">
+                     <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white font-black text-2xl">84</div>
+                     <div>
+                        <div className="text-xs font-bold text-indigo-400 uppercase">{t('recruiter.rec_attract_score')}</div>
+                        <div className="text-xl font-black">{t('recruiter.rec_attract_performance')}</div>
+                     </div>
+                  </div>
+                  <div className="space-y-6">
+                     {attractiveCriteria.map((crit, i) => {
+                        const isGood = crit.score === '95%' || crit.score === '88%';
+                        return (
+                        <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+                           <span className="text-sm font-medium">{crit.label}</span>
+                           <div className="flex items-center gap-4">
+                              <span className="text-xs font-black text-indigo-400">{crit.score}</span>
+                              <span className={isGood ? 'text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400' : 'text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-yellow-500/20 text-yellow-400'}>
+                                 {crit.status}
+                              </span>
+                           </div>
+                        </div>
+                        );
+                     })}
+                  </div>
+               </div>
+            </div>
+            
+            <div className="order-1 lg:order-2">
+              <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-8">
+                <Target size={32} />
+              </div>
+              <h2 className="text-4xl font-black tracking-tight mb-6">{t('recruiter.rec_attract_title')}</h2>
+              <p className="text-xl text-slate-500 font-medium leading-relaxed mb-10">
+                {t('recruiter.rec_attract_desc')}
+              </p>
+              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex items-start gap-4 mb-8">
+                 <Info className="text-indigo-500 shrink-0 mt-1" />
+                 <p className="text-sm font-medium text-slate-600 italic">"{t('recruiter.rec_attract_insight')}"</p>
+              </div>
+              <button onClick={() => navigate('/login')} className="text-indigo-600 font-black uppercase text-xs tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                 {t('recruiter.rec_attract_cta')} <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+       {/* Les 4 Piliers Fonctionnels (Cahier des Charges) */}
+      <section className="py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          {/* Pilier 4: SQL & Infrastructure */}
             <div className="md:col-span-2 bg-gradient-to-r from-slate-50 to-white p-12 rounded-[3.5rem] border border-slate-100 flex flex-col md:flex-row justify-between items-center gap-12">
                <div className="flex items-center gap-8">
                   <div className="w-20 h-20 bg-white shadow-xl rounded-3xl flex items-center justify-center text-slate-900 border border-slate-100">
@@ -137,15 +314,16 @@ const Recruteur: React.FC = () => {
         </div>
       </section>
 
+
       {/* CTA Final */}
       <section className="py-32 px-4 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-black text-slate-900 tracking-tighter mb-10">Prenez l'avantage sur le marché de l'emploi.</h2>
+          <h2 className="text-5xl font-black text-slate-900 tracking-tighter mb-10">{t('recruiter.rec_final_title')}</h2>
           <button 
             onClick={() => navigate('/login')} 
             className="bg-slate-900 text-white px-20 py-8 rounded-[2rem] font-black text-2xl hover:bg-blue-600 hover:scale-105 transition-all shadow-2xl shadow-slate-200"
           >
-            Lancer un Audit maintenant
+            {t('recruiter.rec_final_cta')}
           </button>
         </div>
       </section>
