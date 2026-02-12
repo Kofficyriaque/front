@@ -7,10 +7,12 @@ import Candidat from './pages/Candidat';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Recruteur from './pages/Recruteur';
-import Singup from './pages/Singup';
+import Signup from './pages/Singup';
 import ForgotPassword from './pages/ForgotPassword';
 import About from './pages/About';
-
+import Profile from './pages/Profile';
+import History from './pages/History';
+import { AuthProvider } from './context/AuthContext';
 
 
 const App: React.FC = () => {
@@ -27,23 +29,27 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <main className="flex-grow pt-16">
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/signup" element={<Singup />} />
-            <Route path="/onboarding/candidate" element={<CandidateOnboarding />} />
-            <Route path="/candidat" element={<Candidat />} />
-            <Route path="/recruteur" element={<Recruteur />} />
-            <Route path="*" element={<Landing />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <AuthProvider>
+        <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
+          <Navbar theme={theme} toggleTheme={toggleTheme} />
+          <main className="flex-grow pt-16">
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/history" element={<History />} />
+              <Route path="/onboarding/candidate" element={<CandidateOnboarding />} />
+              <Route path="/candidat" element={<Candidat />} />
+              <Route path="/recruteur" element={<Recruteur />} />
+              <Route path="*" element={<Landing />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 };
