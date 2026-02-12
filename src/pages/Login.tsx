@@ -1,23 +1,32 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Lock, Mail, Loader2, ArrowRight } from 'lucide-react';
+import { Lock, Mail, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../context/AuthContext';
 
 const Login: React.FC = () => {
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { login } = useAuth();
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     setIsLoading(true);
-    // Simulation d'un chargement de 1 seconde
-    setTimeout(() => {
+
+    try {
+      await login(email, password);
+      navigate('/profile');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur de connexion');
+    } finally {
       setIsLoading(false);
-      navigate('/onboarding/candidate');
-    }, 1500);
+    }
   };
 
   return (
@@ -33,6 +42,13 @@ const Login: React.FC = () => {
         </div>
 
         <div className="bg-white dark:bg-slate-950 p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-800">
+          {error && (
+            <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl flex items-center gap-3">
+              <AlertCircle size={20} className="text-red-600 dark:text-red-400" />
+              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSignIn} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">{t('login.email')}</label>
@@ -43,6 +59,8 @@ const Login: React.FC = () => {
                 <input 
                   type="email" 
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder={t('login.emailPlaceholder')}
                   className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-950 transition-all text-slate-900 dark:text-slate-100"
                 />
@@ -61,6 +79,8 @@ const Login: React.FC = () => {
                 <input 
                   type="password" 
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-950 transition-all text-slate-900 dark:text-slate-100"
                 />

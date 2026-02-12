@@ -2,9 +2,11 @@ import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, MapPin, Loader2, ArrowRight } from 'lucide-react';
+import { Mail, Lock, User, MapPin, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
 import { regionsFrance } from '../utils/regionsFrance';
+import { useAuth } from '../context/AuthContext';
 
 const Signup = () => {
   const [firstName, setFirstName] = useState('');
@@ -15,18 +17,25 @@ const Signup = () => {
   const [accountType, setAccountType] = useState('seeker');
   const [marketing, setMarketing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { signup } = useAuth();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError('');
     setIsLoading(true);
-    // TODO: branchement API d'inscription
-    console.log({ firstName, lastName, email, password, marketing, accountType, region });
-    setTimeout(() => {
+    try {
+      // Map accountType to backend role
+      const role = accountType === 'seeker' ? 'Candidat' : 'Recruteur';
+      await signup(email, password, firstName, lastName, role, region);
+      navigate('/profile');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur lors de l\'inscription');
+    } finally {
       setIsLoading(false);
-      navigate('/onboarding/candidate');
-    }, 1500);
+    }
   };
 
   return (
@@ -42,6 +51,13 @@ const Signup = () => {
         </div>
 
         <div className="bg-white dark:bg-slate-950 p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-800">
+          {error && (
+            <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl flex items-center gap-3">
+              <AlertCircle size={20} className="text-red-600 dark:text-red-400" />
+              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            </div>
+          )}
+          
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Account Type */}
             <div>
