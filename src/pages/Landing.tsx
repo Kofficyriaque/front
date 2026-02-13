@@ -32,7 +32,7 @@ const Landing: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
             {/* Candidate Card */}
             <button
-              onClick={() => navigate('/onboarding/candidate')}
+              onClick={() => navigate('/login')}
               className="relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
@@ -126,7 +126,7 @@ const Landing: React.FC = () => {
                 </li>
               </ul>
               <button 
-                onClick={() => navigate('/onboarding/candidate')}
+                onClick={() => navigate('/candidat')}
                 className="text-blue-600 dark:text-blue-400 font-bold flex items-center hover:translate-x-1 transition-transform"
               >
                 {t('landing.forCandidatesCTA')} <ArrowRight size={18} className="ml-2" />
@@ -155,7 +155,7 @@ const Landing: React.FC = () => {
                 </li>
               </ul>
               <button 
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/recruteur')}
                 className="text-white font-bold flex items-center hover:translate-x-1 transition-transform"
               >
                 {t('landing.forRecruitersCTA')} <ArrowRight size={18} className="ml-2" />
@@ -181,10 +181,6 @@ const Landing: React.FC = () => {
               answer={t('faq.a1')}
             />
             <FAQItem 
-              question={t('faq.q2')}
-              answer={t('faq.a2')}
-            />
-            <FAQItem 
               question={t('faq.q3')}
               answer={t('faq.a3')}
             />
@@ -199,8 +195,11 @@ const Landing: React.FC = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-slate-600 dark:text-slate-400 mb-4">{t('faq.more')}</p>
-            <button className="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center justify-center mx-auto">
+            
+            <button 
+              onClick={() => navigate('/about')}
+              className="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center justify-center mx-auto"
+            >
               {t('faq.viewAll')} <ArrowRight size={18} className="ml-2" />
             </button>
           </div>
@@ -211,48 +210,6 @@ const Landing: React.FC = () => {
   );
 };
 
-/* Interface pour FeatureCard
-interface FeatureCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  dark?: boolean;
-  tags?: string[];
-  footer?: string;
-  footerColor?: string;
-}
-*/
 
-/* const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, dark, tags, footer, footerColor }) => {
-  return (
-    <div className={`${dark ? 'bg-slate-900 text-white' : 'bg-white text-slate-900 border border-slate-100 shadow-sm'} p-10 rounded-[2.5rem] flex flex-col h-full min-h-[340px]`}>
-      <div className={`w-12 h-12 ${dark ? 'bg-slate-800' : 'bg-blue-50'} rounded-2xl flex items-center justify-center mb-6 shrink-0`}>
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold mb-4">{title}</h3>
-      <p className={`${dark ? 'text-slate-400' : 'text-slate-500'} mb-auto leading-relaxed`}>{description}</p>
-      
-      {tags && (
-        <div className="flex flex-wrap gap-2 mt-6">
-          {tags.map((tag, i) => (
-            <span key={i} className="px-3 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase tracking-widest rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {footer && (
-        <div className="mt-8 flex items-center gap-2">
-          {footerColor === 'blue' && <CheckCircle2 size={16} className="text-blue-600" />}
-          <span className={`text-sm font-bold ${footerColor === 'blue' ? 'text-blue-600' : 'text-slate-500'}`}>{footer}</span>
-        </div>
-      )}
-      {!footer && !tags && <div className="mt-8 h-1 bg-slate-100 rounded-full w-2/3 overflow-hidden">
-        <div className="h-full bg-blue-600 w-2/3"></div>
-      </div>}
-    </div>
-  );
-}; */
 
 export default Landing;

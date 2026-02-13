@@ -48,7 +48,7 @@ const Candidat: React.FC = () => {
           <h1 className="text-9xl font-black text-slate-900 dark:text-slate-100 tracking-tighter mb-8 leading-[0.85]">{t('candidate.discover_title')}</h1>
           <p className="text-2xl font-medium text-slate-500 dark:text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">{t('candidate.discover_subtitle')}</p>
           <button 
-            onClick={() => navigate('/onboarding/candidate')} 
+            onClick={() => navigate('/login')} 
             className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl dark:shadow-blue-950 hover:scale-105 transition-all"
           >
             {t('candidate.btn_calculate_salary')}
@@ -122,7 +122,7 @@ const Candidat: React.FC = () => {
           
           <div className="mt-40 text-center">
              <button 
-                onClick={() => navigate('/onboarding/candidate')} 
+                onClick={() => navigate('/login')} 
                 className="bg-white text-slate-950 px-20 py-8 rounded-[2.5rem] font-black text-2xl hover:scale-105 hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] transition-all active:scale-95"
              >
                {t('candidate.btn_start')}

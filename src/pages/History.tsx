@@ -22,7 +22,7 @@ const HistoryPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-[3.5rem] shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+        <div className="bg-white dark:bg-slate-950 rounded-[3.5rem] shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden">
           <div className="p-10 border-b border-slate-50 dark:border-slate-800 flex justify-between items-center">
             <div className="flex items-center gap-4">
               <LayoutDashboard size={28} className="text-blue-600" />
