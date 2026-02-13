@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -7,9 +7,11 @@ import Candidat from './pages/Candidat';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Recruteur from './pages/Recruteur';
-import Signup from './pages/Singup';
+import Signup from './pages/Singup';  
 import ForgotPassword from './pages/ForgotPassword';
 import About from './pages/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfUse from './pages/TermsOfUse';
 import Profile from './pages/Profile';
 import History from './pages/History';
 import { AuthProvider } from './context/AuthContext';
@@ -27,10 +29,23 @@ const App: React.FC = () => {
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
   };
 
+  // Initialiser la classe dark au chargement
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const isDark = savedTheme === 'dark' || (!savedTheme && theme === 'dark');
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      document.body.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
+    }
+  }, [theme]);
+
   return (
     <BrowserRouter>
       <AuthProvider>
-        <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
+        <div className={`flex flex-col min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <Navbar theme={theme} toggleTheme={toggleTheme} />
           <main className="flex-grow pt-16">
             <Routes>
@@ -44,6 +59,8 @@ const App: React.FC = () => {
               <Route path="/onboarding/candidate" element={<CandidateOnboarding />} />
               <Route path="/candidat" element={<Candidat />} />
               <Route path="/recruteur" element={<Recruteur />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfUse />} />
               <Route path="*" element={<Landing />} />
             </Routes>
           </main>

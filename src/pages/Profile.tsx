@@ -78,7 +78,7 @@ const Profile: React.FC = () => {
         </div>
 
         {/* CARTE D'INFORMATIONS PRINCIPALE */}
-        <div className="bg-white dark:bg-slate-900 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
+        <div className="bg-white dark:bg-slate-950 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
           <div className="p-10 md:p-16">
             <div className="space-y-10">
               
@@ -233,7 +233,7 @@ const Profile: React.FC = () => {
                   </button>
                   <button 
                     onClick={() => setShowDeleteConfirm(false)}
-                    className="px-8 py-4 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-2xl font-black text-xs uppercase tracking-widest border border-slate-200 dark:border-slate-700"
+                    className="px-8 py-4 bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-300 rounded-2xl font-black text-xs uppercase tracking-widest border border-slate-200 dark:border-slate-700"
                   >
                     {t('profile.profile_cancel')}
                   </button>
