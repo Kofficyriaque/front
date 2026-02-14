@@ -2,10 +2,10 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
 
 export interface User {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
+  id?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
   role?: string;
   location?: string;
 }
@@ -16,14 +16,11 @@ interface AuthResponse {
   user?: {
     id: string;
     email: string;
-    firstName?: string;
-    first_name?: string;
-    lastName?: string;
-    last_name?: string;
-    role?: string;
-    location?: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    location: string;
   };
-  id?: string;
 }
 
 interface AuthContextType {
@@ -58,11 +55,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(true);
     try {
       const data = (await authAPI.login({ email, password })) as AuthResponse;
-      
+
       // Sauvegarder le token et l'utilisateur
-      const token = data.token || data.access_token || '';
+      const token = data.access_token || '';
       localStorage.setItem('authToken', token);
-      
+
       // Récupérer les données existantes si elles existent
       let existingUser: User | null = null;
       const existingSavedUser = localStorage.getItem('user');
@@ -73,12 +70,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           // ignore
         }
       }
-      
+
       const userData: User = {
-        id: data.user?.id || data.id || '',
-        email: data.user?.email || email,
-        firstName: data.user?.firstName || data.user?.first_name || existingUser?.firstName || '',
-        lastName: data.user?.lastName || data.user?.last_name || existingUser?.lastName || '',
+        id: data.user?.id || existingUser?.id ,
+        email: data.user?.email  || existingUser?.email ,
+        firstName: data.user?.firstName || existingUser?.firstName,
+        lastName: data.user?.lastName ||existingUser?.lastName,
         role: data.user?.role || existingUser?.role,
         location: data.user?.location || existingUser?.location,
       };
@@ -94,26 +91,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signup = async (email: string, password: string, firstName: string, lastName: string, role: string, location?: string) => {
     setLoading(true);
     try {
-      const data = (await authAPI.signup({ 
-        email, 
-        password, 
-        firstName, 
+      const data = (await authAPI.signup({
+        email,
+        password,
+        firstName,
         lastName,
         role,
-        location 
+        location
       })) as AuthResponse;
-      
+
       // Sauvegarder le token et l'utilisateur
-      const token = data.token || data.access_token || '';
+      const token = data.access_token || '';
       localStorage.setItem('authToken', token);
-      
+
       const userData: User = {
-        id: data.user?.id || data.id || '',
-        email: data.user?.email || email,
-        firstName: data.user?.firstName || data.user?.first_name || firstName || '',
-        lastName: data.user?.lastName || data.user?.last_name || lastName || '',
-        role: data.user?.role || role,
-        location: data.user?.location || location,
+        id: data.user?.id ,
+        email: data.user?.email,
+        firstName: data.user?.firstName,
+        lastName: data.user?.lastName ,
+        role: data.user?.role,
+        location: data.user?.location,
       };
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);

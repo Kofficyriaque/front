@@ -28,7 +28,7 @@ const Signup = () => {
     setIsLoading(true);
     try {
       // Map accountType to backend role
-      const role = accountType === 'seeker' ? 'Candidat' : 'Recruteur';
+      const role = accountType === 'seeker' ? 'candidat' : 'recruteur';
       await signup(email, password, firstName, lastName, role, region);
       navigate('/profile');
     } catch (err) {
