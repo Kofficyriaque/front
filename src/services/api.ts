@@ -1,6 +1,6 @@
 // API Configuration and Client
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 interface RequestOptions extends RequestInit {
   timeout?: number;
@@ -74,7 +74,7 @@ export const authAPI = {
     firstName: string;
     lastName: string;
     role: string;
-    location?: string;
+    location: string;
   }) =>
     apiRequest('/api/auth/register', {
       method: 'POST',

@@ -28,7 +28,7 @@ interface AuthContextType {
   isConnected: boolean;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, firstName: string, lastName: string, role: string, location?: string) => Promise<void>;
+  signup: (email: string, password: string, firstName: string, lastName: string, role: string, location: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -88,7 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const signup = async (email: string, password: string, firstName: string, lastName: string, role: string, location?: string) => {
+  const signup = async (email: string, password: string, firstName: string, lastName: string, role: string, location: string) => {
     setLoading(true);
     try {
       const data = (await authAPI.signup({
