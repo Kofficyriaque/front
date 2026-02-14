@@ -13,7 +13,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [region, setRegion] = useState("");
+  const [location, setLocation] = useState("");
   const [accountType, setAccountType] = useState('seeker');
   const [marketing, setMarketing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ const Signup = () => {
     try {
       // Map accountType to backend role
       const role = accountType === 'seeker' ? 'candidat' : 'recruteur';
-      await signup(email, password, firstName, lastName, role, region);
+      await signup(email, password, firstName, lastName, role, location);
       navigate('/profile');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors de l\'inscription');
@@ -135,8 +135,8 @@ const Signup = () => {
                 </div>
                 <select
                   required
-                  value={region}
-                  onChange={(e) => setRegion(e.target.value)}
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-950 transition-all text-slate-900 dark:text-slate-100 appearance-none"
                 >
                   <option value="">{t('signup.regionPlaceholder')}</option>
