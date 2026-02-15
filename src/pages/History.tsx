@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { History, LayoutDashboard, ChevronRight } from 'lucide-react';
+import getUserHistory from '../utils/history';
+import type { HistoryReponse } from '../types/history';
+
+
 
 const HistoryPage: React.FC = () => {
-  const recentHistory = [
-    { title: "Senior React Engineer", company: "TechScale Global", salary: "75k - 85k€", date: "Il y a 2 jours", score: 92 },
-    { title: "Fullstack Developer", company: "Innova Group", salary: "55k - 65k€", date: "Il y a 1 semaine", score: 78 },
-    { title: "Lead AI Engineer", company: "CyberCore", salary: "90k - 110k€", date: "Il y a 10 jours", score: 95 },
-    { title: "Junior UI Designer", company: "PixelArt", salary: "35k - 42k€", date: "Il y a 2 semaines", score: 85 }
-  ];
+  const [listeHistorique, setHistorique] = useState<HistoryReponse[]>([]);
+
+  async function history() {
+    const acces_token = localStorage.getItem("authToken");
+    if (!acces_token) return;
+
+    const data: HistoryReponse[] = await getUserHistory(acces_token);
+    setHistorique(data);
+  }
+  useEffect(() => {
+    history();
+  }, []);
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-6 duration-700 pb-32 pt-20">
@@ -31,21 +41,21 @@ const HistoryPage: React.FC = () => {
           </div>
           
           <div className="p-4">
-            {recentHistory.map((item, idx) => (
-              <div key={idx} className="p-8 rounded-[2.5rem] hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-between group border-b border-transparent last:border-none">
+            {listeHistorique?.map((item) => (
+              <div key={item.idHistorique} className="p-8 rounded-[2.5rem] hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-between group border-b border-transparent last:border-none">
                 <div className="flex items-center gap-8">
                   <div className="w-16 h-16 bg-white dark:bg-slate-950 rounded-2xl flex items-center justify-center text-2xl font-black text-blue-600 dark:text-blue-400 shadow-sm border border-slate-100 dark:border-slate-800">
-                    {item.score}%
+                    {item.salaire_predit}%
                   </div>
                   <div>
-                    <h4 className="text-xl font-black text-slate-950 dark:text-white italic">{item.title}</h4>
+                    <h4 className="text-xl font-black text-slate-950 dark:text-white italic">{item.salaire_predit}</h4>
                     <p className="text-sm font-bold text-slate-400 flex items-center gap-2">
-                      {item.company} • <span className="text-blue-600 dark:text-blue-400">{item.salary}</span>
+                      {item.salaire_predit} • <span className="text-blue-600 dark:text-blue-400">{item.salaire_predit}</span>
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
-                  <span className="text-[10px] font-black text-slate-300 dark:text-slate-600 uppercase tracking-widest hidden sm:block">{item.date}</span>
+                  <span className="text-[10px] font-black text-slate-300 dark:text-slate-600 uppercase tracking-widest hidden sm:block">{item.date_prediction}</span>
                   <button className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-sm">
                     <ChevronRight size={20} />
                   </button>

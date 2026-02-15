@@ -34,7 +34,11 @@ const CandidateOnboarding: React.FC = () => {
   async function prediction() {
     setIsAnalyzing(true);
     try {
-      const requete = await predict(data, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMyIsImV4cCI6MTc3MTE5NzIzMX0.GNzzsYMHovft2msPKCTnVRnGAjxvh_GFlHEn16OTaQo') 
+      const access_token = localStorage.getItem("authToken")
+      if (!access_token) {
+        return;
+      }
+      const requete = await predict(data, access_token) 
       const statuses = [
       "Connecting to market APIs...",
       "Analyzing 15,248 job offers for your profile...",
@@ -72,7 +76,14 @@ const CandidateOnboarding: React.FC = () => {
     "Centre-Val de Loire"
   ];
 
-  const suggestedSkills = ["React", "TypeScript", "Node.js", "AWS", "Python", "Docker", "SQL", "Tailwind CSS"];
+  const suggestedSkills = ['python', 'java', 'javascript', 'sql', 'react', 'angular', 'vue',
+    'node.js', 'docker', 'kubernetes', 'aws', 'azure', 'gcp',
+    'machine learning', 'deep learning', 'tensorflow', 'pytorch',
+    'git', 'linux', 'agile', 'scrum', 'devops',
+    'mongodb', 'postgresql', 'mysql', 'redis',
+    'typescript', 'c++', 'go', 'rust', 'scala',
+    'fastapi', 'django', 'flask', 'spring', 'php', 'html', 'css'
+  ];
 
   const handleAddSkill = (e?: React.FormEvent) => {
     e?.preventDefault();
