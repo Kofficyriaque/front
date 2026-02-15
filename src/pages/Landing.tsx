@@ -24,7 +24,7 @@ const Landing: React.FC = () => {
             {t('landing.titleLine1')}<br />
             <span className="text-blue-600 dark:text-blue-500">{t('landing.titleLine2')}</span>
           </h1>
-          
+
           <p className="max-w-2xl mx-auto text-xl text-slate-500 dark:text-slate-400 mb-16 font-medium italic">
             {t('landing.subtitle')}
           </p>
@@ -63,11 +63,11 @@ const Landing: React.FC = () => {
         </div>
       </section>
 
-      
+
       {/* Feature Icons Section */}
       <section className="py-24 bg-white dark:bg-slate-950 px-6 transition-colors">
         <div className="max-w-7xl mx-auto">
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <div className="bg-slate-50 dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 group hover:border-blue-200 dark:hover:border-blue-700 transition-all">
               <div className="w-16 h-16 bg-blue-50 dark:bg-blue-950/50 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-8 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                 <Wand size={28} />
@@ -125,7 +125,7 @@ const Landing: React.FC = () => {
                   <span className="text-slate-600 dark:text-slate-300 font-bold">{t('landing.forCandidatesItem3')}</span>
                 </li>
               </ul>
-              <button 
+              <button
                 onClick={() => navigate('/candidat')}
                 className="text-blue-600 dark:text-blue-400 font-bold flex items-center hover:translate-x-1 transition-transform"
               >
@@ -154,7 +154,7 @@ const Landing: React.FC = () => {
                   <span className="text-slate-200 font-bold">{t('landing.forRecruitersItem3')}</span>
                 </li>
               </ul>
-              <button 
+              <button
                 onClick={() => navigate('/recruteur')}
                 className="text-white font-bold flex items-center hover:translate-x-1 transition-transform"
               >
@@ -165,9 +165,9 @@ const Landing: React.FC = () => {
         </div>
       </section>
 
-      
-      
-            {/* FAQ Section */}
+
+
+      {/* FAQ Section */}
       <section className="py-24 px-4 bg-white dark:bg-slate-950 text-center overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
@@ -176,27 +176,27 @@ const Landing: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            <FAQItem 
+            <FAQItem
               question={t('faq.q1')}
               answer={t('faq.a1')}
             />
-            <FAQItem 
+            <FAQItem
               question={t('faq.q3')}
               answer={t('faq.a3')}
             />
-            <FAQItem 
+            <FAQItem
               question={t('faq.q4')}
               answer={t('faq.a4')}
             />
-            <FAQItem 
+            <FAQItem
               question={t('faq.q5')}
               answer={t('faq.a5')}
             />
           </div>
 
           <div className="mt-12 text-center">
-            
-            <button 
+
+            <button
               onClick={() => navigate('/about')}
               className="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center justify-center mx-auto"
             >
@@ -205,7 +205,7 @@ const Landing: React.FC = () => {
           </div>
         </div>
       </section>
-      
+
     </div>
   );
 };

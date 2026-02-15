@@ -1,6 +1,8 @@
 // API Configuration and Client
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://predict-production-28b1.up.railway.app';
+import type { RequestPredict } from "../types/prediction";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 interface RequestOptions extends RequestInit {
   timeout?: number;
@@ -125,14 +127,14 @@ export const authAPI = {
  * Service API pour les prédictions de salaire
  */
 export const predictionAPI = {
-  predict: (data: Record<string, unknown>) =>
-    apiRequest('/api/prediction/predict', {
+  predict: (data: RequestPredict) =>
+    apiRequest('/api/predict/salary', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
 
   getPredictionHistory: () =>
-    apiRequest('/api/prediction/history', {
+    apiRequest('/api/predict/history', {
       method: 'GET',
     }),
 

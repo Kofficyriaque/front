@@ -1,8 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Brain, Sparkles, CheckCircle2, ChevronRight, X, Loader2, TrendingUp, DollarSign } from 'lucide-react';
+import type { ReponsePredict, RequestPredict } from '../types/prediction';
+import predict from '../utils/predict';
 
 type Step = 1 | 2 | 3;
 
@@ -16,8 +18,46 @@ const CandidateOnboarding: React.FC = () => {
   const [isAnalyzing, setIsAnalyzing] = React.useState(false);
   const [analysisStatus, setAnalysisStatus] = React.useState('');
   const [showResult, setShowResult] = React.useState(false);
+  const [reponse, setReponse] = useState<ReponsePredict | null>(null)
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const data: RequestPredict = {
+    titre: jobTitle,
+    description: "En rejoignant le Pôle Data  vous jouerez un rôle clé dans l'exploitation des données clients pour optimiser la performance commerciale  renforcer la fidélisation  et proposer des recommandations d'actions stratégiques. Vos missions seront les suivantes : Modélisation / Data Science / IA : - Être lead ou binôme sur des projets de Data Science - Cadrer le besoin métier et préparer les données (avec la Data Tech) - Construire ou optimiser les modèles de façon pragmatique - Piloter l'industrialisation avec les Data Engineers et la DSI - Restituer les résultats de manière accessible aux équipes concernées - Assurer le RUN : suivi de la performance  support utilisateurs  maintenance - Contribuer au développement de nouveaux cas d'usage IA à forte valeur Collaboration avec les entités du Groupe : - Travailler en proximité avec les équipes métier (marketing  distribution  logistique  etc.) - Comprendre leurs besoins en matière de données (analyse  visualisation  modélisation) - Leur proposer une solution répondant à ces besoins - Aider les équipes métier à exploiter les résultats pour leurs décisions stratégiques et plans d'actions. - Être pilote de la relation avec une ou plusieurs équipes métier (gestion des priorités et ressources  point régulier pour s'assurer de la satisfaction de l'équipe métier) Analyse de Données : - Collecter  préparer et analyser les données issues de sources multiples. - Identifier les tendances  ruptures  opportunités et leviers d'action. - Présenter vos résultats de façon claire et impactante. Collaboration avec l'équipe Data Technique : - Participer à la qualité et la disponibilité des données et outils - Contribuer aux mises en production de nouvelles tables ou évolutions (identification des données  CTI  recette) - Appliquer les bonnes pratiques et la stratégie sur la stack data  contribuer aux échanges sur le sujet. Amélioration des processus : Être force de proposition sur l'amélioration des processus d'équipe et les méthodes de travail collaboratives. Le groupe SIPA Ouest-France  est un acteur majeur dans le domaine des médias d'information. Historiquement construit autour du quotidien Ouest-France (1er quotidien national)  le Groupe édite également les plateformes : ouest-france.fr  actu.fr et 20minutes.fr  plusieurs quotidiens régionaux (Ouest-France  Le Maine Libre  Courrier de l'Ouest  Presse Océan  La Presse de la Manche)  plus de 80 hebdomadaires via Publihebdos ainsi que des magazines spécialisés. La diversité des activités du Groupe s'étend également à la publicité multi-supports (groupe Additi  Hebdos Communication)  à la radio (Hit West  Cristal  Océane FM)  à l'édition de livres. Propriété l'Association pour le Soutien des Principes de la Démocratie Humaniste (ASPDH)  loi de 1901  le Groupe se distingue par des valeurs fortes et des engagements clairs envers le respect des personnes humaines et des bénéfices exclusivement au service du développement de l'information. INTRASIPA  société d'expertise du Groupe  met à disposition des filiales des fonctions transverses (Data  Cybersécurité  RGPD  R&amp D  Juridique  Finances  Paie...). Le Pôle Data  composé d'une vingtaine de collaborateurs (data analysts  data scientists  experts en data visualisation  web analysts)  intervient auprès de toutes les entités du Groupe et occupe un rôle stratégique au sein de l'organisation. Nous recherchons notre futur(e) Data Analyst / Data Scientist en contrat à durée indéterminé.",
+    metier: 'data scientist',
+    region: region,
+    experience: experience,
+    competences: skills
+  }
+ 
+  async function prediction() {
+    setLoading(true)
+    setIsAnalyzing(true);
+    try {
+      const requete = await predict(data, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMyIsImV4cCI6MTc3MTE5NzIzMX0.GNzzsYMHovft2msPKCTnVRnGAjxvh_GFlHEn16OTaQo') 
+      const statuses = [
+      "Connecting to market APIs...",
+      "Analyzing 15,248 job offers for your profile...",
+      "Normalizing salary benchmarks...",
+      "Calculating median percentiles for " + data.region + "...",
+      "Cross-referencing " + data.competences.length + " skills against market demand...",
+      "Finalizing AI prediction model..."
+      ];
+      for (const status of statuses) {
+        setAnalysisStatus(status);
+        await new Promise(resolve => setTimeout(resolve, 800));
+      }
+      setReponse(requete);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+      setIsAnalyzing(false);
+      setShowResult(true);
+    }
+  }
 
   const regions = [
     "Île-de-France (Paris)",
@@ -52,26 +92,6 @@ const CandidateOnboarding: React.FC = () => {
     if (!skills.includes(skill)) {
       setSkills([...skills, skill]);
     }
-  };
-
-  const runAnalysis = async () => {
-    setIsAnalyzing(true);
-    const statuses = [
-      "Connecting to market APIs...",
-      "Analyzing 15,248 job offers for your profile...",
-      "Normalizing salary benchmarks...",
-      "Calculating median percentiles for " + region + "...",
-      "Cross-referencing " + skills.length + " skills against market demand...",
-      "Finalizing AI prediction model..."
-    ];
-
-    for (const status of statuses) {
-      setAnalysisStatus(status);
-      await new Promise(resolve => setTimeout(resolve, 800));
-    }
-
-    setIsAnalyzing(false);
-    setShowResult(true);
   };
 
   const nextStep = () => {
@@ -139,7 +159,7 @@ const CandidateOnboarding: React.FC = () => {
                           className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-lg font-medium appearance-none"
                         >
                           <option value="">Select range</option>
-                          <option value="0-2">0 - 2 years (Junior)</option>
+                          <option value="Junior (0-2 ans)">0 - 2 years (Junior)</option>
                           <option value="2-5">2 - 5 years (Intermediate)</option>
                           <option value="5-10">5 - 10 years (Senior)</option>
                           <option value="10+">10+ years (Expert/Lead)</option>
@@ -257,7 +277,7 @@ const CandidateOnboarding: React.FC = () => {
                   </div>
 
                   <button 
-                    onClick={runAnalysis}
+                    onClick={prediction}
                     className="w-full bg-blue-600 text-white py-6 rounded-[2rem] font-bold text-xl hover:bg-blue-700 transition-all shadow-xl dark:shadow-blue-950 flex items-center justify-center group"
                   >
                     Launch PrediSalaire AI <Sparkles size={24} className="ml-3 group-hover:rotate-12 transition-transform" />
@@ -287,7 +307,7 @@ const CandidateOnboarding: React.FC = () => {
             </motion.div>
           )}
 
-          {isAnalyzing && (
+          {isAnalyzing &&(
             <motion.div
               key="analyzing"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -305,7 +325,7 @@ const CandidateOnboarding: React.FC = () => {
             </motion.div>
           )}
 
-          {showResult && (
+          {showResult &&(
             <motion.div
               key="result"
               initial={{ opacity: 0, y: 40 }}
@@ -322,7 +342,7 @@ const CandidateOnboarding: React.FC = () => {
                 <div className="space-y-4">
                   <h2 className="text-2xl font-bold text-slate-500">Predicted Market Value</h2>
                   <div className="text-5xl md:text-7xl font-extrabold text-blue-600 tracking-tighter">
-                    48 500 € – 56 200 €
+                    {reponse?.salaire_min} – {reponse?.salaire_max}
                   </div>
                   <p className="text-slate-400 font-medium">Gross Annual Salary (Fixed + Variable)</p>
                 </div>
