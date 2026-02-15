@@ -20,7 +20,6 @@ const CandidateOnboarding: React.FC = () => {
   const [showResult, setShowResult] = React.useState(false);
   const [reponse, setReponse] = useState<ReponsePredict | null>(null)
   const [error, setError] = useState<string>('');
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const data: RequestPredict = {
@@ -33,7 +32,6 @@ const CandidateOnboarding: React.FC = () => {
   }
  
   async function prediction() {
-    setLoading(true)
     setIsAnalyzing(true);
     try {
       const requete = await predict(data, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMyIsImV4cCI6MTc3MTE5NzIzMX0.GNzzsYMHovft2msPKCTnVRnGAjxvh_GFlHEn16OTaQo') 
@@ -52,8 +50,8 @@ const CandidateOnboarding: React.FC = () => {
       setReponse(requete);
     } catch (err: any) {
       setError(err.message);
+      throw new Error(error)
     } finally {
-      setLoading(false);
       setIsAnalyzing(false);
       setShowResult(true);
     }
