@@ -34,7 +34,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [utilisateurs, setUtilisateurs] = useState<Users | null>(null)
+  const datas = JSON.parse(localStorage.getItem("user")!)
+    const[utilisateurs, setUtilisateurs] = useState<Users |null>(datas.user);
   const [connected, setConnected]= useState<boolean>(false)
   const [currentLang, setCurrentLang] = useState<'FR' | 'EN'>(() => 
     i18n.language.startsWith('fr') ? 'FR' : 'EN'
@@ -50,13 +51,11 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
   };
 
 
-  const utilisateur = localStorage.getItem("user")
     useEffect(() => {    
-      if (utilisateur) {
-        setUtilisateurs(JSON.parse(utilisateur))
+      if (utilisateurs) {
         setConnected(true)
       } 
-    }, [utilisateur]);
+    }, [utilisateurs]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
