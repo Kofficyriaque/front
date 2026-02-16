@@ -13,8 +13,8 @@ const Profile: React.FC = () => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [userData, setUserData] = useState<Users>(JSON.parse(localStorage.getItem("user")!))
-  
+  const datas = JSON.parse(localStorage.getItem("user")!)
+  const[userData, setUserData] = useState<Users>(datas.user);
   const handleSave = () => {
     setIsEditing(false);
     console.log("Données sauvegardées :", userData);
