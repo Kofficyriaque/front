@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Sun, Moon, User, LogOut, History, ChevronDown, UserCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../context/AuthContext';
 import i18n from '../i18n';
+import type { Users } from '../types/users';
 
 // --- Composants Drapeaux SVG ---
 const FlagFR = () => (
@@ -29,11 +29,13 @@ interface NavbarProps {
   toggleTheme: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
+const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [utilisateurs, setUtilisateurs] = useState<Users | null>(null)
+  const [connected, setConnected]= useState<boolean>(false)
   const [currentLang, setCurrentLang] = useState<'FR' | 'EN'>(() => 
     i18n.language.startsWith('fr') ? 'FR' : 'EN'
   );
@@ -41,7 +43,20 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   const profileRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { user, logout, isConnected } = useAuth();
+
+  const log_out = () => {
+    localStorage.removeItem('user');
+    setUtilisateurs(null)
+  };
+
+
+  const utilisateur = localStorage.getItem("user")
+    useEffect(() => {    
+      if (utilisateur) {
+        setUtilisateurs(JSON.parse(utilisateur))
+        setConnected(true)
+      } 
+    }, [utilisateur]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -144,7 +159,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               </div>
               
               {/* User Profile Menu or Login Button */}
-              {isConnected && user ? (
+              {connected && utilisateurs ? (
                 <div className="relative" ref={profileRef}>
                   <button 
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -163,8 +178,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                     <div className="absolute right-0 mt-4 w-72 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden animate-in fade-in zoom-in-95 duration-200 z-[60]">
                       <div className="p-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50">
                         <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Account</p>
-                        <p className="font-black text-slate-950 dark:text-white text-lg">{user.firstName} {user.lastName}</p>
-                        <p className="text-xs text-blue-600 dark:text-blue-400 font-bold">{user.email}</p>
+                        <p className="font-black text-slate-950 dark:text-white text-lg">{utilisateurs.prenom} {utilisateurs.nom}</p>
+                        <p className="text-xs text-blue-600 dark:text-blue-400 font-bold">{utilisateurs.email}</p>
                       </div>
 
                       <div className="p-2">
@@ -198,7 +213,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                       <div className="p-2 border-t border-slate-100 dark:border-slate-800 mt-2">
                         <button 
                           onClick={() => {
-                            logout();
+                            log_out();
                             setIsProfileOpen(false);
                             navigate('/');
                           }}
@@ -272,12 +287,12 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                 </div>
               </div>
 
-              {isConnected && user ? (
+              {connected && utilisateurs ? (
                 <>
                   <div className="py-3 px-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50">
                     <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Account</p>
-                    <p className="font-black text-slate-950 dark:text-white">{user.firstName} {user.lastName}</p>
-                    <p className="text-xs text-blue-600 dark:text-blue-400 font-bold">{user.email}</p>
+                    <p className="font-black text-slate-950 dark:text-white">{utilisateurs.prenom} {utilisateurs.nom}</p>
+                    <p className="text-xs text-blue-600 dark:text-blue-400 font-bold">{utilisateurs.email}</p>
                   </div>
                   <button
                     onClick={() => {
@@ -305,7 +320,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                   </button>
                   <div className="mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                     <button 
-                      onClick={() => { logout(); navigate('/'); setIsOpen(false); }}
+                      onClick={() => { log_out(); navigate('/'); setIsOpen(false); }}
                       className="w-full flex items-center gap-4 px-4 py-4 text-sm font-black text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-2xl transition-all"
                     >
                       <div className="w-8 h-8 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center">

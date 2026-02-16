@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../context/AuthContext';
+import type { LoginRequest, Users } from '../types/users';
+import LoginReq from '../utils/login';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -12,16 +13,20 @@ const Login: React.FC = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { login } = useAuth();
+
+  const data: LoginRequest = {
+    email: email,
+    password: password
+}
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-
     try {
-      await login(email, password);
-      navigate('/profile');
+        const user:Users = await LoginReq(data)
+        localStorage.setItem("user",JSON.stringify(user))
+      navigate(`/${user.role}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de connexion');
     } finally {

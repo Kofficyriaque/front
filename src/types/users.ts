@@ -1,5 +1,5 @@
 
-interface User {
+interface Users {
     nom: string,
     prenom:string,
     email: string,
@@ -18,7 +18,7 @@ interface SignUpRequest {
 }
 interface SignUpReponse {
     access_token: string,
-    user: User
+    user: Users
     
 }
 
@@ -27,4 +27,4 @@ interface LoginRequest{
     password: string
 }
 
-export type {SignUpRequest,SignUpReponse,User,LoginRequest}
+export type {SignUpRequest,SignUpReponse,Users,LoginRequest}
