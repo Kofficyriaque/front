@@ -11,9 +11,9 @@ export interface User {
 }
 
 interface AuthResponse {
-  token?: string;
-  access_token?: string;
-  user?: {
+  acces_token: string;
+  access_token: string;
+  user: {
     id: string;
     email: string;
     firstName: string;
@@ -28,7 +28,6 @@ interface AuthContextType {
   isConnected: boolean;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, firstName: string, lastName: string, role: string, location: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -40,9 +39,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Vérifier si l'utilisateur est déjà connecté au chargement
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      // Vous pouvez vérifier le token avec l'API si nécessaire
+    const acces_token = localStorage.getItem('authToken');
+    if (acces_token) {
+      // Vous pouvez vérifier le acces_token avec l'API si nécessaire
       const savedUser = localStorage.getItem('user');
       if (savedUser) {
         setUser(JSON.parse(savedUser));
@@ -54,11 +53,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
+      const getToken = localStorage.getItem("authToken")
+      if (getToken) {
+        
+      }
       const data = (await authAPI.login({ email, password })) as AuthResponse;
 
-      // Sauvegarder le token et l'utilisateur
-      const token = data.access_token || '';
-      localStorage.setItem('authToken', token);
+      // Sauvegarder le acces_token et l'utilisateur
+      const acces_token = data.access_token;
+      localStorage.setItem('authToken', acces_token);
 
       // Récupérer les données existantes si elles existent
       let existingUser: User | null = null;
@@ -87,40 +90,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(false);
     }
   };
-
-  const signup = async (email: string, password: string, firstName: string, lastName: string, role: string, location: string) => {
-    setLoading(true);
-    try {
-      const data = (await authAPI.signup({
-        email,
-        password,
-        firstName,
-        lastName,
-        role,
-        location
-      })) as AuthResponse;
-
-      // Sauvegarder le token et l'utilisateur
-      const token = data.access_token || '';
-      localStorage.setItem('authToken', token);
-
-      const userData: User = {
-        id: data.user?.id ,
-        email: data.user?.email,
-        firstName: data.user?.firstName,
-        lastName: data.user?.lastName ,
-        role: data.user?.role,
-        location: data.user?.location,
-      };
-      localStorage.setItem('user', JSON.stringify(userData));
-      setUser(userData);
-    } catch (error) {
-      throw new Error(error instanceof Error ? error.message : 'Erreur lors de l\'inscription');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const logout = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
@@ -134,7 +103,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isConnected: !!user,
         loading,
         login,
-        signup,
         logout,
       }}
     >

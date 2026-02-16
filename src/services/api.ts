@@ -23,13 +23,13 @@ async function apiRequest<T>(
   const timeoutId = setTimeout(() => controller.abort(), timeout);
 
   try {
-    const token = localStorage.getItem('authToken');
+    const acces_token = localStorage.getItem('authToken');
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
     };
     
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
+    if (acces_token) {
+      headers.Authorization = `Bearer ${acces_token}`;
     }
 
     // Merge avec les headers fournis
@@ -108,7 +108,7 @@ export const authAPI = {
     }),
 
   resetPassword: (data: {
-    token: string;
+    acces_token: string;
     newPassword: string;
   }) =>
     apiRequest('/api/auth/reset-password', {
@@ -116,10 +116,10 @@ export const authAPI = {
       body: JSON.stringify(data),
     }),
 
-  verifyToken: (token: string) =>
+  verifyToken: (acces_token: string) =>
     apiRequest('/api/auth/verify', {
       method: 'POST',
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ acces_token }),
     }),
 };
 

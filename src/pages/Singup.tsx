@@ -6,7 +6,8 @@ import { Mail, Lock, User, MapPin, Loader2, ArrowRight, AlertCircle } from 'luci
 import { useTranslation } from 'react-i18next';
 
 import { regionsFrance } from '../utils/regionsFrance';
-import { useAuth } from '../context/AuthContext';
+import type { SignUpRequest } from '../types/users';
+import SignupReq from '../utils/signup';
 
 const Signup = () => {
   const [firstName, setFirstName] = useState('');
@@ -14,23 +15,35 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState("");
-  const [accountType, setAccountType] = useState('seeker');
+  const [role, setRole] = useState('candidat');
   const [marketing, setMarketing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { signup } = useAuth();
+
+  const data: SignUpRequest = {
+    nom: firstName,
+    prenom: lastName,
+    email: email,
+    password: password,
+    location: location,
+    role: role,
+    date_creation: new Date().toISOString()
+  }
+
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
     try {
-      // Map accountType to backend role
-      const role = accountType === 'seeker' ? 'candidat' : 'recruteur';
-      await signup(email, password, firstName, lastName, role, location);
-      navigate('/profile');
+      await SignupReq(data);
+      const user = localStorage.getItem("user")
+      if (!user) {
+        return;
+      }
+      navigate(`/${role}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors de l\'inscription');
     } finally {
@@ -66,10 +79,10 @@ const Signup = () => {
                 <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 cursor-pointer">
                   <input
                     type="radio"
-                    name="accountType"
-                    value="seeker"
-                    checked={accountType === 'seeker'}
-                    onChange={(e) => setAccountType(e.target.value)}
+                    name="role"
+                    value="candidat"
+                    checked={role === 'candidat'}
+                    onChange={(e) => setRole(e.target.value)}
                     className="h-4 w-4"
                   />
                   {t('signup.candidate')}
@@ -77,10 +90,10 @@ const Signup = () => {
                 <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 cursor-pointer">
                   <input
                     type="radio"
-                    name="accountType"
-                    value="recruiter"
-                    checked={accountType === 'recruiter'}
-                    onChange={(e) => setAccountType(e.target.value)}
+                    name="role"
+                    value="recruteur"
+                    checked={role === 'recruteur'}
+                    onChange={(e) => setRole(e.target.value)}
                     className="h-4 w-4"
                   />
                   {t('signup.recruiter')}
