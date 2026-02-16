@@ -25,7 +25,7 @@ const CandidateOnboarding: React.FC = () => {
   const data: RequestPredict = {
     titre: jobTitle,
     description: "En rejoignant le Pôle Data  vous jouerez un rôle clé dans l'exploitation des données clients pour optimiser la performance commerciale  renforcer la fidélisation  et proposer des recommandations d'actions stratégiques. Vos missions seront les suivantes : Modélisation / Data Science / IA : - Être lead ou binôme sur des projets de Data Science - Cadrer le besoin métier et préparer les données (avec la Data Tech) - Construire ou optimiser les modèles de façon pragmatique - Piloter l'industrialisation avec les Data Engineers et la DSI - Restituer les résultats de manière accessible aux équipes concernées - Assurer le RUN : suivi de la performance  support utilisateurs  maintenance - Contribuer au développement de nouveaux cas d'usage IA à forte valeur Collaboration avec les entités du Groupe : - Travailler en proximité avec les équipes métier (marketing  distribution  logistique  etc.) - Comprendre leurs besoins en matière de données (analyse  visualisation  modélisation) - Leur proposer une solution répondant à ces besoins - Aider les équipes métier à exploiter les résultats pour leurs décisions stratégiques et plans d'actions. - Être pilote de la relation avec une ou plusieurs équipes métier (gestion des priorités et ressources  point régulier pour s'assurer de la satisfaction de l'équipe métier) Analyse de Données : - Collecter  préparer et analyser les données issues de sources multiples. - Identifier les tendances  ruptures  opportunités et leviers d'action. - Présenter vos résultats de façon claire et impactante. Collaboration avec l'équipe Data Technique : - Participer à la qualité et la disponibilité des données et outils - Contribuer aux mises en production de nouvelles tables ou évolutions (identification des données  CTI  recette) - Appliquer les bonnes pratiques et la stratégie sur la stack data  contribuer aux échanges sur le sujet. Amélioration des processus : Être force de proposition sur l'amélioration des processus d'équipe et les méthodes de travail collaboratives. Le groupe SIPA Ouest-France  est un acteur majeur dans le domaine des médias d'information. Historiquement construit autour du quotidien Ouest-France (1er quotidien national)  le Groupe édite également les plateformes : ouest-france.fr  actu.fr et 20minutes.fr  plusieurs quotidiens régionaux (Ouest-France  Le Maine Libre  Courrier de l'Ouest  Presse Océan  La Presse de la Manche)  plus de 80 hebdomadaires via Publihebdos ainsi que des magazines spécialisés. La diversité des activités du Groupe s'étend également à la publicité multi-supports (groupe Additi  Hebdos Communication)  à la radio (Hit West  Cristal  Océane FM)  à l'édition de livres. Propriété l'Association pour le Soutien des Principes de la Démocratie Humaniste (ASPDH)  loi de 1901  le Groupe se distingue par des valeurs fortes et des engagements clairs envers le respect des personnes humaines et des bénéfices exclusivement au service du développement de l'information. INTRASIPA  société d'expertise du Groupe  met à disposition des filiales des fonctions transverses (Data  Cybersécurité  RGPD  R&amp D  Juridique  Finances  Paie...). Le Pôle Data  composé d'une vingtaine de collaborateurs (data analysts  data scientists  experts en data visualisation  web analysts)  intervient auprès de toutes les entités du Groupe et occupe un rôle stratégique au sein de l'organisation. Nous recherchons notre futur(e) Data Analyst / Data Scientist en contrat à durée indéterminé.",
-    metier: 'data scientist',
+    metier: "data scientist",
     region: region,
     experience: experience,
     competences: skills
@@ -34,10 +34,8 @@ const CandidateOnboarding: React.FC = () => {
   async function prediction() {
     setIsAnalyzing(true);
     try {
-      const access_token = localStorage.getItem("authToken")
-      if (!access_token) {
-        return;
-      }
+      const user = JSON.parse(localStorage.getItem("user")!)
+      const access_token = user.access_token
       const requete = await predict(data, access_token) 
       const statuses = [
       "Connecting to market APIs...",

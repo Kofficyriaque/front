@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { LoginRequest, Users } from '../types/users';
+import type { LoginRequest } from '../types/users';
 import LoginReq from '../utils/login';
 
 const Login: React.FC = () => {
@@ -24,9 +24,9 @@ const Login: React.FC = () => {
     setError('');
     setIsLoading(true);
     try {
-        const user:Users = await LoginReq(data)
-        localStorage.setItem("user",JSON.stringify(user))
-      navigate(`/${user.role}`);
+      await LoginReq(data)
+      const datas = JSON.parse(localStorage.getItem("user")!)
+        navigate(`/${datas.user.role}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de connexion');
     } finally {

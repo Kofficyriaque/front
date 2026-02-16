@@ -1,7 +1,7 @@
 import type { HistoryReponse } from "../types/history";
 
 export default async function getUserHistory(acces_token:string) {
-    const back = import.meta.env.VITE_API_BASE_URL
+    const back = import.meta.env.VITE_API_BASE_URL;
     const res = await fetch(`${back}/api/predict/history`, {
         method: "GET",
         headers: {

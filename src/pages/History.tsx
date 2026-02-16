@@ -9,10 +9,9 @@ const HistoryPage: React.FC = () => {
   const [listeHistorique, setHistorique] = useState<HistoryReponse[]>([]);
 
   async function history() {
-    const acces_token = localStorage.getItem("authToken");
-    if (!acces_token) return;
-
-    const data: HistoryReponse[] = await getUserHistory(acces_token);
+    const datas = JSON.parse(localStorage.getItem("user")!);
+    const access_token = datas.access_token
+    const data: HistoryReponse[] = await getUserHistory(access_token);
     setHistorique(data);
   }
   useEffect(() => {

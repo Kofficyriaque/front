@@ -41,7 +41,7 @@ const Signup = () => {
       await SignupReq(data);
       const user = localStorage.getItem("user")
       if (!user) {
-        return;
+        throw new Error("User non sauvegardé")
       }
       navigate(`/${role}`);
     } catch (err) {

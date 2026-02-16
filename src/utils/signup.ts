@@ -1,12 +1,11 @@
-
 import type { SignUpReponse, SignUpRequest} from "../types/users";
 
 export default async function SignupReq(data: SignUpRequest) {
-    const back = import.meta.env.VITE_API_BASE_URL
+    const back = import.meta.env.VITE_API_BASE_URL;
     const res = await fetch(`${back}/api/auth/register`, {
         method: 'post',
         headers:{
-            "Content-type": "Application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
     })
