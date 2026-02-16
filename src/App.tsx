@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
-import CandidateOnboarding from './pages/CandidateOnboarding';
+import CareerAnalysis from './pages/CareerAnalysis';
 import Candidat from './pages/Candidat';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -12,7 +12,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
-import Profile from './pages/Profile';
+//import Profile from './pages/Profile';
 import History from './pages/History';
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -54,9 +54,9 @@ const App: React.FC = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/profile" element={<Profile />} />
+              {/* <Route path="/profile" element={<Profile />} /> */}
               <Route path="/history" element={<History />} />
-              <Route path="/onboarding/candidate" element={<CandidateOnboarding />} />
+              <Route path="/careeranalysis" element={<CareerAnalysis />} />
               <Route path="/candidat" element={<Candidat />} />
               <Route path="/recruteur" element={<Recruteur />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />

@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Database, ShieldCheck, TrendingUp, FileJson, ArrowRight, Target, BarChart3, AlertCircle, Info, CheckCircle2, Cpu, Globe, Activity } from 'lucide-react';
+import { Database, ShieldCheck, TrendingUp, FileJson, ArrowRight, Target, BarChart3, AlertCircle, Info, CheckCircle2, Cpu, Globe, Activity, X } from 'lucide-react';
+import type { Users } from '../types/users';
 
 const Recruteur: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [showError, setShowError] = useState(false);
+  const [user] = useState<Users | null>(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  // Déterminer l'action du bouton
+  const handleButtonClick = () => {
+    if (!user) {
+      navigate('/login');
+    } else if (user.role === 'candidat') {
+      setShowError(true);
+      
+    } else if (user.role === 'recruteur') {
+      navigate('/careeranalysis');
+    } else {
+      navigate('/careeranalysis');
+    }
+  };
+
+  const getButtonText = () => {
+    if (!user) {
+      return t('recruiter.rec_final_cta');
+    }
+    if (user.role === 'candidat') {
+      return t('recruiter.rec_final_cta');
+    }
+    return t('recruiter.rec_final_cta');
+  };
 
   // Benchmarking Items
   const benchmarkItems = [
@@ -45,10 +74,10 @@ const Recruteur: React.FC = () => {
               {t('recruiter.rec_hero_subtitle')}
             </p>
             <button 
-              onClick={() => navigate('/login')} 
+              onClick={handleButtonClick} 
               className="bg-blue-600 text-white px-12 py-6 rounded-2xl font-black text-lg uppercase tracking-widest shadow-2xl dark:shadow-blue-950 hover:-translate-y-1 transition-all active:scale-95 flex items-center gap-4"
             >
-              {t('recruiter.start_now')} <ArrowRight />
+              {getButtonText()} <ArrowRight />
             </button>
           </div>
           <div className="flex-1 w-full max-w-2xl">
@@ -320,13 +349,39 @@ const Recruteur: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-black text-slate-900 dark:text-slate-100 tracking-tighter mb-10">{t('recruiter.rec_final_title')}</h2>
           <button 
-            onClick={() => navigate('/login')} 
+            onClick={handleButtonClick} 
             className="bg-slate-900 text-white px-20 py-8 rounded-[2rem] font-black text-2xl hover:bg-blue-600 hover:scale-105 transition-all shadow-2xl dark:shadow-slate-900"
           >
-            {t('recruiter.rec_final_cta')}
+            {getButtonText()}
           </button>
         </div>
       </section>
+
+      {/* Error Modal for Candidat */}
+      {showError && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-8 max-w-md w-full shadow-2xl border border-red-100 dark:border-red-900">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 bg-red-50 dark:bg-red-950 rounded-full flex items-center justify-center">
+                <AlertCircle className="text-red-600 dark:text-red-400" size={24} />
+              </div>
+              <button onClick={() => setShowError(false)} className="text-slate-400 hover:text-slate-600">
+                <X size={24} />
+              </button>
+            </div>
+            <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 mb-3">{t('recruiter.error_title')}</h3>
+            <p className="text-slate-600 dark:text-slate-400 font-medium mb-6">
+              {t('recruiter.candidat_error_message')}
+            </p>
+            <button 
+              onClick={() => setShowError(false)}
+              className="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
+            >
+              {t('recruiter.close_button')}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

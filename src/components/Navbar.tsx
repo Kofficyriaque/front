@@ -34,9 +34,9 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const datas = JSON.parse(localStorage.getItem("user")!)
-    const[utilisateurs, setUtilisateurs] = useState<Users |null>(datas.user);
-  const [connected, setConnected]= useState<boolean>(false)
+  const storedUser = localStorage.getItem("user");
+  const datas = storedUser ? JSON.parse(storedUser) : null;
+  const [utilisateurs, setUtilisateurs] = useState<Users | null>(datas || null);
   const [currentLang, setCurrentLang] = useState<'FR' | 'EN'>(() => 
     i18n.language.startsWith('fr') ? 'FR' : 'EN'
   );
@@ -45,17 +45,51 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const log_out = () => {
-    localStorage.removeItem('user');
-    setUtilisateurs(null)
+  const loadUserFromStorage = () => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const userData = JSON.parse(storedUser);
+        setUtilisateurs(userData);
+      } catch (e) {
+        setUtilisateurs(null);
+      }
+    } else {
+      setUtilisateurs(null);
+    }
   };
 
+  const log_out = () => {
+    localStorage.removeItem('user');
+    setUtilisateurs(null);
+    window.dispatchEvent(new CustomEvent('userChanged', { detail: null }));
+  };
 
-    useEffect(() => {    
-      if (utilisateurs) {
-        setConnected(true)
-      } 
-    }, [utilisateurs]);
+  useEffect(() => {
+    loadUserFromStorage();
+  }, []);
+
+  useEffect(() => {
+    const handleUserChanged = (e: any) => {
+      if (e.detail) {
+        // Données reçues directement de l'événement (Login/Signup)
+        setUtilisateurs(e.detail);
+      } else {
+        // Fallback: charger depuis localStorage ou vider (logout)
+        setUtilisateurs(null);
+      }
+    };
+    
+    window.addEventListener('userChanged', handleUserChanged);
+    window.addEventListener('storage', loadUserFromStorage);
+    window.addEventListener('focus', loadUserFromStorage);
+    
+    return () => {
+      window.removeEventListener('userChanged', handleUserChanged);
+      window.removeEventListener('storage', loadUserFromStorage);
+      window.removeEventListener('focus', loadUserFromStorage);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -158,7 +192,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
               </div>
               
               {/* User Profile Menu or Login Button */}
-              {connected && utilisateurs ? (
+              {utilisateurs ? (
                 <div className="relative" ref={profileRef}>
                   <button 
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -286,7 +320,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                 </div>
               </div>
 
-              {connected && utilisateurs ? (
+              {utilisateurs ? (
                 <>
                   <div className="py-3 px-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50">
                     <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Account</p>

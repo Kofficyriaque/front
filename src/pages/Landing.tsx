@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Briefcase, Search, TrendingUp, ArrowRight, CheckCircle2, Wand, MapPin, Target } from 'lucide-react';
 
@@ -9,6 +9,47 @@ import FAQItem from '../components/FAQItem';
 const Landing: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  const loadUserRole = () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      try {
+        const userData = JSON.parse(user);
+        setUserRole(userData.role);
+      } catch (e) {
+        setUserRole(null);
+      }
+    } else {
+      setUserRole(null);
+    }
+  };
+
+  useEffect(() => {
+    loadUserRole();
+  }, []);
+
+  useEffect(() => {
+    const handleUserChanged = (e: any) => {
+      if (e.detail) {
+        // Utilisateur connecté
+        setUserRole(e.detail.role);
+      } else {
+        // Utilisateur déconnecté
+        setUserRole(null);
+      }
+    };
+    
+    window.addEventListener('userChanged', handleUserChanged);
+    window.addEventListener('storage', handleUserChanged);
+    window.addEventListener('focus', handleUserChanged);
+    
+    return () => {
+      window.removeEventListener('userChanged', handleUserChanged);
+      window.removeEventListener('storage', handleUserChanged);
+      window.removeEventListener('focus', handleUserChanged);
+    };
+  }, []);
 
   return (
     <div className="bg-white dark:bg-slate-950 overflow-hidden">
@@ -29,36 +70,40 @@ const Landing: React.FC = () => {
             {t('landing.subtitle')}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
+          <div className={`grid ${userRole === 'candidat' ? 'grid-cols-1 max-w-xl' : userRole === 'recruteur' ? 'grid-cols-1 max-w-xl' : 'grid-cols-1 md:grid-cols-2'} gap-8 ${userRole ? 'mx-auto' : 'max-w-4xl mx-auto'} px-4`}>
             {/* Candidate Card */}
-            <button
-              onClick={() => navigate('/login')}
-              className="relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
-            >
-              <div className="relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('landing.candidateBadge')}</span>
-                <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.candidateTitle')}</h3>
-                <div className="flex items-center text-sm font-black uppercase tracking-widest text-white group-hover:translate-x-2 transition-transform">
-                  {t('landing.candidateCta')} <ArrowRight size={18} className="ml-3" />
+            {!userRole || userRole === 'candidat' ? (
+              <button
+                onClick={() => navigate(userRole ? '/careeranalysis' : '/login', { state: { from: '/careeranalysis' } })}
+                className="relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              >
+                <div className="relative z-10">
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('landing.candidateBadge')}</span>
+                  <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.candidateTitle')}</h3>
+                  <div className="flex items-center text-sm font-black uppercase tracking-widest text-white group-hover:translate-x-2 transition-transform">
+                    {t('landing.candidateCta')} <ArrowRight size={18} className="ml-3" />
+                  </div>
                 </div>
-              </div>
-              <User className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/10 group-hover:scale-110 transition-transform duration-700" />
-            </button>
+                <User className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/10 group-hover:scale-110 transition-transform duration-700" />
+              </button>
+            ) : null}
 
             {/* Recruiter Card */}
-            <button
-              onClick={() => navigate('/login')}
-              className="relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
-            >
-              <div className="relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('landing.recruiterBadge')}</span>
-                <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.recruiterTitle')}</h3>
-                <div className="flex items-center text-sm font-black uppercase tracking-widest text-slate-300 group-hover:translate-x-2 transition-transform">
-                  {t('landing.recruiterCta')} <ArrowRight size={18} className="ml-3" />
+            {!userRole || userRole === 'recruteur' ? (
+              <button
+                onClick={() => navigate(userRole ? '/careeranalysis' : '/login', { state: { from: '/careeranalysis' } })}
+                className="relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              >
+                <div className="relative z-10">
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('landing.recruiterBadge')}</span>
+                  <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.recruiterTitle')}</h3>
+                  <div className="flex items-center text-sm font-black uppercase tracking-widest text-slate-300 group-hover:translate-x-2 transition-transform">
+                    {t('landing.recruiterCta')} <ArrowRight size={18} className="ml-3" />
+                  </div>
                 </div>
-              </div>
-              <Briefcase className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/5 group-hover:scale-110 transition-transform duration-700" />
-            </button>
+                <Briefcase className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/5 group-hover:scale-110 transition-transform duration-700" />
+              </button>
+            ) : null}
           </div>
         </div>
       </section>

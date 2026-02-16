@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Lock, Mail, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
+import { Lock, Mail, Loader2, ArrowRight, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { LoginRequest, Users } from '../types/users';
 import LoginReq from '../utils/login';
@@ -9,10 +9,13 @@ import LoginReq from '../utils/login';
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
+  const from = (location.state as { from?: string })?.from || '/';
 
   const data: LoginRequest = {
     email: email,
@@ -26,7 +29,8 @@ const Login: React.FC = () => {
     try {
         const user:Users = await LoginReq(data)
         localStorage.setItem("user",JSON.stringify(user))
-      navigate(`/${user.role}`);
+        window.dispatchEvent(new CustomEvent('userChanged', { detail: user }));
+        navigate(from);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de connexion');
     } finally {
@@ -82,13 +86,20 @@ const Login: React.FC = () => {
                   <Lock size={20} />
                 </div>
                 <input 
-                  type="password" 
+                  type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-950 transition-all text-slate-900 dark:text-slate-100"
+                  className="w-full pl-12 pr-12 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-950 transition-all text-slate-900 dark:text-slate-100"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
             </div>
 

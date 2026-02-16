@@ -1,8 +1,8 @@
 import type { FormEvent } from 'react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, MapPin, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
+import { Mail, Lock, User, MapPin, Loader2, ArrowRight, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { regionsFrance } from '../utils/regionsFrance';
@@ -14,6 +14,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [location, setLocation] = useState("");
   const [role, setRole] = useState('candidat');
   const [marketing, setMarketing] = useState(false);
@@ -21,6 +22,8 @@ const Signup = () => {
   const [error, setError] = useState('');
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const locationState = useLocation();
+  const from = (locationState.state as { from?: string })?.from || '/';
 
   const data: SignUpRequest = {
     nom: firstName,
@@ -43,7 +46,9 @@ const Signup = () => {
       if (!user) {
         return;
       }
-      navigate(`/${role}`);
+      const userData = JSON.parse(user);
+      window.dispatchEvent(new CustomEvent('userChanged', { detail: userData }));
+      navigate(from);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors de l\'inscription');
     } finally {
@@ -187,14 +192,21 @@ const Signup = () => {
                   <Lock size={20} />
                 </div>
                 <input 
-                  type="password" 
+                  type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={t('signup.passwordPlaceholder')}
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-950 transition-all text-slate-900 dark:text-slate-100"
+                  className="w-full pl-12 pr-12 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-950 transition-all text-slate-900 dark:text-slate-100"
                   autoComplete="new-password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
             </div>
 
