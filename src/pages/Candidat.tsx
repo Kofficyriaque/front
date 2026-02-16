@@ -1,15 +1,41 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Calculator, GitCompare, Zap, Globe, CheckCircle2, UserPlus, Cpu, BarChart3 } from 'lucide-react';
+import { Calculator, GitCompare, Zap, Globe, CheckCircle2, UserPlus, Cpu, BarChart3, X } from 'lucide-react';
 import { FeatureVisual } from '../components/FeatureVisual';
+import type { Users } from '../types/users';
 
 
 
 const Candidat: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [showError, setShowError] = useState(false);
+  const [user] = useState<Users | null>(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  // Déterminer l'action du bouton
+  const handleButtonClick = () => {
+    if (!user) {
+      // Non connecté → Se connecter
+      navigate('/login');
+    } else if (user.role === 'recruteur') {
+      // Connecté en tant que recruteur → Afficher erreur
+      setShowError(true);
+    } else if (user.role === 'candidat') {
+      // Connecté en tant que candidat → Diriger vers quiz
+      navigate('/quiz');
+    }
+  };
+
+  const getButtonText = () => {
+    if (!user) return t('candidate.btn_calculate_salary');
+    if (user.role === 'recruteur') return t('candidate.btn_calculate_salary');
+    return t('candidate.btn_start');
+  };
 
   const items1 = t('candidate.cand_feat1_items', { returnObjects: true }) as string[];
   const items2 = t('candidate.cand_feat2_items', { returnObjects: true }) as string[];
@@ -50,7 +76,7 @@ const Candidat: React.FC = () => {
           <h1 className="text-9xl font-black text-slate-900 dark:text-slate-100 tracking-tighter mb-8 leading-[0.85]">{t('candidate.discover_title')}</h1>
           <p className="text-2xl font-medium text-slate-500 dark:text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">{t('candidate.discover_subtitle')}</p>
           <button 
-            onClick={() => navigate('/onboarding/candidate')} 
+            onClick={handleButtonClick} 
             className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl dark:shadow-blue-950 hover:scale-105 transition-all"
           >
             {t('candidate.btn_calculate_salary')}
@@ -124,7 +150,7 @@ const Candidat: React.FC = () => {
           
           <div className="mt-40 text-center">
              <button 
-              onClick={() => navigate('/onboarding/candidate')} 
+              onClick={handleButtonClick} 
                 className="bg-white text-slate-950 px-20 py-8 rounded-[2.5rem] font-black text-2xl hover:scale-105 hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] transition-all active:scale-95"
              >
                {t('candidate.btn_start')}
@@ -132,6 +158,34 @@ const Candidat: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Erreur Modal - Recruiter Access Denied */}
+      {showError && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-slate-950 rounded-[2rem] p-8 max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-800 animate-in zoom-in-95 duration-300">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-black text-red-600 dark:text-red-500 italic">
+                {t('candidate.error_title')}
+              </h2>
+              <button
+                onClick={() => setShowError(false)}
+                className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all"
+              >
+                <X size={20} className="text-slate-400" />
+              </button>
+            </div>
+            <p className="text-slate-600 dark:text-slate-300 font-medium mb-8 leading-relaxed">
+              {t('candidate.recruiter_error_message')}
+            </p>
+            <button
+              onClick={() => setShowError(false)}
+              className="w-full bg-blue-600 text-white px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all"
+            >
+              {t('candidate.close_button')}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

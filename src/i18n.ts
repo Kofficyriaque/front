@@ -129,6 +129,9 @@ const resources = {
         ],
         btn_calculate_salary: 'Calculate my salary',
         btn_start: 'Start',
+        error_title: 'Access Denied',
+        recruiter_error_message: 'You are logged in as a recruiter. Candidate features require a candidate account.',
+        close_button: 'Close',
       },
       recruiter: {
         rec_hero_title: "Optimize Your Recruitment Strategy",
@@ -572,6 +575,9 @@ const resources = {
         ],
         btn_calculate_salary: 'Calculer mon salaire',
         btn_start: 'Commencer',
+        error_title: 'Accès refusé',
+        recruiter_error_message: 'Vous êtes connecté en tant que recruteur. Les fonctionnalités candidat nécessitent un compte candidat.',
+        close_button: 'Fermer',
       },
       recruiter: {
         rec_hero_title: "Optimisez votre stratégie de recrutement",
