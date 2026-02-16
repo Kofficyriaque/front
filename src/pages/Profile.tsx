@@ -1,47 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../context/AuthContext';
 import { 
   Mail, MapPin, Briefcase, 
   Settings, Trash2, AlertTriangle, User,
   Check
 } from 'lucide-react';
+import type { Users } from '../types/users';
 
 const Profile: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
-  const [userData, setUserData] = useState(() => {
-    // Charger depuis localStorage d'abord
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      try {
-        const parsed = JSON.parse(savedUser);
-        return {
-          firstName: parsed.firstName || '',
-          lastName: parsed.lastName || '',
-          role: parsed.role || 'Candidat',
-          email: parsed.email || '',
-          location: parsed.location || ''
-        };
-      } catch {
-        // Si erreur, utiliser le contexte
-      }
-    }
-    
-    // Sinon utiliser le contexte
-    return {
-      firstName: user?.firstName || '',
-      lastName: user?.lastName || '',
-      role: user?.role || 'Candidat',
-      email: user?.email || '',
-      location: user?.location || ''
-    };
-  });
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-
+  const [userData, setUserData] = useState<Users>(JSON.parse(localStorage.getItem("user")!))
+  
   const handleSave = () => {
     setIsEditing(false);
     console.log("Données sauvegardées :", userData);
@@ -92,14 +65,14 @@ const Profile: React.FC = () => {
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
                     <input 
                       type="text" 
-                      value={userData.firstName}
-                      onChange={(e) => setUserData({...userData, firstName: e.target.value})}
+                      value={userData.prenom}
+                      onChange={(e) => setUserData({...userData, prenom: e.target.value})}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
                     />
                   </div>
                 ) : (
                   <div className="text-2xl font-black text-slate-900 dark:text-white italic tracking-tight">
-                    {userData.firstName || 'Non renseigné'}
+                    {userData.prenom || 'Non renseigné'}
                   </div>
                 )}
               </div>
@@ -114,14 +87,14 @@ const Profile: React.FC = () => {
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
                     <input 
                       type="text" 
-                      value={userData.lastName}
-                      onChange={(e) => setUserData({...userData, lastName: e.target.value})}
+                      value={userData.nom}
+                      onChange={(e) => setUserData({...userData, nom: e.target.value})}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
                     />
                   </div>
                 ) : (
                   <div className="text-2xl font-black text-slate-900 dark:text-white italic tracking-tight">
-                    {userData.lastName || 'Non renseigné'}
+                    {userData.nom || 'Non renseigné'}
                   </div>
                 )}
               </div>

@@ -29,7 +29,7 @@ const Signup = () => {
     password: password,
     location: location,
     role: role,
-    date_creation: new Date().toISOString()
+    date_creation: new Date().toLocaleString()
   }
 
 

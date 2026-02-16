@@ -14,5 +14,5 @@ export default async function SignupReq(data: SignUpRequest) {
         throw new Error (res.statusText || "Erreur fetch")
     }
     const reponseJson: SignUpReponse = await res.json()
-    localStorage.setItem("user", JSON.stringify(reponseJson.user))
+    localStorage.setItem("user", JSON.stringify(reponseJson))
 }

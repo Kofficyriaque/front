@@ -14,7 +14,6 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import Profile from './pages/Profile';
 import History from './pages/History';
-import { AuthProvider } from './context/AuthContext';
 
 
 const App: React.FC = () => {
@@ -44,9 +43,8 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <AuthProvider>
         <div className={`flex flex-col min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-          <Navbar theme={theme} toggleTheme={toggleTheme} />
+          <Navbar theme={theme} toggleTheme={toggleTheme}/>
           <main className="flex-grow pt-16">
             <Routes>
               <Route path="/" element={<Landing />} />
@@ -66,7 +64,6 @@ const App: React.FC = () => {
           </main>
           <Footer />
         </div>
-      </AuthProvider>
     </BrowserRouter>
   );
 };
