@@ -17,39 +17,10 @@ const Profile: React.FC = () => {
   
   const [user, setUser] = useState<Users>(JSON.parse(localStorage.getItem("user")!));
   const [isEditing, setIsEditing] = useState(false);
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
-  const [saving, setSaving] = useState(false);
-  const [profileForm, setProfileForm] = useState({
-    prenom: user?.prenom || "",
-    nom: user?.nom || ""
-  });
-  const [passwordForm, setPasswordForm] = useState({
-    old_password: "",
-    new_password: "",
-    confirm_password: ""
-  });
-
-  const handleUpdateProfile = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSaving(true);
-    setSuccess("");
-    setError("");
-    try {
-      // TODO: Appeler l'API pour mettre à jour le profil
-      console.log("Profil mis à jour:", profileForm);
-      setSuccess("Profil mis à jour avec succès");
-      setUser({ ...user, ...profileForm });
-      localStorage.setItem("user", JSON.stringify({ ...user, ...profileForm }));
-      setIsEditing(false);
-    } catch (err) {
-      setError("Erreur lors de la mise à jour");
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const handleCancelEdit = () => {
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const datas = JSON.parse(localStorage.getItem("user")!)
+  const[userData, setUserData] = useState<Users>(datas.user);
+  const handleSave = () => {
     setIsEditing(false);
     setProfileForm({
       prenom: user?.prenom || "",
