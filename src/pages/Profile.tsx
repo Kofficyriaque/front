@@ -1,228 +1,248 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { 
-  Mail, MapPin, Briefcase, 
-  Settings, Trash2, AlertTriangle, User,
-  Check
+  Mail, User, CheckCircle, Lock, Loader2, Save,
+  Edit3, AlertCircle, Shield, X
 } from 'lucide-react';
 import type { Users } from '../types/users';
 
 const Profile: React.FC = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [isEditing, setIsEditing] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [userData, setUserData] = useState<Users>(JSON.parse(localStorage.getItem("user")!))
+  const { t: translate } = useTranslation();
+  const t = {
+    nav_profile: translate('profile.nav_profile'),
+    profile_edit: translate('profile.profile_edit'),
+    profile_save: translate('profile.profile_save'),
+    profile_cancel: translate('profile.profile_cancel'),
+  };
   
-  const handleSave = () => {
-    setIsEditing(false);
-    console.log("Données sauvegardées :", userData);
+  const [user, setUser] = useState<Users>(JSON.parse(localStorage.getItem("user")!));
+  const [isEditing, setIsEditing] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [profileForm, setProfileForm] = useState({
+    prenom: user?.prenom || "",
+    nom: user?.nom || ""
+  });
+  const [passwordForm, setPasswordForm] = useState({
+    old_password: "",
+    new_password: "",
+    confirm_password: ""
+  });
+
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+    setSuccess("");
+    setError("");
+    try {
+      // TODO: Appeler l'API pour mettre à jour le profil
+      console.log("Profil mis à jour:", profileForm);
+      setSuccess("Profil mis à jour avec succès");
+      setUser({ ...user, ...profileForm });
+      localStorage.setItem("user", JSON.stringify({ ...user, ...profileForm }));
+      setIsEditing(false);
+    } catch (err) {
+      setError("Erreur lors de la mise à jour");
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const handleDeleteAccount = () => {
-    console.warn("Compte supprimé définitivement.");
-    navigate('/');
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setProfileForm({
+      prenom: user?.prenom || "",
+      nom: user?.nom || ""
+    });
+  };
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordForm.new_password !== passwordForm.confirm_password) {
+      setError("Les mots de passe ne correspondent pas");
+      return;
+    }
+    setSaving(true);
+    setSuccess("");
+    setError("");
+    try {
+      // TODO: Appeler l'API pour changer le mot de passe
+      console.log("Mot de passe changé");
+      setSuccess("Mot de passe changé avec succès");
+      setPasswordForm({ old_password: "", new_password: "", confirm_password: "" });
+    } catch (err) {
+      setError("Erreur lors du changement de mot de passe");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 pb-32 pt-12">
-      <div className="max-w-3xl mx-auto px-6">
+    <div className="min-h-[calc(100vh-80px)] bg-slate-50 dark:bg-slate-950 py-16 px-4 transition-colors duration-500">
+      <div className="max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700">
         
-        {/* EN-TÊTE DE PAGE */}
-        <div className="mb-12 flex justify-between items-end">
-          <div>
-            <h1 className="text-5xl font-black text-slate-950 dark:text-white tracking-tighter italic mb-2">
-              {t('profile.nav_profile')}
-            </h1>
-            <p className="text-slate-500 dark:text-slate-400 font-medium italic">
-              Gérez vos informations personnelles et vos préférences de compte.
-            </p>
-          </div>
-          
+        <div className="flex justify-between items-end mb-10">
+          <h1 className="text-4xl font-black text-slate-950 dark:text-white tracking-tighter italic">
+            {t.nav_profile}
+          </h1>
           {!isEditing && (
             <button 
               onClick={() => setIsEditing(true)}
-              className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-blue-600 text-white rounded-2xl font-black text-[11px] uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-blue-500/10"
+              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-4 py-2 rounded-xl transition-all"
             >
-              <Settings size={14} /> {t('profile.profile_edit')}
+              <Edit3 size={14} />
+              {t.profile_edit}
             </button>
           )}
         </div>
 
-        {/* CARTE D'INFORMATIONS PRINCIPALE */}
-        <div className="bg-white dark:bg-slate-950 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
-          <div className="p-10 md:p-16">
-            <div className="space-y-10">
-              
-              {/* CHAMP : PRÉNOM */}
-              <div className="group">
-                <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-3 block">
-                  {t('profile.profile_field_firstName') || 'Prénom'}
-                </label>
-                {isEditing ? (
-                  <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
-                    <input 
-                      type="text" 
-                      value={userData.prenom}
-                      onChange={(e) => setUserData({...userData, prenom: e.target.value})}
-                      className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
-                    />
-                  </div>
-                ) : (
-                  <div className="text-2xl font-black text-slate-900 dark:text-white italic tracking-tight">
-                    {userData.prenom || 'Non renseigné'}
-                  </div>
-                )}
-              </div>
-
-              {/* CHAMP : NOM */}
-              <div className="group">
-                <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-3 block">
-                  {t('profile.profile_field_lastName') || 'Nom'}
-                </label>
-                {isEditing ? (
-                  <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
-                    <input 
-                      type="text" 
-                      value={userData.nom}
-                      onChange={(e) => setUserData({...userData, nom: e.target.value})}
-                      className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
-                    />
-                  </div>
-                ) : (
-                  <div className="text-2xl font-black text-slate-900 dark:text-white italic tracking-tight">
-                    {userData.nom || 'Non renseigné'}
-                  </div>
-                )}
-              </div>
-
-              {/* CHAMP : RÔLE */}
-              <div className="group">
-                <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-3 block">
-                  {t('profile.profile_field_role')}
-                </label>
-                {isEditing ? (
-                  <div className="relative">
-                    <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
-                    <input 
-                      type="text" 
-                      value={userData.role}
-                      onChange={(e) => setUserData({...userData, role: e.target.value})}
-                      className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
-                    />
-                  </div>
-                ) : (
-                  <div className="text-xl font-bold text-slate-600 dark:text-slate-400 italic">
-                    {userData.role || 'Non renseigné'}
-                  </div>
-                )}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* CHAMP : EMAIL */}
-                <div className="group">
-                  <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-3 block">
-                    {t('profile.profile_field_email')}
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
-                    <input 
-                      type="email" 
-                      value={userData.email}
-                      disabled
-                      className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-sm font-bold text-slate-900 dark:text-white cursor-not-allowed opacity-60"
-                    />
-                  </div>
-                </div>
-
-                {/* CHAMP : LOCALISATION */}
-                <div className="group">
-                  <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-3 block">
-                    {t('profile.profile_field_location')}
-                  </label>
-                  {isEditing ? (
-                    <div className="relative">
-                      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
-                      <input 
-                        type="text" 
-                        value={userData.location}
-                        onChange={(e) => setUserData({...userData, location: e.target.value})}
-                        className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
-                      />
-                    </div>
-                  ) : (
-                    <div className="text-lg font-bold text-slate-900 dark:text-white">
-                      {userData.location || 'Non renseigné'}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* ACTIONS D'ÉDITION */}
-              {isEditing && (
-                <div className="pt-8 flex flex-col sm:flex-row gap-4">
-                  <button 
-                    onClick={handleSave}
-                    className="flex-1 flex items-center justify-center gap-3 py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-500/20 hover:scale-[1.02] active:scale-95 transition-all"
-                  >
-                    <Check size={18} /> {t('profile.profile_save')}
-                  </button>
-                  <button 
-                    onClick={() => setIsEditing(false)}
-                    className="px-8 py-4 border-2 border-slate-100 dark:border-slate-800 text-slate-400 font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
-                  >
-                    {t('profile.profile_cancel')}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* ZONE DE DANGER : SUPPRESSION */}
-        {!isEditing && (
-          <div className="mt-12 bg-red-50/50 dark:bg-red-950/10 rounded-[2.5rem] border border-red-100 dark:border-red-900/20 p-8 md:p-12">
-            <div className="flex flex-col md:flex-row items-center gap-8 justify-between">
-              <div className="text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <AlertTriangle className="text-red-600" size={20} />
-                  <h3 className="text-xl font-black text-red-600 italic tracking-tight">{t('profile.profile_delete_account')}</h3>
-                </div>
-                <p className="text-sm text-slate-500 dark:text-red-200/40 font-medium italic">
-                  {t('profile.profile_delete_warning')}
-                </p>
-              </div>
-
-              {showDeleteConfirm ? (
-                <div className="flex flex-col sm:flex-row gap-3 animate-in zoom-in-95 duration-200">
-                  <button 
-                    onClick={handleDeleteAccount}
-                    className="px-8 py-4 bg-red-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-700 transition-all shadow-lg shadow-red-500/10"
-                  >
-                    {t('profile.profile_confirm_delete')}
-                  </button>
-                  <button 
-                    onClick={() => setShowDeleteConfirm(false)}
-                    className="px-8 py-4 bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-300 rounded-2xl font-black text-xs uppercase tracking-widest border border-slate-200 dark:border-slate-700"
-                  >
-                    {t('profile.profile_cancel')}
-                  </button>
-                </div>
-              ) : (
-                <button 
-                  onClick={() => setShowDeleteConfirm(true)}
-                  className="flex items-center gap-3 px-8 py-4 text-red-600 border-2 border-red-600/20 rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-red-600 hover:text-white transition-all group"
-                >
-                  <Trash2 size={16} className="group-hover:rotate-12 transition-transform" />
-                  Supprimer mes données
-                </button>
-              )}
-            </div>
+        {/* MESSAGES D'ÉTAT */}
+        {success && (
+          <div className="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-emerald-600 dark:text-emerald-400 flex items-center gap-3 animate-in zoom-in-95 duration-300">
+            <CheckCircle size={20} />
+            <span className="font-bold text-sm">{success}</span>
           </div>
         )}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl text-red-600 dark:text-red-400 flex items-center gap-3 animate-in shake duration-300">
+            <AlertCircle size={20} />
+            <span className="font-bold text-sm">{error}</span>
+          </div>
+        )}
+
+        {/* BLOC 1 : INFORMATIONS PERSONNELLES */}
+        <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-200 dark:border-slate-800 p-8 md:p-10 mb-8 transition-colors relative overflow-hidden">
+          <div className="flex items-center gap-6 mb-10 pb-8 border-b border-slate-100 dark:border-slate-800">
+            <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-inner">
+              <User size={40} />
+            </div>
+            <div>
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight italic transition-all">
+                {user.prenom} {user.nom}
+              </h2>
+              <p className="text-slate-500 dark:text-slate-400 font-medium italic">{user.email}</p>
+              <span className={`inline-block mt-3 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${user.role === 'chercheur_emploi' ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
+                {user.role === 'chercheur_emploi' ? 'Candidat' : 'Recruteur'}
+              </span>
+            </div>
+          </div>
+
+          <form onSubmit={handleUpdateProfile} className="space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 ml-1">Prénom</label>
+                {isEditing ? (
+                  <input 
+                    type="text" 
+                    value={profileForm.prenom} 
+                    onChange={(e) => setProfileForm({ ...profileForm, prenom: e.target.value })} 
+                    className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:text-white font-bold transition-all animate-in fade-in duration-300" 
+                  />
+                ) : (
+                  <p className="px-1 text-lg font-bold text-slate-700 dark:text-slate-200 italic">{user.prenom}</p>
+                )}
+              </div>
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 ml-1">Nom</label>
+                {isEditing ? (
+                  <input 
+                    type="text" 
+                    value={profileForm.nom} 
+                    onChange={(e) => setProfileForm({ ...profileForm, nom: e.target.value })} 
+                    className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:text-white font-bold transition-all animate-in fade-in duration-300" 
+                  />
+                ) : (
+                  <p className="px-1 text-lg font-bold text-slate-700 dark:text-slate-200 italic">{user.nom}</p>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 ml-1">Email</label>
+              <div className="flex items-center gap-4 px-1">
+                <Mail className="text-slate-300 dark:text-slate-600" size={18} />
+                <p className="text-lg font-bold text-slate-400 dark:text-slate-500 italic">{user.email}</p>
+              </div>
+            </div>
+
+            {isEditing && (
+              <div className="flex items-center gap-4 pt-4 animate-in slide-in-from-top-2 duration-300">
+                <button 
+                  type="submit" 
+                  disabled={saving} 
+                  className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/20 disabled:opacity-50 active:scale-95"
+                >
+                  {saving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
+                  {t.profile_save}
+                </button>
+                <button 
+                  type="button"
+                  onClick={handleCancelEdit}
+                  className="flex items-center gap-3 px-6 py-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-black text-xs uppercase tracking-widest transition-all"
+                >
+                  <X size={18} />
+                  {t.profile_cancel}
+                </button>
+              </div>
+            )}
+          </form>
+        </div>
+
+        {/* BLOC 2 : SÉCURITÉ (Toujours en mode interactif car sensible) */}
+        <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-200 dark:border-slate-800 p-8 md:p-10 transition-colors">
+          <form onSubmit={handleChangePassword} className="space-y-6">
+            <h3 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
+              <Shield size={16} className="text-blue-600" /> Sécurité du compte
+            </h3>
+
+            <div>
+              <label className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 ml-1">Mot de passe actuel</label>
+              <input 
+                type="password" 
+                value={passwordForm.old_password} 
+                onChange={(e) => setPasswordForm({ ...passwordForm, old_password: e.target.value })} 
+                required 
+                placeholder="••••••••" 
+                className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:text-white font-bold transition-all" 
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 ml-1">Nouveau</label>
+                <input 
+                  type="password" 
+                  value={passwordForm.new_password} 
+                  onChange={(e) => setPasswordForm({ ...passwordForm, new_password: e.target.value })} 
+                  required 
+                  placeholder="••••••••" 
+                  className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:text-white font-bold transition-all" 
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 ml-1">Confirmer</label>
+                <input 
+                  type="password" 
+                  value={passwordForm.confirm_password} 
+                  onChange={(e) => setPasswordForm({ ...passwordForm, confirm_password: e.target.value })} 
+                  required 
+                  placeholder="••••••••" 
+                  className="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:text-white font-bold transition-all" 
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={saving} 
+              className="flex items-center gap-3 px-8 py-4 bg-slate-950 dark:bg-slate-800 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-900 dark:hover:bg-slate-700 transition-all shadow-xl disabled:opacity-50 active:scale-95 border border-slate-800 dark:border-slate-700"
+            >
+              {saving ? <Loader2 className="animate-spin" size={18} /> : <Lock size={18} />}
+              Changer le mot de passe
+            </button>
+          </form>
+        </div>
 
       </div>
     </div>
