@@ -6,14 +6,13 @@ import {
   Settings, Trash2, AlertTriangle, User,
   Check
 } from 'lucide-react';
-import type { Users } from '../types/users';
 
 const Profile: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [userData, setUserData] = useState<Users>(JSON.parse(localStorage.getItem("user")!))
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user")!))
   
   const handleSave = () => {
     setIsEditing(false);
@@ -65,14 +64,14 @@ const Profile: React.FC = () => {
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
                     <input 
                       type="text" 
-                      value={userData.prenom}
-                      onChange={(e) => setUserData({...userData, prenom: e.target.value})}
+                      value={userData.user.prenom}
+                      onChange={(e) => setUserData({...userData.user, prenom: e.target.value})}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
                     />
                   </div>
                 ) : (
                   <div className="text-2xl font-black text-slate-900 dark:text-white italic tracking-tight">
-                    {userData.prenom || 'Non renseigné'}
+                    {userData.user.prenom || 'Non renseigné'}
                   </div>
                 )}
               </div>
@@ -87,14 +86,14 @@ const Profile: React.FC = () => {
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
                     <input 
                       type="text" 
-                      value={userData.nom}
-                      onChange={(e) => setUserData({...userData, nom: e.target.value})}
+                      value={userData.user.nom}
+                      onChange={(e) => setUserData({...userData.user, nom: e.target.value})}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
                     />
                   </div>
                 ) : (
                   <div className="text-2xl font-black text-slate-900 dark:text-white italic tracking-tight">
-                    {userData.nom || 'Non renseigné'}
+                    {userData.user.nom || 'Non renseigné'}
                   </div>
                 )}
               </div>
@@ -109,14 +108,14 @@ const Profile: React.FC = () => {
                     <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
                     <input 
                       type="text" 
-                      value={userData.role}
-                      onChange={(e) => setUserData({...userData, role: e.target.value})}
+                      value={userData.user.role}
+                      onChange={(e) => setUserData({...userData.user, role: e.target.value})}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
                     />
                   </div>
                 ) : (
                   <div className="text-xl font-bold text-slate-600 dark:text-slate-400 italic">
-                    {userData.role || 'Non renseigné'}
+                    {userData.user.role || 'Non renseigné'}
                   </div>
                 )}
               </div>
@@ -131,7 +130,7 @@ const Profile: React.FC = () => {
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
                     <input 
                       type="email" 
-                      value={userData.email}
+                      value={userData.user.email}
                       disabled
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-sm font-bold text-slate-900 dark:text-white cursor-not-allowed opacity-60"
                     />
@@ -148,14 +147,14 @@ const Profile: React.FC = () => {
                       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
                       <input 
                         type="text" 
-                        value={userData.location}
-                        onChange={(e) => setUserData({...userData, location: e.target.value})}
+                        value={userData.user.location}
+                        onChange={(e) => setUserData({...userData.user, location: e.target.value})}
                         className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-500 transition-all"
                       />
                     </div>
                   ) : (
                     <div className="text-lg font-bold text-slate-900 dark:text-white">
-                      {userData.location || 'Non renseigné'}
+                      {userData.user.location || 'Non renseigné'}
                     </div>
                   )}
                 </div>
