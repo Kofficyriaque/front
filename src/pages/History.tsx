@@ -8,15 +8,16 @@ import type { HistoryReponse } from '../types/history';
 const HistoryPage: React.FC = () => {
   const [listeHistorique, setHistorique] = useState<HistoryReponse[]>([]);
 
-  async function history() {
-    const datas = JSON.parse(localStorage.getItem("user")!);
-    const access_token = datas.access_token
-    const data: HistoryReponse[] = await getUserHistory(access_token);
-    setHistorique(data);
-  }
+  
   useEffect(() => {
+    async function history() {
+      const datas = JSON.parse(localStorage.getItem("user")!);
+      const access_token = datas.access_token
+      const hist: HistoryReponse[] = await getUserHistory(access_token);
+      setHistorique(hist);
+    }
     history();
-  }, []);
+  }, [listeHistorique]);
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-6 duration-700 pb-32 pt-20">
@@ -54,7 +55,7 @@ const HistoryPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
-                  <span className="text-[10px] font-black text-slate-300 dark:text-slate-600 uppercase tracking-widest hidden sm:block">{item.date_prediction}</span>
+                  <span className="text-[10px] font-black text-slate-300 dark:text-slate-600 uppercase tracking-widest hidden sm:block">{item.date_predit}</span>
                   <button className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-sm">
                     <ChevronRight size={20} />
                   </button>

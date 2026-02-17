@@ -5,7 +5,7 @@ export default async function getUserHistory(acces_token:string) {
     const res = await fetch(`${back}/api/predict/history`, {
         method: "GET",
         headers: {
-            'Content-type': 'Application/json',
+            'Content-Type': 'application/json',
             'Authorization':`Bearer ${acces_token}`
         }
     })
