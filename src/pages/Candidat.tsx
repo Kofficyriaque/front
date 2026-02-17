@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Calculator, GitCompare, Zap, Globe, CheckCircle2, UserPlus, Cpu, BarChart3 } from 'lucide-react';
+import { Calculator, GitCompare, Zap, Globe, CheckCircle2, UserPlus, Cpu, BarChart3, AlertCircle, X } from 'lucide-react';
 import { FeatureVisual } from '../components/FeatureVisual';
 
 
@@ -10,6 +10,41 @@ import { FeatureVisual } from '../components/FeatureVisual';
 const Candidat: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [user, setUser] = useState<any>(null);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      try {
+        const parsed = JSON.parse(userData);
+        setUser(parsed.user);
+      } catch (err) {
+        console.error('Erreur parsing user:', err);
+      }
+    }
+  }, []);
+
+  const handleButtonClick = () => {
+    if (!user) {
+      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      navigate('/login');
+    } else if (user.role === 'recruteur') {
+      setShowError(true);
+    } else if (user.role === 'candidat') {
+      navigate('/candidateOnboarding');
+    } else {
+      navigate('/candidateOnboarding');
+    }
+  };
+
+  const getButtonText = () => {
+    if (!user) return t('candidate.btn_calculate_salary');
+    if (user.role === 'recruteur') return t('candidate.btn_calculate_salary');
+    return t('candidate.btn_start');
+  };
+
+
 
   const items1 = t('candidate.cand_feat1_items', { returnObjects: true }) as string[];
   const items2 = t('candidate.cand_feat2_items', { returnObjects: true }) as string[];
@@ -31,6 +66,30 @@ const Candidat: React.FC = () => {
   ];
   return (
     <div className="animate-in fade-in duration-700">
+      {showError && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-8 max-w-md w-full shadow-2xl border border-red-100 dark:border-red-900">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 bg-red-50 dark:bg-red-950 rounded-full flex items-center justify-center">
+                <AlertCircle className="text-red-600 dark:text-red-400" size={24} />
+              </div>
+              <button onClick={() => setShowError(false)} className="text-slate-400 hover:text-slate-600">
+                <X size={24} />
+              </button>
+            </div>
+            <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 mb-3">{t('candidate.error_title')}</h3>
+            <p className="text-slate-600 dark:text-slate-400 font-medium mb-6">
+              {t('candidate.recruiter_error_message')}
+            </p>
+            <button 
+              onClick={() => setShowError(false)}
+              className="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
+            >
+              {t('candidate.close_button')}
+            </button>
+          </div>
+        </div>
+      )}
     {/*En-tête*/}
       <header className="bg-white dark:bg-slate-950 pt-32 pb-24 text-center relative overflow-hidden">
         {/* Blur Blobs Background */}
@@ -50,10 +109,10 @@ const Candidat: React.FC = () => {
           <h1 className="text-9xl font-black text-slate-900 dark:text-slate-100 tracking-tighter mb-8 leading-[0.85]">{t('candidate.discover_title')}</h1>
           <p className="text-2xl font-medium text-slate-500 dark:text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">{t('candidate.discover_subtitle')}</p>
           <button 
-            onClick={() => navigate('/onboarding/candidate')} 
+            onClick={handleButtonClick} 
             className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl dark:shadow-blue-950 hover:scale-105 transition-all"
           >
-            {t('candidate.btn_calculate_salary')}
+            {getButtonText()}
           </button>
         </div>
       </header>
@@ -124,10 +183,10 @@ const Candidat: React.FC = () => {
           
           <div className="mt-40 text-center">
              <button 
-              onClick={() => navigate('/onboarding/candidate')} 
+              onClick={handleButtonClick} 
                 className="bg-white text-slate-950 px-20 py-8 rounded-[2.5rem] font-black text-2xl hover:scale-105 hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] transition-all active:scale-95"
              >
-               {t('candidate.btn_start')}
+               {getButtonText()}
              </button>
           </div>
         </div>

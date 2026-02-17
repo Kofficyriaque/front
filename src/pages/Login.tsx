@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Loader2, ArrowRight, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,7 @@ const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
 
   const data: LoginRequest = {
@@ -25,7 +26,10 @@ const Login: React.FC = () => {
     setIsLoading(true);
     try {
       await LoginReq(data)
-      const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/candidateOnboarding';
+      // Priorité: location.state.from (Navbar) > redirectAfterLogin (Landing) > '/'
+      const fromNavbar = (location.state as { from?: string })?.from;
+      const fromLanding = localStorage.getItem('redirectAfterLogin');
+      const redirectUrl = fromNavbar || fromLanding || '/';
       localStorage.removeItem('redirectAfterLogin');
       navigate(redirectUrl);
     } catch (err) {

@@ -1,11 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Database, ShieldCheck, TrendingUp, FileJson, ArrowRight, Target, BarChart3, AlertCircle, Info, CheckCircle2, Cpu, Globe, Activity } from 'lucide-react';
+import { Database, ShieldCheck, TrendingUp, FileJson, ArrowRight, Target, BarChart3, AlertCircle, Info, CheckCircle2, Cpu, Globe, Activity, X } from 'lucide-react';
 
 const Recruteur: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [user, setUser] = useState<any>(null);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      try {
+        const parsed = JSON.parse(userData);
+        setUser(parsed.user);
+      } catch (err) {
+        console.error('Erreur parsing user:', err);
+      }
+    }
+  }, []);
+
+  const handleButtonClick = () => {
+    if (!user) {
+      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      navigate('/login');
+    } else if (user.role === 'candidat') {
+      setShowError(true);
+    } else if (user.role === 'recruteur') {
+      navigate('/candidateOnboarding');
+    }
+  };
+
+  const getButtonText = () => {
+    if (!user) return t('recruiter.start_now');
+    if (user.role === 'candidat') return t('recruiter.start_now');
+    return t('recruiter.start_now');
+  };
 
   // Benchmarking Items
   const benchmarkItems = [
@@ -32,6 +63,30 @@ const Recruteur: React.FC = () => {
 
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen animate-in fade-in duration-700">
+      {showError && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-8 max-w-md w-full shadow-2xl border border-red-100 dark:border-red-900">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 bg-red-50 dark:bg-red-950 rounded-full flex items-center justify-center">
+                <AlertCircle className="text-red-600 dark:text-red-400" size={24} />
+              </div>
+              <button onClick={() => setShowError(false)} className="text-slate-400 hover:text-slate-600">
+                <X size={24} />
+              </button>
+            </div>
+            <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 mb-3">{t('recruiter.error_title')}</h3>
+            <p className="text-slate-600 dark:text-slate-400 font-medium mb-6">
+              {t('recruiter.candidate_error_message')}
+            </p>
+            <button 
+              onClick={() => setShowError(false)}
+              className="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
+            >
+              {t('recruiter.close_button')}
+            </button>
+          </div>
+        </div>
+      )}
       {/* Header - Vision Stratégique */}
       <header className="relative pt-32 pb-24 px-4 overflow-hidden bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/30 skew-x-12 translate-x-1/4 pointer-events-none"></div>
@@ -45,10 +100,10 @@ const Recruteur: React.FC = () => {
               {t('recruiter.rec_hero_subtitle')}
             </p>
             <button 
-              onClick={() => navigate('/login')} 
+              onClick={handleButtonClick} 
               className="bg-blue-600 text-white px-12 py-6 rounded-2xl font-black text-lg uppercase tracking-widest shadow-2xl dark:shadow-blue-950 hover:-translate-y-1 transition-all active:scale-95 flex items-center gap-4"
             >
-              {t('recruiter.start_now')} <ArrowRight />
+              {getButtonText()} <ArrowRight />
             </button>
           </div>
           <div className="flex-1 w-full max-w-2xl">
@@ -277,8 +332,8 @@ const Recruteur: React.FC = () => {
                  <Info className="text-indigo-500 shrink-0 mt-1" />
                  <p className="text-sm font-medium text-slate-600 italic">"{t('recruiter.rec_attract_insight')}"</p>
               </div>
-              <button onClick={() => navigate('/login')} className="text-indigo-600 font-black uppercase text-xs tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
-                 {t('recruiter.rec_attract_cta')} <ArrowRight size={16} />
+              <button onClick={handleButtonClick} className="text-indigo-600 font-black uppercase text-xs tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                 {getButtonText()} <ArrowRight size={16} />
               </button>
             </div>
           </div>
@@ -320,10 +375,10 @@ const Recruteur: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-black text-slate-900 dark:text-slate-100 tracking-tighter mb-10">{t('recruiter.rec_final_title')}</h2>
           <button 
-            onClick={() => navigate('/login')} 
+            onClick={handleButtonClick} 
             className="bg-slate-900 text-white px-20 py-8 rounded-[2rem] font-black text-2xl hover:bg-blue-600 hover:scale-105 transition-all shadow-2xl dark:shadow-slate-900"
           >
-            {t('recruiter.rec_final_cta')}
+            {getButtonText()}
           </button>
         </div>
       </section>

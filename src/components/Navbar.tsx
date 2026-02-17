@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Sun, Moon, User, LogOut, History, ChevronDown, UserCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
@@ -43,6 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
   const langRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
 
   const log_out = () => {
@@ -234,7 +235,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                 </div>
               ) : (
                 <button 
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate('/login', { state: { from: location.pathname !== '/' ? location.pathname : '/' } })}
                   className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-md"
                 >
                   {t('navbar.login')}
@@ -337,13 +338,13 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
               ) : (
                 <>
                   <button 
-                    onClick={() => { navigate('/login'); setIsOpen(false); }}
+                    onClick={() => { navigate('/login', { state: { from: location.pathname !== '/' ? location.pathname : '/' } }); setIsOpen(false); }}
                     className="w-full text-center py-3 font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
                     {t('navbar.login')}
                   </button>
                   <button 
-                    onClick={() => { navigate('/login'); setIsOpen(false); }}
+                    onClick={() => { navigate('/login', { state: { from: location.pathname !== '/' ? location.pathname : '/' } }); setIsOpen(false); }}
                     className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold shadow-sm hover:bg-blue-700 dark:hover:bg-blue-600"
                   >
                     {t('navbar.startAnalysis')}

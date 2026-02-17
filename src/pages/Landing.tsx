@@ -16,11 +16,14 @@ const Landing: React.FC = () => {
     if (user) {
       try {
         const userData = JSON.parse(user);
+        console.log('userData:', userData);
+        console.log('userRole should be:', userData.user?.role || null);
         setUserRole(userData.user?.role || null);
       } catch (err) {
         console.error('Erreur parsing user:', err);
       }
     } else {
+      console.log('No user in localStorage');
       setUserRole(null);
     }
   };
@@ -77,12 +80,12 @@ const Landing: React.FC = () => {
             {t('landing.subtitle')}
           </p>
 
-          <div className={userRole ? "max-w-2xl mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4"}>
+          <div className={userRole ? "w-full max-w-md mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4"}>
             {/* Candidate Card */}
             {(!userRole || userRole === 'candidat') && (
             <button
               onClick={handleCandidateClick}
-              className="relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              className="w-full relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('landing.candidateBadge')}</span>
@@ -99,7 +102,7 @@ const Landing: React.FC = () => {
             {(!userRole || userRole === 'recruteur') && (
             <button
               onClick={handleRecruiterClick}
-              className="relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              className="w-full relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('landing.recruiterBadge')}</span>

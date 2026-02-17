@@ -129,6 +129,12 @@ const resources = {
         ],
         btn_calculate_salary: 'Calculate my salary',
         btn_start: 'Start',
+        btn_sign_in: 'Sign In',
+        btn_start_analysis: 'Start Analysis',
+        btn_access_recruiter: 'Access Recruiter Tools',
+        error_title: 'Access Denied',
+        recruiter_error_message: 'You are logged in as a recruiter. Candidate features require a candidate account.',
+        close_button: 'Close',
       },
       recruiter: {
         rec_hero_title: "Optimize Your Recruitment Strategy",
@@ -195,7 +201,10 @@ const resources = {
         rec_attract_insight: "Adding remote policy mention increases technical job attractiveness by 22% on average.",
         rec_attract_cta: "Test my first job posting",
         rec_final_title: "Get an edge in the job market.",
-        rec_final_cta: "Launch an Audit now"
+        rec_final_cta: "Launch an Audit now",
+        error_title: 'Access Denied',
+        candidate_error_message: 'You are logged in as a candidate. Recruiter features require a recruiter account.',
+        close_button: 'Close',
       },
       about: {
         pres_tag: "About the Project",
@@ -572,6 +581,12 @@ const resources = {
         ],
         btn_calculate_salary: 'Calculer mon salaire',
         btn_start: 'Commencer',
+        btn_sign_in: 'Se connecter',
+        btn_start_analysis: 'Commencer l\'analyse',
+        btn_access_recruiter: 'Accède aux outils recruteur',
+        error_title: 'Accès refusé',
+        recruiter_error_message: 'Vous êtes connecté en tant que recruteur. Les fonctionnalités candidat nécessitent un compte candidat.',
+        close_button: 'Fermer',
       },
       recruiter: {
         rec_hero_title: "Optimisez votre stratégie de recrutement",
@@ -638,7 +653,10 @@ const resources = {
         rec_attract_insight: "L'ajout d'une mention sur la politique de télétravail augmente l'attractivité de vos postes techniques de 22% en moyenne.",
         rec_attract_cta: "Tester ma première annonce",
         rec_final_title: "Prenez l'avantage sur le marché de l'emploi.",
-        rec_final_cta: "Lancer un Audit maintenant"
+        rec_final_cta: "Lancer un Audit maintenant",
+        error_title: 'Accès refusé',
+        candidate_error_message: 'Vous êtes connecté en tant que candidat. Les fonctionnalités recruteur nécessitent un compte recruteur.',
+        close_button: 'Fermer',
       },
       apropos: {
         // Presentation Page
