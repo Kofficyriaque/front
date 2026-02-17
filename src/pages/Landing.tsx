@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Briefcase, Search, TrendingUp, ArrowRight, CheckCircle2, Wand, MapPin, Target } from 'lucide-react';
 
@@ -9,6 +9,54 @@ import FAQItem from '../components/FAQItem';
 const Landing: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  const updateUserRole = () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      try {
+        const userData = JSON.parse(user);
+        setUserRole(userData.user?.role || null);
+      } catch (err) {
+        console.error('Erreur parsing user:', err);
+      }
+    } else {
+      setUserRole(null);
+    }
+  };
+
+  useEffect(() => {
+    updateUserRole();
+    
+    // Écouter les changements de localStorage
+    window.addEventListener('storage', updateUserRole);
+    window.addEventListener('user-updated', updateUserRole);
+    
+    return () => {
+      window.removeEventListener('storage', updateUserRole);
+      window.removeEventListener('user-updated', updateUserRole);
+    };
+  }, []);
+
+  const handleCandidateClick = () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigate('/candidateOnboarding');
+    } else {
+      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      navigate('/login');
+    }
+  };
+
+  const handleRecruiterClick = () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigate('/candidateOnboarding');
+    } else {
+      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      navigate('/login');
+    }
+  };
 
   return (
     <div className="bg-white dark:bg-slate-950 overflow-hidden">
@@ -29,10 +77,11 @@ const Landing: React.FC = () => {
             {t('landing.subtitle')}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
+          <div className={userRole ? "max-w-2xl mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4"}>
             {/* Candidate Card */}
+            {(!userRole || userRole === 'candidat') && (
             <button
-              onClick={() => navigate('/login')}
+              onClick={handleCandidateClick}
               className="relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
@@ -44,10 +93,12 @@ const Landing: React.FC = () => {
               </div>
               <User className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/10 group-hover:scale-110 transition-transform duration-700" />
             </button>
+            )}
 
             {/* Recruiter Card */}
+            {(!userRole || userRole === 'recruteur') && (
             <button
-              onClick={() => navigate('/login')}
+              onClick={handleRecruiterClick}
               className="relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
@@ -59,6 +110,7 @@ const Landing: React.FC = () => {
               </div>
               <Briefcase className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/5 group-hover:scale-110 transition-transform duration-700" />
             </button>
+            )}
           </div>
         </div>
       </section>

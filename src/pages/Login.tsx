@@ -25,8 +25,9 @@ const Login: React.FC = () => {
     setIsLoading(true);
     try {
       await LoginReq(data)
-      const datas = JSON.parse(localStorage.getItem("user")!)
-        navigate(`/${datas.user.role}`);
+      const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/candidateOnboarding';
+      localStorage.removeItem('redirectAfterLogin');
+      navigate(redirectUrl);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de connexion');
     } finally {

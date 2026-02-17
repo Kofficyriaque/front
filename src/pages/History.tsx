@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { History, LayoutDashboard, ChevronRight, Search, X } from 'lucide-react';
+import { History, LayoutDashboard, ChevronRight, Search, X, TrendingUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import getUserHistory from '../utils/history';
 import type { HistoryReponse } from '../types/history';
@@ -71,7 +71,9 @@ const HistoryPage: React.FC = () => {
                   <div>
                     <h4 className="text-xl font-black text-slate-950 dark:text-white italic">{item.titre}</h4>
                     <p className="text-sm font-bold text-slate-400 flex items-center gap-2">
-                      {item.salaire_min} - <span className="text-blue-600 dark:text-blue-400">{item.salaire_predit}</span>
+                      {item.salaire_min}
+                      <TrendingUp size={14} className="text-emerald-500" />
+                      <span className="text-blue-600 dark:text-blue-400">{item.salaire_predit}</span>
                     </p>
                   </div>
                 </div>

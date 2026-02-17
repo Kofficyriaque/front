@@ -49,6 +49,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
     localStorage.removeItem("user")
     setConnected(false)
     setUtilisateurs(null)
+    window.dispatchEvent(new Event('user-updated'));
+    navigate('/');
   };
 
   
