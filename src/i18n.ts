@@ -31,6 +31,17 @@ const resources = {
         profile_field_role: 'Position / Role',
         profile_field_location: 'Location',
       },
+      history: {
+        title: 'History',
+        subtitle: 'Consult your archived analyses.',
+        searchPlaceholder: 'Search by position, date (DD/MM/YYYY) or company...',
+        activeFilter: 'Active filter',
+        allAnalyses: 'All analyses',
+        analyzedOn: 'Analyzed on',
+        noArchive: 'No matching archive',
+        noArchiveDesc: 'We found no analysis for the search',
+        clearFilters: 'Clear filters',
+      },
       landing: {
         titleLine1: 'The truth about IT salaries.',
         titleLine2: 'Revealed by Data.',
@@ -374,6 +385,17 @@ const resources = {
         profile_field_email: 'Adresse Email',
         profile_field_role: 'Poste / Rôle',
         profile_field_location: 'Localisation',
+      },
+      history: {
+        title: 'Historique',
+        subtitle: 'Consultez vos analyses archivées.',
+        searchPlaceholder: 'Rechercher par poste, date (JJ/MM/AAAA) ou entreprise...',
+        activeFilter: 'Filtre actif',
+        allAnalyses: 'Toutes les analyses',
+        analyzedOn: 'Analysé le',
+        noArchive: 'Aucune archive correspondante',
+        noArchiveDesc: 'Nous n\'avons trouvé aucune analyse pour la recherche',
+        clearFilters: 'Effacer les filtres',
       },
       landing: {
         
