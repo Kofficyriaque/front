@@ -22,7 +22,7 @@ const CandidateOnboarding: React.FC = () => {
   const [showResult, setShowResult] = React.useState(false);
   const [reponse, setReponse] = useState<ReponsePredict | null>(null)
   const [error, setError] = useState<string>('');
-  const [found,setFound]=useState(false)
+  const [,setFound]=useState(false)
 
   const navigate = useNavigate();
   const data: RequestPredict = {
