@@ -71,9 +71,9 @@ const HistoryPage: React.FC = () => {
                   <div>
                     <h4 className="text-xl font-black text-slate-950 dark:text-white italic">{item.titre}</h4>
                     <p className="text-sm font-bold text-slate-400 flex items-center gap-2">
-                      {item.salaire_min}
+                      {Math.round(item.salaire_min ?? 0)}
                       <TrendingUp size={14} className="text-emerald-500" />
-                      <span className="text-blue-600 dark:text-blue-400">{item.salaire_predit}</span>
+                      <span className="text-blue-600 dark:text-blue-400">{Math.round(item.salaire_predit ?? 0)}</span>
                     </p>
                   </div>
                 </div>

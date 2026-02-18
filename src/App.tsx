@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Landing from './pages/Landing';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import CandidateOnboarding from './pages/CandidateOnboarding';
 import Candidat from './pages/Candidat';
@@ -14,6 +14,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import Profile from './pages/Profile';
 import History from './pages/History';
+import { ScrollToTop } from './components/ScrollTop';
 
 
 const App: React.FC = () => {
@@ -43,11 +44,12 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
+    <ScrollToTop />
         <div className={`flex flex-col min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <Navbar theme={theme} toggleTheme={toggleTheme}/>
           <main className="flex-grow pt-16">
             <Routes>
-              <Route path="/" element={<Landing />} />
+              <Route path="/" element={<Home />} />
               <Route path="about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -59,7 +61,7 @@ const App: React.FC = () => {
               <Route path="/recruteur" element={<Recruteur />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfUse />} />
-              <Route path="*" element={<Landing />} />
+              <Route path="*" element={<Home />} />
             </Routes>
           </main>
           <Footer />

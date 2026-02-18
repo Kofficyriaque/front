@@ -6,7 +6,7 @@ import { User, Briefcase, Search, TrendingUp, ArrowRight, CheckCircle2, Wand, Ma
 import { useTranslation } from 'react-i18next';
 import FAQItem from '../components/FAQItem';
 
-const Landing: React.FC = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [userRole, setUserRole] = useState<string | null>(null);
@@ -72,12 +72,12 @@ const Landing: React.FC = () => {
 
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9] mb-8">
-            {t('landing.titleLine1')}<br />
-            <span className="text-blue-600 dark:text-blue-500">{t('landing.titleLine2')}</span>
+            {t('home.titleLine1')}<br />
+            <span className="text-blue-600 dark:text-blue-500">{t('home.titleLine2')}</span>
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-500 dark:text-slate-400 mb-16 font-medium italic">
-            {t('landing.subtitle')}
+            {t('home.subtitle')}
           </p>
 
           <div className={userRole ? "w-full max-w-md mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4"}>
@@ -88,10 +88,10 @@ const Landing: React.FC = () => {
               className="w-full relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('landing.candidateBadge')}</span>
-                <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.candidateTitle')}</h3>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('home.candidateBadge')}</span>
+                <h3 className="text-3xl font-black mb-6 leading-tight">{t('home.candidateTitle')}</h3>
                 <div className="flex items-center text-sm font-black uppercase tracking-widest text-white group-hover:translate-x-2 transition-transform">
-                  {t('landing.candidateCta')} <ArrowRight size={18} className="ml-3" />
+                  {t('home.candidateCta')} <ArrowRight size={18} className="ml-3" />
                 </div>
               </div>
               <User className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/10 group-hover:scale-110 transition-transform duration-700" />
@@ -105,10 +105,10 @@ const Landing: React.FC = () => {
               className="w-full relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
             >
               <div className="relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('landing.recruiterBadge')}</span>
-                <h3 className="text-3xl font-black mb-6 leading-tight">{t('landing.recruiterTitle')}</h3>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('home.recruiterBadge')}</span>
+                <h3 className="text-3xl font-black mb-6 leading-tight">{t('home.recruiterTitle')}</h3>
                 <div className="flex items-center text-sm font-black uppercase tracking-widest text-slate-300 group-hover:translate-x-2 transition-transform">
-                  {t('landing.recruiterCta')} <ArrowRight size={18} className="ml-3" />
+                  {t('home.recruiterCta')} <ArrowRight size={18} className="ml-3" />
                 </div>
               </div>
               <Briefcase className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/5 group-hover:scale-110 transition-transform duration-700" />
@@ -127,24 +127,24 @@ const Landing: React.FC = () => {
               <div className="w-16 h-16 bg-blue-50 dark:bg-blue-950/50 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-8 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                 <Wand size={28} />
               </div>
-              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">Prédiction IA</h3>
-              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">Estimation précise des salaires basée sur l'analyse NLP des descriptions de postes.</p>
+              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">{t('home.predictionTitle')}</h3>
+              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">{t('home.predictionDesc')}</p>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 group hover:border-slate-300 dark:hover:border-slate-700 transition-all">
               <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-900 dark:text-slate-100 mb-8 transition-colors group-hover:bg-slate-950 dark:group-hover:bg-white group-hover:text-white dark:group-hover:text-slate-950">
                 <MapPin size={28} />
               </div>
-              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">Cartographie</h3>
-              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">Visualisez les zones géographiques les plus attractives pour votre secteur d'activité.</p>
+              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">{t('home.feature2Title')}</h3>
+              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">{t('home.feature2Desc')}</p>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 group hover:border-blue-200 dark:hover:border-blue-700 transition-all">
               <div className="w-16 h-16 bg-blue-50 dark:bg-blue-950/50 rounded-2xl flex items-center justify-center text-blue-700 dark:text-blue-400 mb-8 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                 <Target size={28} />
               </div>
-              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">Skills Hub</h3>
-              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">Identifiez les compétences rares et débloquez votre potentiel de gain.</p>
+              <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">{t('home.feature3Title')}</h3>
+              <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">{t('home.feature3Desc')}</p>
             </div>
           </div>
         </div>
@@ -154,8 +154,8 @@ const Landing: React.FC = () => {
       <section className="py-32 bg-slate-50 dark:bg-slate-900 px-6 transition-colors">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter mb-6">{t('landing.valueTitle')}</h2>
-            <p className="text-xl text-slate-500 dark:text-slate-400 font-medium italic max-w-2xl mx-auto">{t('landing.valueSubtitle')}</p>
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter mb-6">{t('home.valueTitle')}</h2>
+            <p className="text-xl text-slate-500 dark:text-slate-400 font-medium italic max-w-2xl mx-auto">{t('home.valueSubtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -164,27 +164,31 @@ const Landing: React.FC = () => {
               <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-8 shadow-sm">
                 <Search size={28} />
               </div>
-              <h3 className="text-3xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">{t('landing.forCandidatesTitle')}</h3>
-              <p className="text-slate-500 dark:text-slate-400 mb-10 leading-relaxed font-medium text-lg italic">{t('landing.forCandidatesDesc')}</p>
+              <h3 className="text-3xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">{t('home.forCandidatesTitle')}</h3>
+              <p className="text-slate-500 dark:text-slate-400 mb-10 leading-relaxed font-medium text-lg italic">{t('home.forCandidatesDesc')}</p>
               <ul className="space-y-6 mb-12 flex-grow">
                 <li className="flex items-center group">
                   <CheckCircle2 size={20} className="text-blue-600 dark:text-blue-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
-                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('landing.forCandidatesItem1')}</span>
+                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('home.forCandidatesItem1')}</span>
                 </li>
                 <li className="flex items-center group">
                   <CheckCircle2 size={20} className="text-blue-600 dark:text-blue-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
-                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('landing.forCandidatesItem2')}</span>
+                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('home.forCandidatesItem2')}</span>
                 </li>
                 <li className="flex items-center group">
                   <CheckCircle2 size={20} className="text-blue-600 dark:text-blue-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
-                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('landing.forCandidatesItem3')}</span>
+                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('home.forCandidatesItem3')}</span>
+                </li>
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-blue-600 dark:text-blue-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-600 dark:text-slate-300 font-bold">{t('home.forCandidatesItem4')}</span>
                 </li>
               </ul>
               <button
                 onClick={() => navigate('/candidat')}
                 className="text-blue-600 dark:text-blue-400 font-bold flex items-center hover:translate-x-1 transition-transform"
               >
-                {t('landing.forCandidatesCTA')} <ArrowRight size={18} className="ml-2" />
+                {t('home.forCandidatesCTA')} <ArrowRight size={18} className="ml-2" />
               </button>
             </div>
 
@@ -193,27 +197,31 @@ const Landing: React.FC = () => {
               <div className="w-14 h-14 bg-white/10 text-indigo-400 rounded-2xl flex items-center justify-center mb-8">
                 <TrendingUp size={28} />
               </div>
-              <h3 className="text-3xl font-black mb-6 tracking-tight">{t('landing.forRecruitersTitle')}</h3>
-              <p className="text-slate-400 mb-10 leading-relaxed font-medium text-lg italic">{t('landing.forRecruitersDesc')}</p>
+              <h3 className="text-3xl font-black mb-6 tracking-tight">{t('home.forRecruitersTitle')}</h3>
+              <p className="text-slate-400 mb-10 leading-relaxed font-medium text-lg italic">{t('home.forRecruitersDesc')}</p>
               <ul className="space-y-6 mb-12 flex-grow">
                 <li className="flex items-center group">
                   <CheckCircle2 size={20} className="text-indigo-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
-                  <span className="text-slate-200 font-bold">{t('landing.forRecruitersItem1')}</span>
+                  <span className="text-slate-200 font-bold">{t('home.forRecruitersItem1')}</span>
                 </li>
                 <li className="flex items-center group">
                   <CheckCircle2 size={20} className="text-indigo-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
-                  <span className="text-slate-200 font-bold">{t('landing.forRecruitersItem2')}</span>
+                  <span className="text-slate-200 font-bold">{t('home.forRecruitersItem2')}</span>
                 </li>
                 <li className="flex items-center group">
                   <CheckCircle2 size={20} className="text-indigo-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
-                  <span className="text-slate-200 font-bold">{t('landing.forRecruitersItem3')}</span>
+                  <span className="text-slate-200 font-bold">{t('home.forRecruitersItem3')}</span>
+                </li>
+                <li className="flex items-center group">
+                  <CheckCircle2 size={20} className="text-indigo-400 mr-4 shrink-0 transition-transform group-hover:scale-125" />
+                  <span className="text-slate-200 font-bold">{t('home.forRecruitersItem4')}</span>
                 </li>
               </ul>
               <button
                 onClick={() => navigate('/recruteur')}
                 className="text-white font-bold flex items-center hover:translate-x-1 transition-transform"
               >
-                {t('landing.forRecruitersCTA')} <ArrowRight size={18} className="ml-2" />
+                {t('home.forRecruitersCTA')} <ArrowRight size={18} className="ml-2" />
               </button>
             </div>
           </div>
@@ -267,4 +275,4 @@ const Landing: React.FC = () => {
 
 
 
-export default Landing;
+export default Home;
