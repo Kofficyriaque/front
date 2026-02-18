@@ -16,14 +16,11 @@ const Home: React.FC = () => {
     if (user) {
       try {
         const userData = JSON.parse(user);
-        console.log('userData:', userData);
-        console.log('userRole should be:', userData.user?.role || null);
         setUserRole(userData.user?.role || null);
       } catch (err) {
         console.error('Erreur parsing user:', err);
       }
     } else {
-      console.log('No user in localStorage');
       setUserRole(null);
     }
   };

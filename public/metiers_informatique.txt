@@ -1,0 +1,120 @@
+Programmeur
+Développeur applicatif
+Développeur desktop
+Développeur web
+Développeur front-end
+Développeur back-end
+Développeur full-stack
+Développeur API
+Développeur microservices
+Développeur open source
+Mainteneur logiciel
+Développeur WordPress
+Développeur Drupal
+Développeur e-commerce
+Développeur WebGL
+Développeur iOS
+Développeur cross-platform
+Développeur Flutter
+Développeur React Native
+Programmeur gameplay
+Programmeur moteur
+Programmeur graphique
+Game designer
+Level designer
+Technical game designer
+Testeur jeux vidéo
+Ingénieur moteur 3D
+Machine learning engineer
+Deep learning engineer
+Chercheur IA
+Ingénieur NLP
+Ingénieur vision par ordinateur
+Ingénieur robotique IA
+MLOps engineer
+AI trainer
+AI prompt engineer
+AI safety engineer
+Analytics engineer
+BI analyst
+BI developer
+Data architect
+Data steward
+Data quality analyst
+Big data engineer
+Security engineer
+Cloud platform engineer
+Cloud operations engineer
+Cloud reliability engineer
+Ingénieur systèmes
+Ingénieur réseaux
+Architecte infrastructure
+Architecte systèmes
+Technicien systèmes
+Technicien réseaux
+Ingénieur télécom
+Ingénieur NOC
+Consultant sécurité
+Pentester
+Red teamer
+Blue teamer
+Analyste SOC
+Threat hunter
+Incident responder
+Digital forensics analyst
+Security auditor
+Cryptography engineer
+Application security engineer
+Cloud security specialist
+Automation engineer
+Performance tester
+Security tester
+Validation engineer
+Platform engineer
+Release engineer
+Build engineer
+CI/CD engineer
+Infrastructure as code engineer
+Architecte d’entreprise
+Solution architect
+Systems architect
+Interaction designer
+UX researcher
+Service designer
+Product owner
+Product manager
+Technical product manager
+Scrum master
+Agile coach
+Delivery manager
+Support applicatif
+Support production
+Ingénieur support
+Technicien maintenance informatique
+Database engineer
+Database architect
+DBA cloud
+NoSQL specialist
+Blockchain developer
+Blockchain architect
+Web3 engineer
+Crypto security engineer
+Développeur embarqué
+Firmware engineer
+Ingénieur IoT
+Ingénieur robotique
+Hardware engineer
+FPGA engineer
+Ingénieur réalité augmentée
+Ingénieur réalité mixte
+Spatial computing engineer
+Quantum computing engineer
+Edge computing engineer
+Network security engineer
+SDN engineer
+Network automation engineer
+IT auditor
+Risk analyst
+IT compliance officer
+IT GRC analyst
+IT controller
