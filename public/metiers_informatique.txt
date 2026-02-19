@@ -40,6 +40,12 @@ BI analyst
 BI developer
 Data architect
 Data steward
+Data Engineer
+Data Scientist
+Data Governance
+Data Governance Senior Specialist
+Data Senior Specialist
+Data Governance Specialist
 Data quality analyst
 Big data engineer
 Security engineer
@@ -118,3 +124,4 @@ Risk analyst
 IT compliance officer
 IT GRC analyst
 IT controller
+Full-Stack

@@ -278,9 +278,6 @@ const Recruteur: React.FC = () => {
                         </div>
                      ))}
                   </div>
-                  <div className="p-4 bg-slate-50 text-center">
-                     <button className="text-[10px] font-black uppercase text-indigo-600 hover:underline">{t('recruiter.rec_skills_view_all')}</button>
-                  </div>
                </div>
             </div>
           </div>
@@ -332,9 +329,6 @@ const Recruteur: React.FC = () => {
                  <Info className="text-indigo-500 shrink-0 mt-1" />
                  <p className="text-sm font-medium text-slate-600 italic">"{t('recruiter.rec_attract_insight')}"</p>
               </div>
-              <button onClick={handleButtonClick} className="text-indigo-600 font-black uppercase text-xs tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
-                 {getButtonText()} <ArrowRight size={16} />
-              </button>
             </div>
           </div>
         </div>
