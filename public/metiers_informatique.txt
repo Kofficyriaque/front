@@ -5,6 +5,7 @@ Développeur web
 Développeur front-end
 Développeur back-end
 Développeur full-stack
+Développeur Web Drupal
 Développeur API
 Développeur microservices
 Développeur open source
@@ -16,6 +17,7 @@ Développeur WebGL
 Développeur iOS
 Développeur cross-platform
 Développeur Flutter
+Développeur React
 Développeur React Native
 Programmeur gameplay
 Programmeur moteur
@@ -33,8 +35,11 @@ Ingénieur vision par ordinateur
 Ingénieur robotique IA
 MLOps engineer
 AI trainer
+trainer
 AI prompt engineer
+Prompt Engineer
 AI safety engineer
+safety engineer
 Analytics engineer
 BI analyst
 BI developer
@@ -125,3 +130,18 @@ IT compliance officer
 IT GRC analyst
 IT controller
 Full-Stack
+Administrateur Systèmes Réseaux & Sécurité
+Systèmes Réseaux & Sécurité
+Webdesigner
+Graphic Web Designer
+Designer Senior
+Designer Ux 
+Ux Designer 
+Ingénieur en intelligence artificielle
+intelligence artificielle
+IA
+cyber-sécurité
+Cyber Sécurité
+CyberSécurité
+Ingénieur Cyber Sécurité
+Ingénieur Cyber-Sécurité
