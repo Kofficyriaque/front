@@ -19,8 +19,6 @@ const About: React.FC = () => {
 
   // --- VISION SECTION ---
   const presVisionP1 = t(`${ns}.pres_vision_p1`);
-  const presVisionP2 = t(`${ns}.pres_vision_p2`);
-  const presVisionP3 = t(`${ns}.pres_vision_p3`);
 
   return (
     <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 animate-in fade-in duration-1000 transition-colors">
