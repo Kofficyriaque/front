@@ -70,6 +70,9 @@ const HistoryPage: React.FC = () => {
                 <div className="flex items-center gap-8">
                   <div>
                     <h4 className="text-xl font-black text-slate-950 dark:text-white italic">{item.titre}</h4>
+                       <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-[9px] font-black uppercase tracking-widest text-slate-500 rounded-lg border border-slate-200 dark:border-slate-700">
+                        {item.niveau_experience}
+                      </span>
                     <p className="text-sm font-bold text-slate-400 flex items-center gap-2">
                       {Math.round(item.salaire_min ?? 0)}
                       <TrendingUp size={14} className="text-emerald-500" />

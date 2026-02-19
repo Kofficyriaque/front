@@ -148,13 +148,6 @@ const About: React.FC = () => {
               <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-950 dark:text-slate-100 leading-tight transition-colors">
                 {presVisionP1}
               </h2>
-              <div className="h-px w-20 bg-slate-300 dark:bg-slate-700 mx-auto"></div>
-              <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed transition-colors">
-                {presVisionP2}
-              </p>
-              <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed transition-colors">
-                {presVisionP3}
-              </p>
            </div>
         </div>
       </section>

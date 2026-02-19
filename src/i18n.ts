@@ -92,7 +92,7 @@ const resources = {
         cand_step1_title: 'Create your profile',
         cand_step1_desc:
           'Enter your current or target role, experience, and location. It takes under 2 minutes.',
-        cand_step2_title: 'Add your skills',
+        cand_step2_title: 'Offer details',
         cand_step2_desc:
           "List your technologies, languages, and frameworks. The more precise, the more accurate the estimate.",
         cand_step3_title: 'Get your analysis',
@@ -603,7 +603,7 @@ const resources = {
         cand_step1_title: 'Créez votre profil',
         cand_step1_desc:
           'Renseignez votre poste actuel ou visé, votre expérience et votre localisation. Ça prend moins de 2 minutes.',
-        cand_step2_title: 'Ajoutez vos compétences',
+        cand_step2_title: 'Détails de l’offre',
         cand_step2_desc:
           "Listez vos technologies, langages et frameworks. Plus vous êtes précis, plus l'estimation sera juste.",
         cand_step3_title: 'Obtenez votre analyse',

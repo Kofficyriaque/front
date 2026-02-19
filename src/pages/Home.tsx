@@ -248,10 +248,6 @@ const Home: React.FC = () => {
               question={t('faq.q4')}
               answer={t('faq.a4')}
             />
-            <FAQItem
-              question={t('faq.q5')}
-              answer={t('faq.a5')}
-            />
           </div>
 
           <div className="mt-12 text-center">
