@@ -23,12 +23,12 @@ const Recruteur: React.FC = () => {
 
   const handleButtonClick = () => {
     if (!user) {
-      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
       navigate('/login');
     } else if (user.role === 'candidat') {
       setShowError(true);
     } else if (user.role === 'recruteur') {
-      navigate('/candidateOnboarding');
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
     }
   };
 

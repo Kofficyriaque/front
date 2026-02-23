@@ -35,7 +35,7 @@ export default defineConfig([
 
     Structure principale (dossier `src`):
 
-    - `pages/` : vues (Home, CandidateOnboarding, Candidat, Recruteur, About, Profile, History, Login, Signup...)
+    - `pages/` : vues (Home, CareerAnalysis, Candidat, Recruteur, About, Profile, History, Login, Signup...)
     - `components/` : éléments réutilisables (Navbar, Footer, FAQItem, FeatureVisual...)
     - `services/` : client API centralisé
     - `utils/` et `types/` : helpers et définitions TypeScript
@@ -48,26 +48,7 @@ export default defineConfig([
     - i18next / react-i18next
     - Framer Motion (animations)
     - Lucide Icons
-# PrediSalaire — Frontend
 
-## Présentation du projet
-
-PrediSalaire est une application web qui estime les salaires IT en se basant sur l'analyse de grandes quantités d'offres d'emploi et sur des modèles ML/NLP. Elle fournit des rapports pour les candidats et des outils de benchmarking pour les recruteurs.
-
-## Architecture du projet
-
-- Frontend: React + TypeScript, bundlé avec Vite
-- Routage: React Router
-- Styles: Tailwind CSS
-- Traductions: i18next / react-i18next (FR / EN)
-- Persistances légères: `localStorage` pour token/utilisateur et préférences
-
-Structure principale (dossier `src`):
-
-- `pages/` : vues et routes
-- `components/` : éléments réutilisables
-- `services/` : client API
-- `utils/` et `types/` : helpers et définitions TypeScript
 
 ## Technologies utilisées
 
@@ -93,16 +74,14 @@ Prérequis: Node.js (>=16) et npm/yarn
 
 ```bash
 npm install
-# ou
-yarn
+
 ```
 
 2. Lancer le serveur de développement
 
 ```bash
 npm run dev
-# ou
-yarn dev
+
 ```
 
 3. Construire pour la production
@@ -121,7 +100,7 @@ npm run preview
 - `/signup` — Signup
 - `/profile` — Profile
 - `/history` — History
-- `/candidateOnboarding` — CandidateOnboarding (onboarding candidat)
+- `/careerAnalysis` — CareerAnalysis (onboarding candidat)
 - `/candidat` — Candidat
 - `/recruteur` — Recruteur
 - `/privacy` — PrivacyPolicy
@@ -138,14 +117,12 @@ npm run preview
 ## Fonctionnalités principales
 
 - Estimation salariale par profil (poste, compétences, région, expérience)
-- Onboarding candidat en 3 étapes (profil, stack, analyse)
+- Onboarding candidat en 5 étapes (profil, expertise, stack, description, analyse)
 - Historique des analyses
 - Outils recruteur pour benchmarking et audit d'annonces
 - Interface bilingue (FR/EN)
 
-## Remarques sur les traductions (i18n)
 
-Le fichier `src/i18n.ts` contient les ressources FR/EN. Il est normal d'avoir des clefs de traduction non utilisées — elles ne posent pas d'erreur mais peuvent être nettoyées si vous souhaitez. Je peux analyser et lister les clefs i18n effectivement utilisées par le code sur demande.
 
 ## Résultats attendus
 
@@ -153,13 +130,5 @@ Le fichier `src/i18n.ts` contient les ressources FR/EN. Il est normal d'avoir de
 - Score de confiance et métriques d'échantillon
 - Recommandations sur compétences et attractivité d'une annonce
 
-## Prochaines étapes que je peux faire
 
-- Lister les clefs i18n non utilisées et proposer un nettoyage
-- Générer des badges CI / licence dans le README
-- Ajouter un guide de déploiement (Vercel / Netlify / Docker)
-
----
-
-Si vous voulez que j'analyse les clefs i18n et supprime celles inutilisées, je peux lancer un audit rapide maintenant.
 

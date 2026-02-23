@@ -41,9 +41,9 @@ const Home: React.FC = () => {
   const handleCandidateClick = () => {
     const user = localStorage.getItem("user");
     if (user) {
-      navigate('/candidateOnboarding');
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
     } else {
-      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
       navigate('/login');
     }
   };
@@ -51,9 +51,9 @@ const Home: React.FC = () => {
   const handleRecruiterClick = () => {
     const user = localStorage.getItem("user");
     if (user) {
-      navigate('/candidateOnboarding');
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
     } else {
-      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
       navigate('/login');
     }
   };
