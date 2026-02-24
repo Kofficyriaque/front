@@ -39,6 +39,7 @@ Analytics engineer
 BI analyst
 BI developer
 Data architect
+Data Scientist
 Data steward
 Data quality analyst
 Big data engineer
