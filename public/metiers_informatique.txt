@@ -1,13 +1,30 @@
 Programmeur
 Développeur applicatif
+Développeur mobile
+Développeur Java 
+Développeur PHP 
+Développeur Python 
+Développeur Node.js
 Développeur desktop
 Développeur web
 Développeur front-end
 Développeur back-end
 Développeur full-stack
+Développeur logiciel embarqué
+Développeur Web Drupal
 Développeur API
 Développeur microservices
 Développeur open source
+Développeur Symfony
+Développeur Angular / Vue.js
+Développeur Angular 
+Développeur .NET / C#
+Développeur C#
+Développeur SAP
+Développeur SharePoint
+Développeur Magento
+Développeur Ruby on Rails
+Développeur Golang
 Mainteneur logiciel
 Développeur WordPress
 Développeur Drupal
@@ -16,32 +33,61 @@ Développeur WebGL
 Développeur iOS
 Développeur cross-platform
 Développeur Flutter
+Développeur React
 Développeur React Native
+Développeur Android 
+Développeur iOS
+Développeur Android / IOS
+Développeur de jeux vidéo
+Développeur jeux vidéo
+Ingénieur(e) en cyber-sécurité
+Ingénieur DevOps
+Ingénieur en intelligence artificielle
 Programmeur gameplay
 Programmeur moteur
 Programmeur graphique
+LLM Engineer
 Game designer
 Level designer
 Technical game designer
+Ingénieur Virtualisation
 Testeur jeux vidéo
 Ingénieur moteur 3D
+Ingénieur ITIL
+ITIL
 Machine learning engineer
 Deep learning engineer
 Chercheur IA
+Account Manager IT
+Solution Engineer
+Administrateur Active Directory
+DevOps 
+Ingénieur cybersécurité
+Ingénieur cloud
 Ingénieur NLP
 Ingénieur vision par ordinateur
 Ingénieur robotique IA
 MLOps engineer
 AI trainer
+trainer
 AI prompt engineer
+Prompt Engineer
 AI safety engineer
+safety engineer
 Analytics engineer
 BI analyst
 BI developer
 Data architect
 Data Scientist
 Data steward
+Data Engineer
+Data Scientist
+Data Governance
+Data Governance Senior Specialist
+Data Senior Specialist
+Data Governance Specialist
 Data quality analyst
+Big Data
 Big data engineer
 Security engineer
 Cloud platform engineer
@@ -52,6 +98,7 @@ Ingénieur réseaux
 Architecte infrastructure
 Architecte systèmes
 Technicien systèmes
+Technicien support informatique
 Technicien réseaux
 Ingénieur télécom
 Ingénieur NOC
@@ -119,3 +166,93 @@ Risk analyst
 IT compliance officer
 IT GRC analyst
 IT controller
+Full-Stack
+Administrateur système
+Administrateur Systèmes Réseaux & Sécurité
+Systèmes Réseaux & Sécurité
+Webdesigner
+Graphic Web Designer
+Web designer
+Expert 
+Expert en cybersécurité
+Designer Senior
+Designer Ux 
+Webmaster
+Ux Designer 
+Ingénieur en intelligence artificielle
+intelligence artificielle
+IA
+cyber-sécurité
+Cyber Sécurité
+CyberSécurité
+Ingénieur Cyber Sécurité
+Ingénieur Cyber-Sécurité
+Administrateur Bases de Données
+Administrateur(trice) Base de Données
+Ingénieur Système Informatique
+Technicien Système Informatique
+Système Informatique
+Architecte Systèmes Informatiques
+Administrateur - Administratrice Système et Réseaux
+Système et Réseaux
+Administrateur Support
+Administrateur Support Réseau
+Architecte big data
+Data Engineer - Développeur Big Data
+Architecte Cloud Infrastructure
+Architecte des Systèmes d'Information
+Architecte Si
+Ingénieur·e CI/CD
+UX / UI designer
+Concepteur multimédia
+intégrateur web
+Ingénieur réseau
+Consultant·e informatique
+IT Consultant
+Architecte informatique
+Software engineer
+Ingénieur sécurité informatique
+Ingénieur Devops
+Architecte logiciel
+IT Project Manager
+Gestionnaire de Données Clients 
+Chef - Cheffe de Projet 
+Chef - Cheffe de Projet Cybersécurité
+Cheffe - Chef de Projet IT
+Chef de projet IT
+Chef de projet digital
+Architecte Solution IT
+Contract Manager IT
+IT Business Analyst 
+Ingénieur Commercial IT
+Ingénieur en cloud computing
+Ingénieur informatique
+Business Analyst
+Système Embarqué 
+Développeur Concepteur Informatique
+Développeur Data
+Mainframe COBOL
+Testeur Qualité Logiciel 
+Testeur 
+testeur informatique
+Ingénieur Étude et Développement - Chef de Projet C++ & Python
+Chef de Projet C++ & Python
+Ingénieur Étude et Développement 
+Data Analyst
+Administrateur de base de données
+Technicien helpdesk 
+support helpdesk
+Ingénieur en cloud computing
+Analyste en cybersécurité
+Analyste SOC
+Architecte logiciel et Solution architect 
+DSI (Directeur des Systèmes d'Information)
+Responsable informatique 
+Responsable informatique DSI
+CTO (Chief Technology Officer)
+Chief Technology Officer
+CTO
+Tech Lead
+Développeur Salesforce / SAP
+Développeur Salesforce 
+Intégrateur ERP

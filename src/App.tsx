@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import CandidateOnboarding from './pages/CandidateOnboarding';
+import CareerAnalysis from './pages/CareerAnalysis';
 import Candidat from './pages/Candidat';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -14,6 +14,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import Profile from './pages/Profile';
 import History from './pages/History';
+import ReviewPage from './pages/ReviewPage';
 import { ScrollToTop } from './components/ScrollTop';
 
 
@@ -56,7 +57,8 @@ const App: React.FC = () => {
               <Route path="/signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/history" element={<History />} />
-              <Route path="/candidateOnboarding" element={<CandidateOnboarding />} />
+              <Route path="/review" element={<ReviewPage />} />
+              <Route path="/careerAnalysis" element={<CareerAnalysis />} />
               <Route path="/candidat" element={<Candidat />} />
               <Route path="/recruteur" element={<Recruteur />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />

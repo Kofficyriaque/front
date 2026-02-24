@@ -19,55 +19,116 @@ If you are developing a production application, we recommend updating the config
 export default defineConfig([
   globalIgnores(['dist']),
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    # PrediSalaire — Frontend
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    ## Présentation du projet
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+    PrediSalaire est une application web qui estime les salaires IT en se basant sur l'analyse de grandes quantités d'offres d'emploi et de techniques NLP/ML. Elle fournit des rapports aux candidats et des outils de benchmarking pour les recruteurs.
+
+    ## Architecture du projet
+
+    - Frontend: React + TypeScript, bundlé avec Vite.
+    - Routage: React Router.
+    - Styles: Tailwind CSS.
+    - Traductions: i18next / react-i18next (FR / EN).
+    - Persistances légères: localStorage pour token/utilisateur et préférences.
+
+    Structure principale (dossier `src`):
+
+    - `pages/` : vues (Home, CareerAnalysis, Candidat, Recruteur, About, Profile, History, Login, Signup...)
+    - `components/` : éléments réutilisables (Navbar, Footer, FAQItem, FeatureVisual...)
+    - `services/` : client API centralisé
+    - `utils/` et `types/` : helpers et définitions TypeScript
+
+    ## Technologies utilisées
+
+    - React 18+ / TypeScript
+    - Vite (dev server, build)
+    - Tailwind CSS
+    - i18next / react-i18next
+    - Framer Motion (animations)
+    - Lucide Icons
+
+
+## Technologies utilisées
+
+- React (v18+) + TypeScript
+- Vite
+- Tailwind CSS
+- i18next / react-i18next
+- Framer Motion
+- Lucide Icons
+
+## Scripts utiles (dans `package.json`)
+
+- `npm run dev` — lancement en développement (Vite)
+- `npm run build` — build de production
+- `npm run preview` — prévisualiser le build
+- `npm run lint` — vérification ESLint
+
+## Installation et lancement
+
+Prérequis: Node.js (>=16) et npm/yarn
+
+1. Installer les dépendances
+
+```bash
+npm install
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Lancer le serveur de développement
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+
+3. Construire pour la production
+
+```bash
+npm run build
+npm run preview
+```
+
+## Pages / Routes disponibles
+
+- `/` — Home
+- `/about` — About
+- `/login` — Login
+- `/forgot-password` — ForgotPassword
+- `/signup` — Signup
+- `/profile` — Profile
+- `/history` — History
+- `/careerAnalysis` — CareerAnalysis (onboarding candidat)
+- `/candidat` — Candidat
+- `/recruteur` — Recruteur
+- `/privacy` — PrivacyPolicy
+- `/terms` — TermsOfUse
+
+## Composants principaux
+
+- `src/components/Navbar.tsx`
+- `src/components/Footer.tsx`
+- `src/components/ScrollTop.tsx`
+- `src/components/FAQItem.tsx`
+- `src/components/FeatureVisual.tsx`
+
+## Fonctionnalités principales
+
+- Estimation salariale par profil (poste, compétences, région, expérience)
+- Onboarding candidat en 5 étapes (profil, expertise, stack, description, analyse)
+- Historique des analyses
+- Outils recruteur pour benchmarking et audit d'annonces
+- Interface bilingue (FR/EN)
+
+
+
+## Résultats attendus
+
+- Fourchette salariale prédite (salaire brut annuel)
+- Score de confiance et métriques d'échantillon
+- Recommandations sur compétences et attractivité d'une annonce
+
+
+

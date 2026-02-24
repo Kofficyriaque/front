@@ -8,7 +8,7 @@ import type { ReponsePredict, RequestPredict } from '../types/prediction';
 import predict from '../utils/predict';
 type Step = 1 | 2 | 3 | 4 | 5;
 
-const CandidateOnboarding: React.FC = () => {
+const CareerAnalysis: React.FC = () => {
   const { t } = useTranslation();
   const [step, setStep] = React.useState<Step>(1);
   const [jobTitle, setJobTitle] = React.useState('');
@@ -438,4 +438,4 @@ const ResultStat: React.FC<{ icon: React.ReactNode, label: string, value: string
   </div>
 );
 
-export default CandidateOnboarding;
+export default CareerAnalysis;

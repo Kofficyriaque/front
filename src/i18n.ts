@@ -281,6 +281,21 @@ const resources = {
         backToLogin: 'Back to login',
         success: 'Check your email for a link to reset your password.',
       },
+      review: {
+        title: 'We value your feedback',
+        subtitle: 'Help us improve SmartRecruit Analytics.',
+        rating_label: 'How would you rate the tool?',
+        category_label: 'What did you particularly like?',
+        comment_placeholder: 'Share your experience with us...',
+        submit: 'Submit my testimonial',
+        success_title: 'Thank you for your feedback!',
+        success_subtitle: 'Your review has been sent to our technical team.',
+        back_home: 'Back to Home',
+        cat_accuracy: 'AI Accuracy',
+        cat_ui: 'UI Design',
+        cat_speed: 'Speed',
+        cat_ux: 'User Experience'
+      },
       onboarding: {
         steps: { profile: 'Profile', expertise: 'Expertise', analysis: 'Analysis', stepOf: 'Step {{step}} of 3' },
         step1Title: 'Tell us about your role.',
@@ -557,6 +572,21 @@ const resources = {
         submit: 'Envoyer le lien de réinitialisation',
         backToLogin: 'Retour à la connexion',
         success: 'Consultez votre email pour un lien de réinitialisation de mot de passe.',
+      },
+      review: {
+        title: 'Votre avis nous intéresse',
+        subtitle: 'Aidez-nous à améliorer SmartRecruit Analytics.',
+        rating_label: 'Quelle note donneriez-vous à l\'outil ?',
+        category_label: 'Qu\'avez-vous particulièrement apprécié ?',
+        comment_placeholder: 'Partagez votre expérience avec nous...',
+        submit: 'Envoyer mon témoignage',
+        success_title: 'Merci pour votre retour !',
+        success_subtitle: 'Votre avis a été transmis à notre équipe technique.',
+        back_home: 'Retour à l\'accueil',
+        cat_accuracy: 'Précision de l\'IA',
+        cat_ui: 'Interface Design',
+        cat_speed: 'Rapidité',
+        cat_ux: 'Expérience Utilisateur'
       },
       onboarding: {
         steps: { profile: 'Profil', expertise: 'Expertise', analysis: 'Analyse', stepOf: 'Étape {{step}} sur 3' },

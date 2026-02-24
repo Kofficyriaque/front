@@ -27,14 +27,14 @@ const Candidat: React.FC = () => {
 
   const handleButtonClick = () => {
     if (!user) {
-      localStorage.setItem('redirectAfterLogin', '/candidateOnboarding');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
       navigate('/login');
     } else if (user.role === 'recruteur') {
       setShowError(true);
     } else if (user.role === 'candidat') {
-      navigate('/candidateOnboarding');
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
     } else {
-      navigate('/candidateOnboarding');
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
     }
   };
 

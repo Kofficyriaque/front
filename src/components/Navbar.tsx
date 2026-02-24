@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon, User, LogOut, History, ChevronDown, UserCircle } from 'lucide-react';
+import { Menu, X, Sun, Moon, User, LogOut, History, ChevronDown, UserCircle, Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 import type { Users } from '../types/users';
@@ -118,6 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
             <Link to="/about" className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{t('navbar.forAbout')}</Link>
             <Link to="/candidat" className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{t('navbar.forCandidates')}</Link>
             <Link to="/recruteur" className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{t('navbar.forRecruiters')}</Link>
+            
             <div className="flex items-center space-x-4 pl-4 border-l border-slate-200 dark:border-slate-700">
               {/* Theme Toggle Button */}
               <button 
@@ -203,6 +204,19 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                         
                         <button 
                           onClick={() => {
+                            navigate('/review');
+                            setIsProfileOpen(false);
+                          }}
+                          className="w-full flex items-center gap-4 px-4 py-3 text-sm font-bold rounded-2xl transition-all text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                        >
+                          <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                            <Star size={18} />
+                          </div>
+                          {t('navbar.review')}
+                        </button>
+
+                        <button 
+                          onClick={() => {
                             navigate('/history');
                             setIsProfileOpen(false);
                           }}
@@ -234,12 +248,20 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                   )}
                 </div>
               ) : (
-                <button 
-                  onClick={() => navigate('/login', { state: { from: location.pathname !== '/' ? location.pathname : '/' } })}
-                  className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-md"
-                >
-                  {t('navbar.login')}
-                </button>
+                <div className="flex items-center space-x-3">
+                  <button 
+                    onClick={() => navigate('/login', { state: { from: location.pathname !== '/' ? location.pathname : '/' } })}
+                    className="bg-white text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                  >
+                    {t('navbar.login')}
+                  </button>
+                  <button
+                    onClick={() => { window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/'; }}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-md"
+                  >
+                    {t('navbar.startAnalysis')}
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -313,6 +335,18 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                   </button>
                   <button
                     onClick={() => {
+                      navigate('/review');
+                      setIsOpen(false);
+                    }}
+                    className="w-full flex items-center gap-4 px-4 py-3 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                      <Star size={18} />
+                    </div>
+                    {t('navbar.review')}
+                  </button>
+                  <button
+                    onClick={() => {
                       navigate('/history');
                       setIsOpen(false);
                     }}
@@ -344,7 +378,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                     {t('navbar.login')}
                   </button>
                   <button 
-                    onClick={() => { navigate('/login', { state: { from: location.pathname !== '/' ? location.pathname : '/' } }); setIsOpen(false); }}
+                    onClick={() => { window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/'; }}
                     className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold shadow-sm hover:bg-blue-700 dark:hover:bg-blue-600"
                   >
                     {t('navbar.startAnalysis')}

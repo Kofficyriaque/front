@@ -16,6 +16,14 @@ const Login: React.FC = () => {
   const location = useLocation();
   const { t } = useTranslation();
 
+  // If user is already logged in, don't show login page — send to home
+  React.useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate]);
+
   const data: LoginRequest = {
     email: email,
     password: password
@@ -32,7 +40,14 @@ const Login: React.FC = () => {
       const fromHome = localStorage.getItem('redirectAfterLogin');
       const redirectUrl = fromNavbar || fromHome || '/';
       localStorage.removeItem('redirectAfterLogin');
-      navigate(redirectUrl);
+        // clear stored redirect after reading it
+        // If the redirect target is an absolute external URL, use window.location
+        const isExternal = /^https?:\/\//i.test(redirectUrl);
+        if (isExternal) {
+          window.location.href = redirectUrl;
+        } else {
+          navigate(redirectUrl);
+        }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de connexion');
     } finally {
