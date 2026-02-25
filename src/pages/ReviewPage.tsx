@@ -6,24 +6,11 @@ import { Star, Send, MessageSquare, CheckCircle, ArrowLeft, Heart, Sparkles } fr
 const ReviewPage: React.FC = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [categories, setCategories] = useState<string[]>([]);
   const [comment, setComment] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const cats = [
-    { id: 'accuracy', label: t('review.cat_accuracy') },
-    { id: 'ui', label: t('review.cat_ui') },
-    { id: 'speed', label: t('review.cat_speed') },
-    { id: 'ux', label: t('review.cat_ux') }
-  ];
-
-  const toggleCategory = (id: string) => {
-    setCategories(prev => 
-      prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]
-    );
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
