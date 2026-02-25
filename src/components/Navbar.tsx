@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Sun, Moon, User, LogOut, History, ChevronDown, UserCircle, Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import logoLight from '../assets/logo_Market_Visualize1.png';
+import logoDark from '../assets/logo_sombre.png';
 import i18n from '../i18n';
 import type { Users } from '../types/users';
 
@@ -106,10 +108,14 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-1">
-              <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">PrediSalaire</span>
-              <span className="text-xl font-bold tracking-tight text-blue-600">. ai</span>
+          <div className="flex items-start">
+            <Link to="/" className="flex items-start">
+              <img
+                src={theme === 'dark' ? logoDark : logoLight}
+                alt="Site logo"
+                className="w-auto h-16 object-contain bg-transparent p-0 block"
+                style={{ transform: 'scale(3)', transformOrigin: 'left center', backgroundColor: 'transparent' }}
+              />
             </Link>
           </div>
 

@@ -62,7 +62,7 @@ const ReviewPage: React.FC = () => {
       <div className="max-w-3xl mx-auto">
         
         <button 
-          onClick={() => navigate('/profile')}
+          onClick={() => navigate('/home')}
           className="flex items-center gap-3 text-slate-400 hover:text-blue-600 font-bold uppercase tracking-widest text-[10px] mb-12 transition-all group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-2 transition-transform" />
@@ -114,35 +114,14 @@ const ReviewPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* CATEGORY SECTION */}
-              <div className="space-y-6">
-                <label className="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em] mb-4">
-                  {t('review.category_label')}
-                </label>
-                <div className="flex flex-wrap gap-3">
-                  {cats.map((cat) => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={() => toggleCategory(cat.id)}
-                      className={`px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all border ${
-                        categories.includes(cat.id)
-                        ? 'bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/20'
-                        : 'bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-500 hover:border-blue-300'
-                      }`}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              
 
               {/* COMMENT SECTION */}
               <div className="space-y-6">
                 <div className="flex items-center gap-3 mb-4">
                   <MessageSquare size={16} className="text-slate-400" />
                   <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em]">
-                    Votre témoignage (optionnel)
+                    {t('review.comment_label')}
                   </label>
                 </div>
                 <textarea 
@@ -173,9 +152,6 @@ const ReviewPage: React.FC = () => {
                     </>
                   )}
                 </button>
-                <p className="mt-6 text-[9px] font-black text-slate-300 uppercase tracking-widest italic">
-                  Anonyme • RGPD Protégé
-                </p>
               </div>
 
             </form>
