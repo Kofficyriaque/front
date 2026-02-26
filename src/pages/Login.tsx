@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Lock, Mail, Loader2, ArrowRight, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { LoginRequest } from '../types/users';
-import LoginReq from '../utils/login';
+import {LoginReq, validateToken} from '../utils/login';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +20,20 @@ const Login: React.FC = () => {
   React.useEffect(() => {
     const user = localStorage.getItem('user');
     if (user) {
-      navigate('/');
+      const userJson = JSON.parse(user)
+      async function logs() {
+        const valideTok = await validateToken(userJson.access_token)
+        if (valideTok) {
+          navigate('/');
+        }
+        else {
+          navigate("/login")
+          localStorage.removeItem("user")
+        }
+      }
+      logs(); 
+    } else {
+      navigate("/login")
     }
   }, [navigate]);
 
