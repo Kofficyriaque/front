@@ -27,14 +27,14 @@ const Candidat: React.FC = () => {
 
   const handleButtonClick = () => {
     if (!user) {
-      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app');
       navigate('/login');
     } else if (user.role === 'recruteur') {
       setShowError(true);
     } else if (user.role === 'candidat') {
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/?us='+encodeURIComponent(user.access_token);
     } else {
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/?us='+encodeURIComponent(user.access_token);
     }
   };
 
@@ -49,7 +49,7 @@ const Candidat: React.FC = () => {
   const items1 = t('candidate.cand_feat1_items', { returnObjects: true }) as string[];
   const items2 = t('candidate.cand_feat2_items', { returnObjects: true }) as string[];
   const items3 = t('candidate.cand_feat3_items', { returnObjects: true }) as string[];
-  const items5 = t('candidate.cand_feat5_items', 
+  const items5 = t('candidate.cand_feat5_items',
     { returnObjects: true }) as string[];
 
   const candidateFeatures = [
@@ -81,7 +81,7 @@ const Candidat: React.FC = () => {
             <p className="text-slate-600 dark:text-slate-400 font-medium mb-6">
               {t('candidate.recruiter_error_message')}
             </p>
-            <button 
+            <button
               onClick={() => setShowError(false)}
               className="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
             >
@@ -90,7 +90,7 @@ const Candidat: React.FC = () => {
           </div>
         </div>
       )}
-    {/*En-tête*/}
+      {/*En-tête*/}
       <header className="bg-white dark:bg-slate-950 pt-32 pb-24 text-center relative overflow-hidden">
         {/* Blur Blobs Background */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-25 -top-40 -left-40"></div>
@@ -103,13 +103,13 @@ const Candidat: React.FC = () => {
         <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-cyan-300 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-15"></div>
         <div className="absolute top-0 left-1/2 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-10 -top-40"></div>
         <div className="absolute bottom-1/3 left-2/3 w-88 h-88 bg-indigo-400 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-12"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
-          
+
           <h1 className="text-9xl font-black text-slate-900 dark:text-slate-100 tracking-tighter mb-8 leading-[0.85]">{t('candidate.discover_title')}</h1>
           <p className="text-2xl font-medium text-slate-500 dark:text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">{t('candidate.discover_subtitle')}</p>
-          <button 
-            onClick={handleButtonClick} 
+          <button
+            onClick={handleButtonClick}
             className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl dark:shadow-blue-950 hover:scale-105 transition-all"
           >
             {getButtonText()}
@@ -159,11 +159,11 @@ const Candidat: React.FC = () => {
             <p className="text-2xl text-blue-400 font-medium tracking-wide italic opacity-80">{t('candidate.cand_how_it_works_subtitle')}</p>
             <div className="w-24 h-2 bg-blue-600 mx-auto mt-10 rounded-full"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
             {/* Ligne de connexion (Desktop) */}
             <div className="absolute top-[4.5rem] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent hidden md:block"></div>
-            
+
             {steps.map((s, idx) => (
               <div key={idx} className="relative group">
                 <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-12 rounded-[4rem] hover:bg-white/10 transition-all duration-700 h-full flex flex-col items-center text-center group-hover:-translate-y-4">
@@ -180,14 +180,14 @@ const Candidat: React.FC = () => {
               </div>
             ))}
           </div>
-          
+
           <div className="mt-40 text-center">
-             <button 
-              onClick={handleButtonClick} 
-                className="bg-white text-slate-950 px-20 py-8 rounded-[2.5rem] font-black text-2xl hover:scale-105 hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] transition-all active:scale-95"
-             >
-               {getButtonText()}
-             </button>
+            <button
+              onClick={handleButtonClick}
+              className="bg-white text-slate-950 px-20 py-8 rounded-[2.5rem] font-black text-2xl hover:scale-105 hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] transition-all active:scale-95"
+            >
+              {getButtonText()}
+            </button>
           </div>
         </div>
       </section>

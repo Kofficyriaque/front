@@ -41,7 +41,8 @@ const Home: React.FC = () => {
   const handleCandidateClick = () => {
     const user = localStorage.getItem("user");
     if (user) {
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
+      const userData = JSON.parse(user)
+      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/?us='+encodeURIComponent(userData.access_token)
     } else {
       localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
       navigate('/login');
