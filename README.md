@@ -19,11 +19,11 @@ If you are developing a production application, we recommend updating the config
 export default defineConfig([
   globalIgnores(['dist']),
   {
-    # PrediSalaire — Frontend
+    # Market Visualizer — Frontend
 
     ## Présentation du projet
 
-    PrediSalaire est une application web qui estime les salaires IT en se basant sur l'analyse de grandes quantités d'offres d'emploi et de techniques NLP/ML. Elle fournit des rapports aux candidats et des outils de benchmarking pour les recruteurs.
+    Market Visualizer est une application web qui estime les salaires IT en se basant sur l'analyse de grandes quantités d'offres d'emploi et de techniques NLP/ML. Elle fournit des rapports aux candidats et des outils de benchmarking pour les recruteurs.
 
     ## Architecture du projet
 

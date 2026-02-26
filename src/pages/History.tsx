@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { History, LayoutDashboard, ChevronRight, Search, X, TrendingUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import getUserHistory from '../utils/history';
@@ -10,6 +10,7 @@ const HistoryPage: React.FC = () => {
   const { t } = useTranslation();
   const [listeHistorique, setHistorique] = useState<HistoryReponse[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
   
   useEffect(() => {
@@ -21,6 +22,12 @@ const HistoryPage: React.FC = () => {
     }
     history();
   }, []);
+
+  // Debounce the search term to avoid recalculating on every keystroke
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedSearch(searchTerm.trim().toLowerCase()), 300);
+    return () => clearTimeout(id);
+  }, [searchTerm]);
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-6 duration-700 pb-32 pt-20">
@@ -65,7 +72,21 @@ const HistoryPage: React.FC = () => {
           </div>
           
           <div className="p-4">
-            {listeHistorique?.map((item) => (
+            {/** Filtrage client optimisé : useMemo + debounce */}
+            {useMemo(() => {
+              const q = debouncedSearch;
+              if (!q) return listeHistorique;
+              return listeHistorique.filter((item) => {
+                const titre = (item.titre || '').toLowerCase();
+                const date = (item.date_predit || '').toLowerCase();
+                const salaire = String(Math.round(item.salaire_predit ?? 0));
+                return (
+                  titre.includes(q) ||
+                  date.includes(q) ||
+                  salaire.includes(q)
+                );
+              });
+            }, [listeHistorique, debouncedSearch])?.map((item) => (
               <div key={item.idHistorique} className="p-8 rounded-[2.5rem] hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-between group border-b border-transparent last:border-none">
                 <div className="flex items-center gap-8">
                   <div>

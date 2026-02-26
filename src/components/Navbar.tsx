@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon, User, LogOut, History, ChevronDown, UserCircle, Star } from 'lucide-react';
+import { Menu, X, Sun, Moon, User, LogOut, History, UserCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import logoLight from '../assets/logo_Market_Visualize1.png';
 import logoDark from '../assets/logo_sombre.png';
@@ -183,7 +183,9 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                       </div>
                       <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-950 rounded-full"></span>
                     </div>
-                    <ChevronDown size={14} className={`text-slate-400 transition-transform duration-300 mr-2 ${isProfileOpen ? 'rotate-180' : ''}`} />
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className={`text-slate-400 transition-transform duration-300 mr-2 ${isProfileOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </button>
 
                   {isProfileOpen && (
@@ -208,18 +210,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                           {t('navbar.profile')}
                         </button>
                         
-                        <button 
-                          onClick={() => {
-                            navigate('/review');
-                            setIsProfileOpen(false);
-                          }}
-                          className="w-full flex items-center gap-4 px-4 py-3 text-sm font-bold rounded-2xl transition-all text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
-                        >
-                          <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-                            <Star size={18} />
-                          </div>
-                          {t('navbar.review')}
-                        </button>
+                       
 
                         <button 
                           onClick={() => {
@@ -295,7 +286,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
       {isOpen && (
         <div className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 animate-in slide-in-from-top duration-300">
           <div className="px-4 pt-2 pb-6 space-y-3">
-            <Link to="/" className="block text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-2">{t('navbar.ourMission')}</Link>
+            <Link to="/about" className="block text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-2">{t('navbar.forAbout')}</Link>
             <Link to="/candidat" className="block text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-2">{t('navbar.forCandidates')}</Link>
             <Link to="/recruteur" className="block text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-2">{t('navbar.forRecruiters')}</Link>
             
@@ -338,18 +329,6 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                       <UserCircle size={18} />
                     </div>
                     {t('navbar.profile')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      navigate('/review');
-                      setIsOpen(false);
-                    }}
-                    className="w-full flex items-center gap-4 px-4 py-3 text-sm font-bold rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
-                  >
-                    <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-                      <Star size={18} />
-                    </div>
-                    {t('navbar.review')}
                   </button>
                   <button
                     onClick={() => {
