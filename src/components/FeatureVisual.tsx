@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const FeatureVisual: React.FC<{ type: string; color: string }> = ({ type, color }) => {
-  const baseClass = `w-5/6 h-5/6 bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 p-8 flex flex-col group-hover:scale-105 transition-all duration-700 overflow-hidden relative`;
+   const baseClass = `w-full h-full bg-white rounded-2xl shadow-lg border border-slate-100 p-4 sm:p-8 flex flex-col items-center sm:items-stretch group-hover:scale-105 transition-all duration-500 overflow-hidden relative`;
 
   // Helpers to avoid dynamic Tailwind classnames
   const overlayFromColor = (c: string) => {
@@ -33,7 +33,7 @@ export const FeatureVisual: React.FC<{ type: string; color: string }> = ({ type,
             </div>
           </div>
           
-          <div className="relative w-36 h-36 flex items-center justify-center flex-shrink-0">
+          <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center flex-shrink-0">
              <div className="absolute inset-2 border-2 border-blue-200 rounded-full"></div>
              <div className="absolute inset-0 border-4 border-blue-600 rounded-full" style={{ clipPath: 'polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 50%)' }}></div>
              {[...Array(6)].map((_, i) => (
@@ -42,8 +42,8 @@ export const FeatureVisual: React.FC<{ type: string; color: string }> = ({ type,
                ></div>
              ))}
              <div className="text-center z-10">
-                <div className="text-[7px] font-black text-slate-400 uppercase">Estimation</div>
-                <div className="text-3xl font-black text-slate-900 leading-none">75<span className="text-lg text-blue-600">k</span></div>
+                <div className="text-[8px] sm:text-[7px] font-black text-slate-400 uppercase">Estimation</div>
+                <div className="text-2xl sm:text-3xl font-black text-slate-900 leading-none">75<span className="text-lg text-blue-600">k</span></div>
              </div>
           </div>
 
@@ -72,10 +72,10 @@ export const FeatureVisual: React.FC<{ type: string; color: string }> = ({ type,
             </div>
           </div>
           
-          <div className="relative w-36 h-36 flex items-center justify-center flex-shrink-0">
+          <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center flex-shrink-0">
              <div className="absolute inset-3 border border-dashed border-indigo-300 rounded-full animate-spin-slow"></div>
              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-28 h-28 bg-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-black shadow-xl">
+                        <div className="w-20 h-20 sm:w-28 sm:h-28 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl sm:text-3xl font-black shadow-xl">
                   88<span className="text-lg opacity-50">%</span>
                 </div>
              </div>
@@ -108,8 +108,8 @@ export const FeatureVisual: React.FC<{ type: string; color: string }> = ({ type,
             </div>
           </div>
           
-          <div className="relative w-full h-48 flex flex-col items-center justify-center">
-             <div className="w-full max-w-[140px] space-y-4">
+          <div className="relative w-full h-40 sm:h-48 flex flex-col items-center justify-center">
+             <div className="w-full max-w-[140px] sm:max-w-[160px] space-y-4">
                 <div className="relative group/skill">
                    <div className="flex justify-between items-end mb-1">
                       <span className="text-[10px] font-black text-slate-900">GenAI / LLM</span>
@@ -140,18 +140,18 @@ export const FeatureVisual: React.FC<{ type: string; color: string }> = ({ type,
              </div>
              
              {/* Center badge */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-12 bg-slate-900 text-white p-3 rounded-xl shadow-2xl border border-white/20 z-10 pointer-events-none">
+                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-12 bg-slate-900 text-white p-2 sm:p-3 rounded-lg sm:rounded-xl shadow-2xl border border-white/20 z-10 pointer-events-none">
                 <div className="text-[7px] font-black uppercase opacity-50">Score Rareté</div>
                 <div className="text-xl font-black">9.8<span className="text-xs">/10</span></div>
              </div>
           </div>
 
           <div className="w-full grid grid-cols-2 gap-3">
-             <div className="p-4 bg-amber-50 rounded-2xl border border-amber-100">
+             <div className="p-3 sm:p-4 bg-amber-50 rounded-xl sm:rounded-2xl border border-amber-100">
                 <div className="text-[8px] font-black text-amber-600 uppercase mb-1">Potentiel Boost</div>
                 <div className="text-[7px] font-black text-slate-900">+25,000 €</div>
              </div>
-             <div className="p-4 bg-slate-900 rounded-2xl">
+             <div className="p-3 sm:p-4 bg-slate-900 rounded-xl sm:rounded-2xl">
                 <div className="text-[8px] font-black text-amber-400 uppercase mb-1">Profil</div>
                 <div className="text-[7px] font-black text-white">Hautement<br />Critique</div>
              </div>
@@ -171,8 +171,8 @@ export const FeatureVisual: React.FC<{ type: string; color: string }> = ({ type,
             </div>
           </div>
           
-          <div className="w-full space-y-2 flex-grow flex flex-col justify-center">
-            <div className="flex items-center justify-between px-3 py-2 bg-blue-50 rounded-lg border border-blue-100 text-[8px]">
+               <div className="w-full space-y-2 flex-grow flex flex-col justify-center">
+                  <div className="flex items-center justify-between px-2 py-2 sm:px-3 sm:py-2 bg-blue-50 rounded-lg border border-blue-100 text-[8px]">
                <span className="font-bold text-slate-900">Paris</span>
                <span className="font-black text-blue-600">65k€</span>
             </div>

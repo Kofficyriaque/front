@@ -21,13 +21,12 @@ const Footer: React.FC = () => {
           {/* Left: Brand & Description */}
           <div className="flex-1 max-w-md">
             <div className="flex items-center space-x-1 mb-6">
-              <span className="text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">PrediSalaire</span>
-              <span className="text-3xl font-black tracking-tight text-blue-600">.ai</span>
+              <span className="text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">Market Visualizer</span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed font-medium mb-8">{t('footer.about')}</p>
             <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400">
               <Mail size={18} />
-              <a href="mailto:hello@predisalaire.ai" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">hello@predisalaire.ai</a>
+              <a href="mailto:info.marketvisualizer@gmail.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">info.marketvisualizer@gmail.com</a>
             </div>
           </div>
 
@@ -77,7 +76,7 @@ const Footer: React.FC = () => {
         {/* Divider */}
         <div className="border-t border-slate-200 dark:border-slate-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 dark:text-slate-400 font-medium">
-            <p>© {year} PrediSalaire.ai. {t('footer.rights')}</p>
+            <p>© {year} Market Visualizer</p>
           </div>
         </div>
       </div>

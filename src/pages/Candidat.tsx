@@ -119,9 +119,9 @@ const Candidat: React.FC = () => {
       {/*Fonctionnalités*/}
       <section className="py-32 px-4 bg-white dark:bg-slate-950">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {candidateFeatures.map((f, idx) => (
-              <div key={idx} className="group relative bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-[3rem] p-12 overflow-hidden hover:shadow-2xl hover:border-blue-200 dark:hover:border-blue-900 transition-all duration-500 flex flex-col md:flex-row gap-10 h-[500px]">
+              <div key={idx} className="group relative bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-6 sm:p-8 overflow-hidden hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900 transition-all duration-300 flex flex-col md:flex-row gap-6">
                 <div className="flex-1 relative z-10">
                   <div className={`w-14 h-14 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center mb-8 border border-slate-100 dark:border-slate-700 text-blue-600 dark:text-blue-400`}>
                     {f.icon}
@@ -137,7 +137,7 @@ const Candidat: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                <div className="flex-1 min-h-[300px] relative flex items-center justify-center">
+                <div className="flex-1 min-h-[160px] md:min-h-[300px] relative flex items-center justify-center">
                   <FeatureVisual type={f.title} color={f.color} />
                 </div>
               </div>

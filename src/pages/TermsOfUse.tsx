@@ -125,7 +125,7 @@ const TermsOfUse: React.FC = () => {
             </div>
             <div className="mt-16 text-center">
                <p className="text-[10px] font-black text-slate-300 dark:text-slate-700 uppercase tracking-[0.5em]">
-                  © PrediSalaire Analytics • Direction Juridique
+                  © Market Visualier • Direction Juridique
                </p>
             </div>
           </main>
