@@ -262,7 +262,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                     {t('navbar.login')}
                   </button>
                   <button
-                    onClick={() => { window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/'; }}
+                    onClick={() => { window.location.href = 'https://dashboard-market-visualizer.streamlit.app/'; }}
                     className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-md"
                   >
                     {t('navbar.startAnalysis')}
@@ -384,7 +384,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme}) => {
                     {t('navbar.login')}
                   </button>
                   <button 
-                    onClick={() => { window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/'; }}
+                    onClick={() => { window.location.href = 'https://dashboard-market-visualizer.streamlit.app/'; }}
                     className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold shadow-sm hover:bg-blue-700 dark:hover:bg-blue-600"
                   >
                     {t('navbar.startAnalysis')}

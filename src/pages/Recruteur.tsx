@@ -23,12 +23,12 @@ const Recruteur: React.FC = () => {
 
   const handleButtonClick = () => {
     if (!user) {
-      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/');
       navigate('/login');
     } else if (user.role === 'candidat') {
       setShowError(true);
     } else if (user.role === 'recruteur') {
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
+      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     }
   };
 
