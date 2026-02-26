@@ -27,14 +27,14 @@ const Candidat: React.FC = () => {
 
   const handleButtonClick = () => {
     if (!user) {
-      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/');
       navigate('/login');
     } else if (user.role === 'recruteur') {
       setShowError(true);
     } else if (user.role === 'candidat') {
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/?us='+encodeURIComponent(user.access_token);
+        window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     } else {
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/?us='+encodeURIComponent(user.access_token);
+        window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     }
   };
 

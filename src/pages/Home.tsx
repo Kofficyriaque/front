@@ -41,10 +41,9 @@ const Home: React.FC = () => {
   const handleCandidateClick = () => {
     const user = localStorage.getItem("user");
     if (user) {
-      const userData = JSON.parse(user)
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/?us='+encodeURIComponent(userData.access_token)
+      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     } else {
-      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/');
       navigate('/login');
     }
   };
@@ -52,9 +51,9 @@ const Home: React.FC = () => {
   const handleRecruiterClick = () => {
     const user = localStorage.getItem("user");
     if (user) {
-      window.location.href = 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/';
+      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     } else {
-      localStorage.setItem('redirectAfterLogin', 'https://dashboard-ihtugscjuhjujfanippkle.streamlit.app/');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/');
       navigate('/login');
     }
   };
