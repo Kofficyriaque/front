@@ -27,11 +27,11 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     updateUserRole();
-    
+
     // Écouter les changements de localStorage
     window.addEventListener('storage', updateUserRole);
     window.addEventListener('user-updated', updateUserRole);
-    
+
     return () => {
       window.removeEventListener('storage', updateUserRole);
       window.removeEventListener('user-updated', updateUserRole);
@@ -41,7 +41,8 @@ const Home: React.FC = () => {
   const handleCandidateClick = () => {
     const user = localStorage.getItem("user");
     if (user) {
-      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
+      const userData = JSON.parse(user)
+      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/?us=' + encodeURIComponent(userData.access_token);
     } else {
       localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/');
       navigate('/login');
@@ -51,9 +52,10 @@ const Home: React.FC = () => {
   const handleRecruiterClick = () => {
     const user = localStorage.getItem("user");
     if (user) {
-      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
+      const userData = JSON.parse(user)
+      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/?us=' + encodeURIComponent(userData.access_token);
     } else {
-      localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/');
+      localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/?us=');
       navigate('/login');
     }
   };
@@ -80,36 +82,36 @@ const Home: React.FC = () => {
           <div className={userRole ? "w-full max-w-md mx-auto" : "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4"}>
             {/* Candidate Card */}
             {(!userRole || userRole === 'candidat') && (
-            <button
-              onClick={handleCandidateClick}
-              className="w-full relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
-            >
-              <div className="relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('home.candidateBadge')}</span>
-                <h3 className="text-3xl font-black mb-6 leading-tight">{t('home.candidateTitle')}</h3>
-                <div className="flex items-center text-sm font-black uppercase tracking-widest text-white group-hover:translate-x-2 transition-transform">
-                  {t('home.candidateCta')} <ArrowRight size={18} className="ml-3" />
+              <button
+                onClick={handleCandidateClick}
+                className="w-full relative group bg-blue-600 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              >
+                <div className="relative z-10">
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-100/70 mb-4 block">{t('home.candidateBadge')}</span>
+                  <h3 className="text-3xl font-black mb-6 leading-tight">{t('home.candidateTitle')}</h3>
+                  <div className="flex items-center text-sm font-black uppercase tracking-widest text-white group-hover:translate-x-2 transition-transform">
+                    {t('home.candidateCta')} <ArrowRight size={18} className="ml-3" />
+                  </div>
                 </div>
-              </div>
-              <User className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/10 group-hover:scale-110 transition-transform duration-700" />
-            </button>
+                <User className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/10 group-hover:scale-110 transition-transform duration-700" />
+              </button>
             )}
 
             {/* Recruiter Card */}
             {(!userRole || userRole === 'recruteur') && (
-            <button
-              onClick={handleRecruiterClick}
-              className="w-full relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
-            >
-              <div className="relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('home.recruiterBadge')}</span>
-                <h3 className="text-3xl font-black mb-6 leading-tight">{t('home.recruiterTitle')}</h3>
-                <div className="flex items-center text-sm font-black uppercase tracking-widest text-slate-300 group-hover:translate-x-2 transition-transform">
-                  {t('home.recruiterCta')} <ArrowRight size={18} className="ml-3" />
+              <button
+                onClick={handleRecruiterClick}
+                className="w-full relative group bg-slate-900 dark:bg-slate-800 text-white p-12 rounded-[3rem] text-left overflow-hidden shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              >
+                <div className="relative z-10">
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4 block">{t('home.recruiterBadge')}</span>
+                  <h3 className="text-3xl font-black mb-6 leading-tight">{t('home.recruiterTitle')}</h3>
+                  <div className="flex items-center text-sm font-black uppercase tracking-widest text-slate-300 group-hover:translate-x-2 transition-transform">
+                    {t('home.recruiterCta')} <ArrowRight size={18} className="ml-3" />
+                  </div>
                 </div>
-              </div>
-              <Briefcase className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/5 group-hover:scale-110 transition-transform duration-700" />
-            </button>
+                <Briefcase className="absolute right-[-20px] bottom-[-20px] w-48 h-48 text-white/5 group-hover:scale-110 transition-transform duration-700" />
+              </button>
             )}
           </div>
         </div>
