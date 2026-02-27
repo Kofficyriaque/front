@@ -11,5 +11,5 @@ export default async function resetPassword(data:any) {
         throw new Error(res.statusText || "Erreur fetch forgot password")
     }
     const reponseJson = await res.json()
-    return reponseJson.email
+    return reponseJson.email_sent
 }

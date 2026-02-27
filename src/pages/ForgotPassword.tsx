@@ -27,13 +27,16 @@ const ForgotPassword = () => {
     setIsLoading(true);
     try {
       const emailSended = await resetPassword(data)
-      if (emailSended===true) {
+      if (emailSended) {
         setIsSubmitted(true)
         setStep(2)
-        setIsLoading(false);
+        
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de connexion');
+    }
+    finally {
+      setIsLoading(false);
     }
   };
 
