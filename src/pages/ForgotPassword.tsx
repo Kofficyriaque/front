@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Loader2, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import resetPassword from '../utils/forgotPassword'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -12,9 +13,17 @@ const ForgotPassword = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    try {
+      const emailSended = await resetPassword(email)
+      if (emailSended) {
+        
+      }
+    } catch {
+      
+    }
     // TODO: branchement API pour réinitialiser le mot de passe
     console.log({ email });
     setTimeout(() => {
