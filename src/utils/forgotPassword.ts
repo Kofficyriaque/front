@@ -1,11 +1,11 @@
-export default async function resetPassword(email:string) {
+export default async function resetPassword(data:any) {
     const back = import.meta.env.VITE_API_BASE_URL;
     const res = await fetch(`${back}/api/auth/forgot-password`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(email)
+        body: JSON.stringify(data)
     })
     if (!res.ok) {
         throw new Error(res.statusText || "Erreur fetch forgot password")

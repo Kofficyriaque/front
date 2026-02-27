@@ -19,25 +19,22 @@ const ForgotPassword = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
-
+  const data = {
+    email: email
+  }
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const emailSended = await resetPassword(email)
-      if (emailSended) {
-        
+      const emailSended = await resetPassword(data)
+      if (emailSended===true) {
+        setIsSubmitted(true)
+        setStep(2)
+        setIsLoading(false);
       }
-    } catch {
-      
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur de connexion');
     }
-    // TODO: branchement API pour réinitialiser le mot de passe
-    console.log({ email });
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSubmitted(true);
-      setStep(2); // move to verification step
-    }, 1500);
   };
 
   const handleVerifyCode = (e: React.FormEvent) => {
