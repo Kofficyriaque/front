@@ -25,16 +25,22 @@ const Candidat: React.FC = () => {
     }
   }, []);
 
+
   const handleButtonClick = () => {
     if (!user) {
+      
       localStorage.setItem('redirectAfterLogin', 'https://dashboard-market-visualizer.streamlit.app/');
       navigate('/login');
     } else if (user.role === 'recruteur') {
       setShowError(true);
     } else if (user.role === 'candidat') {
-        window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
+      
+      // mark that we are leaving to an external dashboard so returning won't show login
+      try { localStorage.setItem('skipLoginOnReturn', '1'); } catch (e) {}
+      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     } else {
-        window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
+      try { localStorage.setItem('skipLoginOnReturn', '1'); } catch (e) {}
+      window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     }
   };
 

@@ -28,6 +28,7 @@ const Recruteur: React.FC = () => {
     } else if (user.role === 'candidat') {
       setShowError(true);
     } else if (user.role === 'recruteur') {
+      try { localStorage.setItem('skipLoginOnReturn', '1'); } catch (e) {}
       window.location.href = 'https://dashboard-market-visualizer.streamlit.app/';
     }
   };

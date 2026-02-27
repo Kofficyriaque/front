@@ -15,26 +15,45 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
+  const [checking, setChecking] = React.useState(true);
 
   // If user is already logged in, don't show login page — send to home
   React.useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      const userJson = JSON.parse(user)
-      async function logs() {
-        const valideTok = await validateToken(userJson.access_token)
-        if (valideTok) {
-          navigate('/');
-        }
-        else {
-          navigate("/login")
-          localStorage.removeItem("user")
-        }
+    (async () => {
+      // If we recently redirected to an external dashboard, skip showing login when returning
+      const skipReturn = localStorage.getItem('skipLoginOnReturn');
+      if (skipReturn) {
+        try { localStorage.removeItem('skipLoginOnReturn'); } catch (e) {}
+        navigate('/');
+        return;
       }
-      logs(); 
-    } else {
-      navigate("/login")
-    }
+
+      const user = localStorage.getItem('user');
+      if (!user) {
+        // nothing to validate, show login form
+        setChecking(false);
+        return;
+      }
+
+      const userJson = JSON.parse(user);
+      try {
+        const valideTok = await validateToken(userJson.access_token);
+        if (valideTok === true) {
+          navigate('/');
+          return;
+        }
+        if (valideTok === false) {
+          localStorage.removeItem('user');
+          setChecking(false);
+          return;
+        }
+        // validateToken returned undefined (network error) — assume logged in to avoid showing login
+        navigate('/');
+      } catch (err) {
+        // on unexpected error, show login
+        setChecking(false);
+      }
+    })();
   }, [navigate]);
 
   const data: LoginRequest = {
@@ -54,10 +73,11 @@ const Login: React.FC = () => {
       const redirectUrl = fromNavbar || fromHome || '/';
       localStorage.removeItem('redirectAfterLogin');
         // clear stored redirect after reading it
-        // If the redirect target is an absolute external URL, use window.location
+        // If the redirect target is an absolute external URL, replace the location
+        // so `/login` does not remain in browser history (prevents back-button flash).
         const isExternal = /^https?:\/\//i.test(redirectUrl);
         if (isExternal) {
-          window.location.href = redirectUrl;
+          window.location.replace(redirectUrl);
         } else {
           navigate(redirectUrl);
         }
@@ -67,6 +87,8 @@ const Login: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  if (checking) return null;
 
   return (
     <div className="min-h-[calc(100vh-64px)] bg-slate-50 dark:bg-slate-900 flex items-center justify-center p-4">
